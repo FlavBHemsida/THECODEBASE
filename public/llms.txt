@@ -1,0 +1,23 @@
+# Flavor-Boss
+
+> Sveriges prisbelönta afro-karibiska catering, foodtruck och eventpartner baserad i Malmö & Skåne. Fyrfaldig vinnare av Streetfood-SM.
+
+Flavor-Boss AB serverar jamaicansk och västafrikansk streetfood — jerk chicken, jollof rice, mikate-donuts och mer — på bröllop, företagsevent, festivaler och privata fester i Malmö, Skåne och Köpenhamn.
+
+## Pages
+
+- [Hem](/): Översikt av Flavor-Boss catering, foodtruck och event.
+- [Meny](/meny): Festival- och cateringmeny med signaturrätter, vegetariskt, veganskt och halal.
+- [Cateringpaket](/cateringpaket): Skräddarsydda cateringpaket för bröllop, företag och privatfester.
+- [Upplevelser](/upplevelser): Helhetsupplevelser, foodtruck och eventpaket.
+- [Foodtruck](/foodtruck): Boka foodtrucken till ditt event.
+- [Grill](/grill): Jerk-grill och tillägg.
+- [Pop-up](/pop-up): Pop-up-event och samarbeten.
+- [Boka oss](/boka-oss): Bokningsformulär och kontaktuppgifter.
+- [Information](/information): Praktisk info, leveransområden och el-krav.
+- [Vår resa](/var-resa): Vår historia, milstolpar och utmärkelser.
+- [FAQ](/faq): Svar på vanliga frågor om catering, allergier och bokning.
+
+## Optional
+
+- Kontakt: info@flavorboss.se · +46 700 66 36 11 · Hantverkaregatan 4, Arlöv, Sverige.

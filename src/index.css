@@ -1,0 +1,330 @@
+@import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800&family=DM+Sans:wght@400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+  font-family: 'Kurri Island';
+  src: url('/__l5e/assets-v1/aec64d1e-4498-41b5-a450-06a6a4271be2/KurriIslandItaPERSONAL-Black.ttf') format('truetype');
+  font-weight: 900;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Bungee';
+  src: url('/__l5e/assets-v1/9913dcac-0379-46d2-89bc-ecf1a7a28f11/Bungee-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@layer base {
+  :root {
+    --background: 45 100% 96%;
+    --foreground: 0 0% 8%;
+    --card: 0 0% 100%;
+    --card-foreground: 0 0% 8%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 0 0% 8%;
+    --primary: 22 95% 52%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 45 80% 65%;
+    --secondary-foreground: 0 0% 8%;
+    --muted: 40 30% 88%;
+    --muted-foreground: 0 0% 35%;
+    --accent: 332 90% 48%;
+    --accent-foreground: 0 0% 100%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 30 30% 80%;
+    --input: 30 20% 85%;
+    --ring: 22 95% 60%;
+    --radius: 0.75rem;
+
+    --surface-dark: 280 30% 12%;
+    --surface-dark-foreground: 45 100% 96%;
+    --surface-green: 160 60% 28%;
+    --surface-green-foreground: 0 0% 100%;
+    --surface-yellow: 45 95% 55%;
+    --surface-yellow-foreground: 0 0% 8%;
+    --surface-pink: 332 90% 48%;
+    --surface-pink-foreground: 0 0% 100%;
+
+    --font-display: 'Barlow Condensed', sans-serif;
+    --font-body: 'DM Sans', sans-serif;
+
+    --sidebar-background: 0 0% 98%;
+    --sidebar-foreground: 240 5.3% 26.1%;
+    --sidebar-primary: 240 5.9% 10%;
+    --sidebar-primary-foreground: 0 0% 98%;
+    --sidebar-accent: 240 4.8% 95.9%;
+    --sidebar-accent-foreground: 240 5.9% 10%;
+    --sidebar-border: 220 13% 91%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  body {
+    @apply bg-background text-foreground;
+    font-family: var(--font-body);
+  }
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-display);
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: -0.02em;
+    line-height: 0.9;
+  }
+}
+
+@layer utilities {
+  .text-display {
+    font-family: var(--font-display);
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: -0.02em;
+    line-height: 0.9;
+  }
+  .text-subheading {
+    font-family: var(--font-display);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    font-size: clamp(0.8rem, 1.5vw, 1rem);
+  }
+  .text-body {
+    font-family: var(--font-body);
+    font-weight: 400;
+    line-height: 1.6;
+    max-width: 65ch;
+  }
+  .bg-surface-dark {
+    background-color: hsl(var(--surface-dark));
+    color: hsl(var(--surface-dark-foreground));
+  }
+  .bg-surface-green {
+    background-color: hsl(var(--surface-green));
+    color: hsl(var(--surface-green-foreground));
+  }
+  .bg-surface-yellow {
+    background-color: hsl(var(--surface-yellow));
+    color: hsl(var(--surface-yellow-foreground));
+  }
+  .bg-surface-pink {
+    background-color: hsl(var(--surface-pink));
+    color: hsl(var(--surface-pink-foreground));
+  }
+  .section-padding {
+    @apply py-10 md:py-16 lg:py-20;
+  }
+  .container-site {
+    @apply max-w-[1440px] mx-auto px-4 md:px-8;
+  }
+  .funky-gradient {
+    background: linear-gradient(135deg, hsl(22 95% 52%), hsl(332 90% 48%), hsl(280 60% 45%));
+  }
+  .warm-gradient {
+    background: linear-gradient(135deg, #ff612b, #ffae30);
+  }
+  .warm-gradient-text {
+    background: linear-gradient(135deg, #ff612b, #ffae30);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  .funky-gradient-text {
+    background: linear-gradient(135deg, hsl(22 95% 52%), hsl(332 90% 48%));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+}
+
+/* Awards strip animation */
+@keyframes scroll-awards {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+.animate-scroll-awards {
+  animation: scroll-awards 30s linear infinite;
+}
+
+/* Photo strip scroll */
+@keyframes scroll-photos {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+.animate-scroll-photos {
+  animation: scroll-photos 40s linear infinite;
+}
+
+/* Funky blob animation */
+@keyframes blob-float {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  33% { transform: translate(30px, -20px) scale(1.05); }
+  66% { transform: translate(-20px, 15px) scale(0.95); }
+}
+.animate-blob {
+  animation: blob-float 7s ease-in-out infinite;
+}
+
+/* Sliding lines animation — left to right */
+@keyframes slide-lines {
+  0% { background-position: 0 0; }
+  100% { background-position: 200px 0; }
+}
+.animate-slide-lines {
+  animation: slide-lines 12s linear infinite;
+}
+
+/* Reverse sliding lines */
+@keyframes slide-lines-reverse {
+  0% { background-position: 200px 0; }
+  100% { background-position: 0 0; }
+}
+.animate-slide-lines-reverse {
+  animation: slide-lines-reverse 18s linear infinite;
+}
+
+/* Diagonal drift */
+@keyframes drift-diagonal {
+  0% { background-position: 0 0; }
+  100% { background-position: 120px 120px; }
+}
+.animate-drift-diagonal {
+  animation: drift-diagonal 20s linear infinite;
+}
+
+/* Slow spin */
+@keyframes slow-spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+.animate-slow-spin {
+  animation: slow-spin 40s linear infinite;
+}
+
+/* Pulse glow */
+@keyframes pulse-glow {
+  0%, 100% { opacity: 0.15; transform: scale(1); }
+  50% { opacity: 0.3; transform: scale(1.1); }
+}
+.animate-pulse-glow {
+  animation: pulse-glow 4s ease-in-out infinite;
+}
+
+/* Neon cyan wave pulse — for highlighted menu items */
+@keyframes neon-cyan-pulse {
+  0%, 100% {
+    box-shadow:
+      0 0 0 0 rgba(34, 211, 238, 0.55),
+      0 0 18px 2px rgba(34, 211, 238, 0.55),
+      inset 0 0 16px rgba(34, 211, 238, 0.25);
+  }
+  50% {
+    box-shadow:
+      0 0 0 12px rgba(34, 211, 238, 0),
+      0 0 36px 6px rgba(34, 211, 238, 0.85),
+      inset 0 0 28px rgba(34, 211, 238, 0.45);
+  }
+}
+.animate-neon-cyan {
+  animation: neon-cyan-pulse 2.4s ease-in-out infinite;
+  border: 2px solid rgba(34, 211, 238, 0.85) !important;
+}
+
+/* CTA glow — pulses box-shadow only, never opacity (so the button stays solid) */
+@keyframes cta-glow {
+  0%, 100% {
+    box-shadow: 0 0 25px rgba(255,238,0,0.7), 0 0 55px rgba(201,0,26,0.6), 0 12px 40px rgba(201,0,26,0.6);
+  }
+  50% {
+    box-shadow: 0 0 45px rgba(255,238,0,1), 0 0 90px rgba(201,0,26,0.95), 0 14px 50px rgba(201,0,26,0.85);
+  }
+}
+.animate-cta-glow {
+  animation: cta-glow 2.4s ease-in-out infinite;
+}
+
+/* Float up-down */
+@keyframes float-y {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-15px); }
+}
+.animate-float-y {
+  animation: float-y 5s ease-in-out infinite;
+}
+
+/* Orb drift — large floating gradient circles wandering around */
+@keyframes orb-drift {
+  0%   { transform: translate(0, 0) scale(1); }
+  25%  { transform: translate(40px, -30px) scale(1.08); }
+  50%  { transform: translate(-25px, 20px) scale(0.95); }
+  75%  { transform: translate(20px, 35px) scale(1.05); }
+  100% { transform: translate(0, 0) scale(1); }
+}
+.animate-orb-drift {
+  animation: orb-drift 18s ease-in-out infinite;
+}
+
+/* Animated pattern reveal — falls into place on load */
+@keyframes pattern-reveal {
+  0% { opacity: 0; transform: translateY(-30px) scale(0.95); }
+  60% { opacity: 0.06; transform: translateY(5px) scale(1.01); }
+  100% { opacity: 0.06; transform: translateY(0) scale(1); }
+}
+.animate-pattern-reveal {
+  animation: pattern-reveal 1.2s cubic-bezier(0.25, 1, 0.5, 1) both;
+}
+
+/* Staggered pattern cascade */
+@keyframes pattern-cascade {
+  0% { clip-path: inset(0 0 100% 0); opacity: 0; }
+  100% { clip-path: inset(0 0 0 0); opacity: 1; }
+}
+
+/* Animated gradient shift */
+@keyframes gradient-shift {
+  0% { background-position: 50% 0%; }
+  50% { background-position: 50% 100%; }
+  100% { background-position: 50% 0%; }
+}
+.animate-gradient-shift {
+  animation: gradient-shift 10s ease-in-out infinite;
+}
+
+/* Horizontal gradient shift — for buttons / CTAs */
+@keyframes gradient-shift-x {
+  0%   { background-position: 0% 50%; }
+  50%  { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+.animate-gradient-shift-x {
+  animation: gradient-shift-x 6s ease-in-out infinite;
+}
+
+/* Skip to content */
+.skip-to-content {
+  @apply sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-[100] focus:px-4 focus:py-2 focus:bg-primary focus:text-primary-foreground focus:rounded-full;
+}
+
+/* Marquee strip */
+@keyframes marquee-scroll {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+.animate-marquee {
+  animation: marquee-scroll 45s linear infinite;
+}
+

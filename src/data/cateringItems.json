@@ -1,0 +1,326 @@
+[
+  {
+    "item_name": "snack_box",
+    "display_name": "Snack-Box",
+    "category": "catering",
+    "cost": 200,
+    "price_type": "per_unit",
+    "count": 1,
+    "item_description": "Light alternative. Snack Box. Contains 1pc Jerk Chicken, 1 portion Jerk Cauliflower, 2pcs Mikaté, served with boss garlic sauce and Flavor-Heat Dancing Hot Sauce. Costs 245kr with grilled corn. Allergens: Contains Gluten (Mikaté), Lactose (Garlic sauce), Soy (Jerk Cauliflower, jerk chicken), and Egg (Garlic sauce)"
+  },
+  {
+    "item_name": "snack_box_with_corn",
+    "display_name": "Snackbox med Grillad Majs",
+    "category": "catering",
+    "cost": 245,
+    "price_type": "per_unit",
+    "count": 1,
+    "item_description": "Snack Box. Contains 1pc Jerk Chicken, 1 portion Jerk Cauliflower, Grilled corn in garlic oil, 2pcs Mikaté, served with boss garlic sauce and Flavor-Heat Dancing Hot Sauce. Allergens: Contains Gluten (Mikaté), Lactose (Garlic sauce), Soy (Jerk Cauliflower, jerk chicken), and Egg (Garlic sauce). Served additionally with grilled corn."
+  },
+  {
+    "item_name": "jerk_box",
+    "display_name": "Jerk-Box",
+    "category": "catering",
+    "cost": 265,
+    "price_type": "per_unit",
+    "count": 1,
+    "item_description": "Medium alternative. Jerk Box contains: Jerk Chicken & Jerk Cauliflower, Jollof rice, coleslaw, Mikaté (kongolesiska donuts), Grillad majs i vitlöksolja, Boss vitlökssås, Flavor-Heat Dancing Hot Sauce & Kongolesiska donuts Mikaté"
+  },
+  {
+    "item_name": "flavorbox",
+    "display_name": "Flavor-Box",
+    "category": "catering",
+    "cost": 345,
+    "price_type": "per_unit",
+    "count": 1,
+    "item_description": "Full meal. Flavor-Box. Contains 1 scoop Jollof rice, 1 spoon coleslaw, 1pc Jerk Chicken, 1portion Cauliflower, 2 Mikaté (Congolese donut), 1 grilled garlic corn, and 1 meat Samosa. Served with boss garlic sauce and Flavor-Heat Dancing Hot Sauce. Allergens: Contains Gluten (Mikaté & Samosa), Lactose (Garlic sauce, Coleslaw, Samosa), Soy (Jerk Cauliflower, jerk chicken), and Egg (Garlic sauce & Coleslaw)."
+  },
+  {
+    "item_name": "sweet_flavors_mikate",
+    "display_name": "Sweet Flavors Mikaté (Dessert)",
+    "category": "catering",
+    "cost": 95,
+    "price_type": "per_unit",
+    "count": 1,
+    "item_description": "Dessert Box (Sweet Flavors Deluxe). Contains 6 pieces of Mikaté with toppings (Oreo + white chocolate OR Lotus Biscoff + salted caramel). AI EXTRACTION RULE: This item is sold per BOX/PORTION. If the customer orders a specific number of \"portions\" or \"boxes\", extract that exact number. If they ask for a specific number of individual \"pieces\", divide that number by 6 (Example: \"12 pieces\" = extract quantity: 2). Vocabulary Guardrail: If the customer asks for \"portioner\", \"boxar\", or \"lådor\" (Example: \"12 portioner\"), you MUST extract that EXACT number (Qty: 12). ONLY divide by 6 if the customer explicitly uses the words \"stycken\" or \"bitar\" (Example: \"12 stycken\" = Qty: 2). If they just say \"dessert for everyone\", extract a quantity equal to the total guest count."
+  },
+  {
+    "item_name": "samosa_mikate_snack",
+    "display_name": "Samosa & Mikaté Snack Experience",
+    "category": "catering",
+    "cost": 135,
+    "price_type": "per_unit",
+    "count": 1,
+    "item_description": "West African crispy pierogies (two per person) filled with spicy vegetarian or beef filling, served with our Boss Garlic Sauce and Flavor-Heat Dancing Hot Sauce.  AI EXTRACTION RULE: This is a PER-PERSON individual food portion. If the customer requests the \"Snack Experience\" or \"samosa/mikaté snack\" for their entire group without specifying a number, the quantity MUST equal the total number of guests (Example: 50 guests = extract quantity: 50). If they request a specific number of portions, extract that exact number (Example: \"We want 10 of those snack experiences\" = extract quantity: 10"
+  },
+  {
+    "item_name": "delivery_local",
+    "display_name": "Lokal Leverans",
+    "category": "catering",
+    "cost": 299,
+    "price_type": "fixed_price",
+    "count": 1,
+    "item_description": "Simple drop-off of warm food in Malmö/Burlöv area."
+  },
+  {
+    "item_name": "buffet_set_up_malmö_burlöv",
+    "display_name": "Bufféuppsättning (Malmö/Burlöv)",
+    "category": "catering",
+    "cost": 995,
+    "price_type": "fixed_price",
+    "count": 1,
+    "item_description": "Delivery + professional buffet layout and presentation, within Malmö/Burlöv"
+  },
+  {
+    "item_name": "disposable_set",
+    "display_name": "Engångsartiklar (Tallrikar & Bestick)",
+    "category": "catering",
+    "cost": 35,
+    "price_type": "per_unit",
+    "count": 1,
+    "item_description": "Eco-friendly plate, wooden cutlery, and napkin."
+  },
+  {
+    "item_name": "food_truck_base",
+    "display_name": "FoodTruck-Upplevelse",
+    "category": "catering",
+    "cost": 7500,
+    "price_type": "fixed_price",
+    "count": 1,
+    "item_description": "Food Truck Base Fee. Includes travel, disposable items (knives, forks, napkins) setup, and exactly the FIRST (1st) hour of warm food service.\nAI EXTRACTION RULE 1 (VEHICLE TYPE): This item is STRICTLY for the FOOD truck. Do NOT extract this if the customer asks for the 'booze truck' or 'bar truck'. Extract quantity: 1 if they order the regular food/catering truck.\nAI EXTRACTION RULE 2 (ELECTRICITY CHECK): If you extract this item, you MUST evaluate their electricity status. If the customer EXPLICITLY states they do NOT have 16-32A electricity, you MUST also extract the item gas_utility_fee (Qty: 1). If the customer DOES NOT mention electricity at all, you MUST NOT extract the fee, but you MUST add \"Missing info: Does the location have 16-32A electricity available for the truck?\" to your missing_info array.\nAI EXTRACTION RULE 3: The price is for the whole experince and is not per person."
+  },
+  {
+    "item_name": "food_truck_extra_hour",
+    "display_name": "Food Truck (Extra Serveringstimme)",
+    "category": "catering",
+    "cost": 1500,
+    "price_type": "fixed_price",
+    "count": 1,
+    "item_description": "Additional hour of active service for the FOOD truck. AI EXTRACTION RULE: STRICT DEPENDENCY. You MUST NEVER extract this item unless food_truck_base is also being extracted in the same order. Apply this ONLY to the regular food truck (NOT Booze Truck or DJ). Calculate the quantity by taking the total requested food truck hours minus 1. AI EXTRACTION RULE 2: The price is for the whole experince and is not per person."
+  },
+  {
+    "item_name": "gas_utility_fee",
+    "display_name": "Gas- & Utrustningsavgift",
+    "category": "catering",
+    "cost": 995,
+    "price_type": "fixed_price",
+    "count": 1,
+    "item_description": "Surcharge if 16-32A electricity is not available at site. AI EXTRACTION RULE: You have two strictly mutually exclusive options. OPTION 1: If the customer EXPLICITLY states they DO NOT have electricity, extract this item (Qty: 1) and do NOT write anything about electricity in missing_info. OPTION 2: If the customer DOES NOT MENTION electricity at all, you MUST NOT extract this item, but you MUST add \"Missing info: Electricity status\" to the missing_info array."
+  },
+  {
+    "item_name": "decoration_light",
+    "display_name": "Dekorationsupplevelse (Light-Paket)",
+    "category": "catering",
+    "cost": 995,
+    "price_type": "fixed_price",
+    "count": 1,
+    "item_description": "Lanterns, tablecloths and green plants are included. A colorful decoration that gives the buffet a warm feeling. Perfect for a simple but atmospheric touch. "
+  },
+  {
+    "item_name": "decoration_medium",
+    "display_name": "Dekorationsupplevelse (Medium-Paket)",
+    "category": "catering",
+    "cost": 3500,
+    "price_type": "fixed_price",
+    "count": 1,
+    "item_description": "Including colorful dishes, lanterns, tablecloths, palm, cactus, green plants and colorful decorative balls. Arranged in different levels that bring the buffet to life. Help with setting up costs 1500kr."
+  },
+  {
+    "item_name": "decoration_luxury",
+    "display_name": "Dekorationsupplevelse (Lyxpaket)",
+    "category": "catering",
+    "cost": 5000,
+    "price_type": "fixed_price",
+    "count": 1,
+    "item_description": "Full premium experience including custom staging. Including colorful dishes, lanterns, tablecloths, palm, cactus, green plants and colorful decorative balls, dining areas and ceiling. Arranged in different levels that bring the buffet to life. Help with setting up costs 2995kr."
+  },
+  {
+    "item_name": "hostess_standard_2h",
+    "display_name": "Värdinna (2 timmar)",
+    "category": "catering",
+    "cost": 3000,
+    "price_type": "per_unit",
+    "count": 1,
+    "item_description": "Professional hostess for 2 hours."
+  },
+  {
+    "item_name": "hostess_patricia_2h",
+    "display_name": "VIP Värdinna Patricia (2 timmar)",
+    "category": "catering",
+    "cost": 4000,
+    "price_type": "fixed_price",
+    "count": 1,
+    "item_description": "Premium Hostess. Patricia Dianda on-site for 2 hours."
+  },
+  {
+    "item_name": "serving_staff_per_hour",
+    "display_name": "Serveringspersonal (Per timme)",
+    "category": "catering",
+    "cost": 495,
+    "price_type": "fixed_price",
+    "count": 1,
+    "item_description": "Additional serving staff (Minimum 2 for 50+ guests)."
+  },
+  {
+    "item_name": "maskot_surprise",
+    "display_name": "Dansande Maskot (Surprise)",
+    "category": "catering",
+    "cost": 2500,
+    "price_type": "fixed_price",
+    "count": 1,
+    "item_description": "1-hour appearance: Entrance with food, dance, photos."
+  },
+  {
+    "item_name": "maskot_party_starter",
+    "display_name": "Dansande Maskot (Party Starter)",
+    "category": "catering",
+    "cost": 3500,
+    "price_type": "fixed_price",
+    "count": 1,
+    "item_description": "2-hour appearance: Servering, dance, and fest inslag."
+  },
+  {
+    "item_name": "maskot_full_exp",
+    "display_name": "Dansande Maskot (Full Experience)",
+    "category": "catering",
+    "cost": 5000,
+    "price_type": "fixed_price",
+    "count": 1,
+    "item_description": "3-hour appearance: Full entertainment and interaction."
+  },
+  {
+    "item_name": "fika_deal",
+    "display_name": "Fika Deal",
+    "category": "catering",
+    "cost": 2500,
+    "price_type": "per_unit",
+    "count": 30,
+    "item_description": "BULK FIKA DEAL. Perfect for office coffee, networking events, conferences, Friday night hangout, or as an extra highlight to the event! Contains exactly 30 portions of Sweet Flavors Mikaté. AI EXTRACTION RULE: This item is sold in batches of 30. To calculate the 'quantity' to extract, divide the total number of guests by 30. (Example: If the customer has 60 guests, the extracted quantity MUST be 2. If 90 guests, quantity is 3)."
+  },
+  {
+    "item_name": "samosa_mikate_snack_deal",
+    "display_name": "Samosa & Mikaté Experience (30 portioner)",
+    "category": "catering",
+    "cost": 3750,
+    "price_type": "per_unit",
+    "count": 30,
+    "item_description": "BULK SAMOSA & MIKATE DEAL. Perfect for office coffee, networking events, conferences, Friday night hangout, or as an extra highlight to the event! Contains exactly 30 portions of Samosa & Mikaté Snack. AI EXTRACTION RULE: This item is sold in batches of 30. To calculate the 'quantity' to extract, divide the total number of guests by 30. (Example: If the customer has 90 guests, the extracted quantity MUST be 3)."
+  },
+  {
+    "item_name": "samosa_pack",
+    "display_name": "Samosa Snack Pack",
+    "category": "catering",
+    "cost": 350,
+    "price_type": "per_unit",
+    "count": 10,
+    "item_description": "ADD-ON PACKAGE. A single box containing 10 individual Samosas. AI EXTRACTION RULE: If a customer requests a specific number of samosas, divide that number by 10 to get the quantity. (Example: If they ask for 20 samosas, extract quantity: 2)."
+  },
+  {
+    "item_name": "mikate_pack",
+    "display_name": "Mikaté Snack Pack",
+    "category": "catering",
+    "cost": 350,
+    "price_type": "per_unit",
+    "count": 40,
+    "item_description": "ADD-ON PACKAGE. A single box containing 40 individual Mikaté. AI EXTRACTION RULE: If a customer requests a specific number of mikaté, divide that number by 40 to get the quantity. (Example: If they ask for 80 mikaté, extract quantity: 2)."
+  },
+  {
+    "item_name": "mix_all_sauces_addon",
+    "display_name": "Extra Såspaket (Flavorheat & Boss Garlic)",
+    "category": "catering",
+    "cost": 15,
+    "price_type": "per_unit",
+    "count": 1,
+    "item_description": "Sauce Upgrade. Add an extra mix of all signature sauces. AI EXTRACTION RULE: This is a PER-PERSON add-on. If the customer requests this upgrade for their group or order without specifying an exact number, the quantity MUST equal the total number of guests or main menus ordered (Example: 15 guests = extract quantity: 15). If they specifically request a set number of extra sauces (Example: \"we want 3 extra sauces\"), extract only that specific number."
+  },
+  {
+    "item_name": "pickup_arlov_kitchen",
+    "display_name": "Avhämtning (Arlöv Kök)",
+    "category": "catering",
+    "cost": 0,
+    "price_type": "fixed_price",
+    "count": 1,
+    "item_description": "Self-Pickup. Customer collects warm food from Flavor-Boss Kitchen, Hantverkaregatan 4, Arlöv."
+  },
+  {
+    "item_name": "flavor_booze_truck_base",
+    "display_name": "Flavor-Booze Truck Experience",
+    "category": "catering",
+    "cost": 9995,
+    "price_type": "fixed_price",
+    "count": 1,
+    "item_description": "Flavor Booze Truck (Bar Experience). 3-hour service including staff, bar setup, streetbites, dessert, and soup. (Excl. alcohol/permit) AI EXTRACTION RULE: This item is STRICTLY for the BOOZE/BAR truck. It requires the customer to explicitly ask for the 'booze truck', 'bar', or 'drink truck'. Do NOT extract this if the customer is only asking for the regular food truck. If requested, extract quantity: 1. AI EXTRACTION RULE 2: The price is for the whole experince and is not per person."
+  },
+  {
+    "item_name": "dj_flavor_light",
+    "display_name": "DJ Flavor (Light-Paket)",
+    "category": "catering",
+    "cost": 7000,
+    "price_type": "fixed_price",
+    "count": 1,
+    "item_description": "Basic DJ Set. Standard sound/light for smaller venues."
+  },
+  {
+    "item_name": "dj_flavor_boost",
+    "display_name": "DJ Flavor (Boost-Paket)",
+    "category": "catering",
+    "cost": 10000,
+    "price_type": "fixed_price",
+    "count": 1,
+    "item_description": "Music Wagon. Enhanced sound and \"Flavor Boost\" mobile setup."
+  },
+  {
+    "item_name": "dj_full_on_flavor",
+    "display_name": "DJ Full-On Flavor (Helhetsupplevelse)",
+    "category": "catering",
+    "cost": 15000,
+    "price_type": "fixed_price",
+    "count": 1,
+    "item_description": "Music Wagon. Enhanced sound and \"Flavor Boost\" mobile setup."
+  },
+  {
+    "item_name": "dj_extra_hour",
+    "display_name": "DJ (Extra Timme)",
+    "category": "catering",
+    "cost": 995,
+    "price_type": "per_unit",
+    "count": 1,
+    "item_description": "Additional hour of DJ performance beyond the initial 3-hour booking."
+  },
+  {
+    "item_name": "catering_package_light_base",
+    "display_name": "Cateringpaket (Light)",
+    "category": "catering",
+    "cost": 7690,
+    "price_type": "fixed_price",
+    "count": 1,
+    "item_description": "Light Catering Package Deal. Includes Flavor-Boxes, Light decoration (candles, tablecloths, plants), disposable items, set-up on site, and Malmö/Burlöv shipping for EXACTLY 15 people.  For every extra guest the cost is 380kr.  AI EXTRACTION RULE: This is a bundled package. If the customer requests the \"Light package\" or the package for smaller events, extract quantity: 1. STRICT CONSTRAINT: If you extract this package, you MUST NOT extract flavorbox, delivery_local, disposable_set, decoration_light, or setup_medium individually, as they are already included. If the customer has more than 15 guests, you MUST evaluate the extra guests using the package_light_extra_guest item."
+  },
+  {
+    "item_name": "catering_package_meduim_base",
+    "display_name": "Cateringpaket (Medium)",
+    "category": "catering",
+    "cost": 11395,
+    "price_type": "fixed_price",
+    "count": 1,
+    "item_description": "Medium Catering Package. Includes Flavor-Boxes, Light decoration (candles, tablecloths, plants), disposable items, set-up on site, and Malmö/Burlöv shipping for EXACTLY 30 people. For every extra guest the cost is 380kr.  AI EXTRACTION RULE: This is a bundled package. STRICT CONSTRAINT: If you extract this package, you MUST NOT extract flavorbox, delivery_local, disposable_set, decoration_light, or setup_medium individually, as they are already included."
+  },
+  {
+    "item_name": "setup_medium",
+    "display_name": "Hjälp med uppsättning (Medium)",
+    "category": "catering",
+    "cost": 1500,
+    "price_type": "fixed_price",
+    "count": 1,
+    "item_description": "Pro Setup. Flavor-Boss staff handles the visual presentation and buffet staging on-site."
+  },
+  {
+    "item_name": "grill_experience_base",
+    "display_name": "Grill Experience",
+    "category": "catering",
+    "cost": 150,
+    "price_type": "per_unit",
+    "count": 1,
+    "item_description": "The ultimate rooftop or garden party experience where our grill master provides a fragrant atmosphere with cinnamon-spiced Jamaican fusioned jerk. Includes a professional grill master and staff, all side dishes, delivery, and 3 hours of service (including 1–1.5 hours of active grilling). Cost is 150kr per person for a minimum of 40 guests. For groups of 13–39 people, the price is a flat fee of 6,000 Kr instead of the per-person rate. Extended Service: 995 Kr per additional hour of service. Grill Rental: + 1,500 Kr (if the venue does not have a grill). Grill Delivery Fee: 299 Kr (within Malmö/Burlöv area)."
+  }
+]
