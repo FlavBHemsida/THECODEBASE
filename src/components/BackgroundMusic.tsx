@@ -1,19 +1,22 @@
 import { useState, useRef, useEffect, useLayoutEffect } from 'react';
 import { Volume2, VolumeX } from 'lucide-react';
 
-const MUSIC_SRC = '/audio/bg-music-fast.mp3';
+const MUSIC_SRC = '/audio/bg-music.opus';
 const TARGET_VOLUME = 0.35;
+const MUTE_STORAGE_KEY = 'fb-music-muted';
 
 const BackgroundMusic = () => {
   const audioRef = useRef<HTMLAudioElement>(null);
-  const [muted, setMuted] = useState(false);
+  const [muted, setMuted] = useState(() => sessionStorage.getItem(MUTE_STORAGE_KEY) === 'true');
+  const [needsGesture, setNeedsGesture] = useState(false);
+  const userMutedRef = useRef(muted);
 
   useLayoutEffect(() => {
     const preload = document.createElement('link');
     preload.rel = 'preload';
     preload.as = 'audio';
     preload.href = MUSIC_SRC;
-    preload.type = 'audio/mpeg';
+    preload.type = 'audio/ogg';
     preload.setAttribute('fetchpriority', 'high');
     document.head.appendChild(preload);
 
@@ -21,6 +24,17 @@ const BackgroundMusic = () => {
       preload.remove();
     };
   }, []);
+
+  const fadeIn = (audio: HTMLAudioElement) => {
+    if (audio.dataset.fading === 'true') return;
+    audio.dataset.fading = 'true';
+    let vol = 0;
+    const interval = setInterval(() => {
+      vol = Math.min(vol + 0.05, TARGET_VOLUME);
+      audio.volume = vol;
+      if (vol >= TARGET_VOLUME) clearInterval(interval);
+    }, 35);
+  };
 
   useEffect(() => {
     const audio = audioRef.current;
@@ -30,70 +44,55 @@ const BackgroundMusic = () => {
     audio.volume = 0;
     audio.muted = false;
 
-    const fadeIn = () => {
-      if (audio.dataset.fading === 'true') return;
-      audio.dataset.fading = 'true';
-      let vol = 0;
-      const interval = setInterval(() => {
-        vol = Math.min(vol + 0.05, TARGET_VOLUME);
-        audio.volume = vol;
-        if (vol >= TARGET_VOLUME) clearInterval(interval);
-      }, 35);
-    };
-
-    const tryStart = () => {
+    const startAfterHeaderVideo = () => {
+      if (userMutedRef.current) return;
       audio.muted = false;
       audio.volume = 0.01;
-      return audio.play().then(fadeIn);
-    };
-
-    const startAfterHeaderVideo = () => {
-      tryStart().catch(() => {});
-    };
-
-    const onFirstGesture = () => {
-      tryStart().catch(() => {});
+      audio.play().then(() => fadeIn(audio)).catch(() => setNeedsGesture(true));
     };
 
     window.addEventListener('flavorboss:hero-video-started', startAfterHeaderVideo, { once: true });
-    const fallbackTimer = window.setTimeout(startAfterHeaderVideo, 700);
-
-    // If the browser blocks sound without a gesture, this starts on the very first interaction.
-    const opts = { passive: true } as AddEventListenerOptions;
-    document.addEventListener('pointerdown', onFirstGesture, opts);
-    document.addEventListener('touchstart', onFirstGesture, opts);
-    document.addEventListener('keydown', onFirstGesture, opts);
-
-    return () => {
-      window.removeEventListener('flavorboss:hero-video-started', startAfterHeaderVideo);
-      window.clearTimeout(fallbackTimer);
-      document.removeEventListener('pointerdown', onFirstGesture);
-      document.removeEventListener('touchstart', onFirstGesture);
-      document.removeEventListener('keydown', onFirstGesture);
-    };
+    return () => window.removeEventListener('flavorboss:hero-video-started', startAfterHeaderVideo);
   }, []);
 
   const toggle = () => {
     const audio = audioRef.current;
     if (!audio) return;
+
+    if (needsGesture) {
+      // Autoplay was blocked — this click is a real user gesture, guaranteed to work.
+      audio.muted = false;
+      audio.volume = 0.01;
+      audio.play().then(() => fadeIn(audio)).catch(() => {});
+      setNeedsGesture(false);
+      userMutedRef.current = false;
+      setMuted(false);
+      sessionStorage.setItem(MUTE_STORAGE_KEY, 'false');
+      return;
+    }
+
     if (muted) {
+      userMutedRef.current = false;
       audio.muted = false;
       setMuted(false);
+      sessionStorage.setItem(MUTE_STORAGE_KEY, 'false');
     } else {
+      userMutedRef.current = true;
       audio.muted = true;
       setMuted(true);
+      sessionStorage.setItem(MUTE_STORAGE_KEY, 'true');
     }
   };
 
   return (
     <>
-      <audio ref={audioRef} src={MUSIC_SRC} loop preload="auto" autoPlay playsInline />
+      <audio ref={audioRef} src={MUSIC_SRC} loop preload="auto" playsInline />
       <button
         onClick={toggle}
         className="fixed bottom-5 right-5 z-50 w-12 h-12 rounded-full bg-surface-dark flex items-center justify-center shadow-lg hover:scale-110 transition-transform border border-primary/30"
-        aria-label={muted ? 'Unmute music' : 'Mute music'}
+        aria-label={muted || needsGesture ? 'Unmute music' : 'Mute music'}
       >
-        {muted ? (
+        {muted || needsGesture ? (
           <VolumeX className="w-5 h-5 text-primary" />
         ) : (
           <Volume2 className="w-5 h-5 text-primary" />

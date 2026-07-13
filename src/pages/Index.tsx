@@ -50,7 +50,7 @@ const Index = () => {
         <ServicesSection />
         <div className="w-full bg-gradient-to-r from-[#F07020] to-[#E8186D] py-1 md:py-2">
           <div className="text-center px-4">
-            <span className="font-kurri text-black text-lg md:text-2xl lg:text-3xl tracking-tight">
+            <span className="font-kurriCaps text-black text-lg md:text-2xl lg:text-3xl tracking-tight">
               Afro-Caribbean Streetfood At it's Best!
             </span>
           </div>

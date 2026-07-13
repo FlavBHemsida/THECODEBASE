@@ -27,38 +27,38 @@ import patternOrangeImg from '@/assets/pattern-orange.png';
 import patternGreenImg from '@/assets/pattern-green.png';
 import menuFlavorBoxImg from '@/assets/menu-flavor-box.jpg';
 import menuSamosaBoxImg from '@/assets/menu-samosa-box.jpg';
-import menuSweetFlavorsDeluxeAsset from '@/assets/menu-sweet-flavors-deluxe.webp.asset.json';
+import menuSweetFlavorsDeluxeAsset from '@/assets/menu-sweet-flavors-deluxe.webp';
 import menuCarousel1 from '@/assets/menu-carousel-1.jpg';
 import menuCarousel2 from '@/assets/menu-carousel-2.jpg';
 import menuCarousel3 from '@/assets/menu-carousel-3.jpg';
 import menuCarousel4 from '@/assets/menu-carousel-4.jpg';
-import cateringHeroMobileAsset from '@/assets/catering-hero-mobile-v2.png.asset.json';
+import cateringHeroMobileAsset from '@/assets/catering-hero-mobile-v2.webp';
 import menuCarousel5 from '@/assets/menu-carousel-5.jpg';
 import menuCarousel6 from '@/assets/menu-carousel-6.jpg';
 import menuCarousel7 from '@/assets/menu-carousel-7.jpg';
-import cateringHeroLeftAsset from '@/assets/catering-hero-left.webp.asset.json';
-import cateringHeroMiddleAsset from '@/assets/catering-hero-middle.webp.asset.json';
-import cateringHeroRightAsset from '@/assets/catering-hero-right.webp.asset.json';
+import cateringHeroLeftAsset from '@/assets/catering-hero-left.webp';
+import cateringHeroMiddleAsset from '@/assets/catering-hero-middle.webp';
+import cateringHeroRightAsset from '@/assets/catering-hero-right.webp';
 import grillWingsFire from '@/assets/grill-wings-fire.jpg';
-import cateringNavBuffeAsset from '@/assets/catering-nav-buffe.webp.asset.json';
+import cateringNavBuffeAsset from '@/assets/catering-nav-buffe.webp';
 import cateringNavBulk from '@/assets/catering-nav-bulk.png';
-import cateringNavPaketAsset from '@/assets/catering-nav-paket.webp.asset.json';
-import cateringNavUpplevelserAsset from '@/assets/catering-nav-upplevelser-v2.webp.asset.json';
-import cateringNavStaffAsset from '@/assets/catering-nav-staff-v2.webp.asset.json';
-import cateringNavEntertainmentAsset from '@/assets/catering-nav-entertainment.webp.asset.json';
-import cateringNavDecorationAsset from '@/assets/catering-nav-decoration-v2.webp.asset.json';
+import cateringNavPaketAsset from '@/assets/catering-nav-paket.webp';
+import cateringNavUpplevelserAsset from '@/assets/catering-nav-upplevelser-v2.webp';
+import cateringNavStaffAsset from '@/assets/catering-nav-staff-v2.webp';
+import cateringNavEntertainmentAsset from '@/assets/catering-nav-entertainment.webp';
+import cateringNavDecorationAsset from '@/assets/catering-nav-decoration-v2.webp';
 import cateringCardFlavorbox from '@/assets/catering-card-flavorbox.png';
 import cateringCardSnackbox from '@/assets/catering-card-snackbox.png';
 import cateringCardJerkbox from '@/assets/catering-card-jerkbox.png';
-import cateringSamosaMikatéSnackAsset from '@/assets/catering-samosa-mikate-snack.webp.asset.json';
-import cateringCardSamosaPackAsset from '@/assets/catering-card-samosa-pack.webp.asset.json';
-import jerkWrapIcon from '@/assets/jerk-wrap-icon.png.asset.json';
+import cateringSamosaMikatéSnackAsset from '@/assets/catering-samosa-mikate-snack.webp';
+import cateringCardSamosaPackAsset from '@/assets/catering-card-samosa-pack.webp';
+import jerkWrapIcon from '@/assets/jerk-wrap-icon.png';
 import snackBoxBrochure from '@/assets/snack-box-brochure.pdf.asset.json';
 import cateringSnackboxCornAsset from '@/assets/catering-snackbox-corn.png.asset.json';
-import cateringMikatéPackAsset from '@/assets/catering-mikate-pack.webp.asset.json';
-import cateringMikatéPhotoAsset from '@/assets/catering-mikate-photo.webp.asset.json';
-import cateringLogisticsNavAsset from '@/assets/catering-logistics-nav.webp.asset.json';
-import jerkBoxPlateAsset from '@/assets/jerk-box-plate.webp.asset.json';
+import cateringMikatéPackAsset from '@/assets/catering-mikate-pack.webp';
+import cateringMikatéPhotoAsset from '@/assets/catering-mikate-photo.webp';
+import cateringLogisticsNavAsset from '@/assets/catering-logistics-nav.webp';
+import jerkBoxPlateAsset from '@/assets/jerk-box-plate.webp';
 import decorationLightAsset from '@/assets/decoration-light.png.asset.json';
 import { useCateringBasket } from '@/hooks/useCateringBasket';
 
@@ -66,11 +66,11 @@ const CARD_IMAGE_BY_ID: Record<string, string> = {
   flavorbox: cateringCardFlavorbox,
   snack_box: cateringCardSnackbox,
   snack_box_with_corn: cateringSnackboxCornAsset.url,
-  jerk_box: jerkBoxPlateAsset.url,
-  sweet_flavors_mikate: cateringMikatéPhotoAsset.url,
-  samosa_mikate_snack: cateringSamosaMikatéSnackAsset.url,
-  samosa_pack: cateringCardSamosaPackAsset.url,
-  mikate_pack: cateringMikatéPackAsset.url,
+  jerk_box: jerkBoxPlateAsset,
+  sweet_flavors_mikate: cateringMikatéPhotoAsset,
+  samosa_mikate_snack: cateringSamosaMikatéSnackAsset,
+  samosa_pack: cateringCardSamosaPackAsset,
+  mikate_pack: cateringMikatéPackAsset,
   decoration_light: decorationLightAsset.url,
 };
 
@@ -1081,7 +1081,7 @@ const Meny = () => {
             className="pointer-events-none select-none absolute z-10 right-2 sm:right-3 md:right-5 lg:right-6 top-1/2 -translate-y-1/2"
           >
             <img
-              src={jerkWrapIcon.url}
+              src={jerkWrapIcon}
               alt=""
               className="drop-shadow-[0_8px_24px_rgba(0,0,0,0.55)] opacity-95 animate-float-y w-24 sm:w-28 md:w-36 lg:w-40 h-auto object-contain"
             />
@@ -1557,7 +1557,7 @@ const Meny = () => {
                     { text: t('Våra signatursåser Boss Garlic Sauce', 'Our signature Boss Garlic Sauce'), color: 'bg-surface-yellow' },
                     { text: 'FlavorHeat Dancing Hotsauce', color: 'bg-surface-yellow' },
                   ],
-                  floatingIcon: jerkWrapIcon.url,
+                  floatingIcon: jerkWrapIcon,
                   allergens: t(
                     'Innehåller:\nLaktos: Coleslaw & Vitlökssås\nÄgg: Coleslaw & Vitlökssås\nBaljväxter/soja: Jerkmarinad\nGluten: Mikaté',
                     'Contains:\nLactose: Coleslaw & Garlic Sauce\nEgg: Coleslaw & Garlic Sauce\nLegumes/soy: Jerk Marinade\nGluten: Mikaté'
@@ -1567,7 +1567,7 @@ const Meny = () => {
                 {
                   id: 'sweet_flavors',
                   title: 'SWEET FLAVORS DELUXE',
-                  image: menuSweetFlavorsDeluxeAsset.url,
+                  image: menuSweetFlavorsDeluxeAsset,
                   alt: 'Sweet Flavors Deluxe',
                   badge: t('SM-vinnare dessert 2025', 'SM Dessert Winner 2025'),
                   border: 'border-surface-yellow',
@@ -1994,7 +1994,7 @@ const Meny = () => {
             <div className="lg:hidden relative mb-6">
               <div className="relative w-full overflow-hidden rounded-2xl shadow-2xl ring-2 ring-white/20" style={{ height: 'min(58svh, 460px)' }}>
                 <img
-                  src={cateringHeroMobileAsset.url}
+                  src={cateringHeroMobileAsset}
                   alt=""
                   loading="eager"
                   className="absolute inset-0 w-full h-full object-cover"
@@ -2033,7 +2033,7 @@ const Meny = () => {
             <div className="hidden lg:block relative mb-4 md:mb-0 sm:px-6 md:px-10">
               <div className="relative">
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6">
-                  {[cateringHeroLeftAsset.url, cateringHeroMiddleAsset.url, cateringHeroRightAsset.url].map((src, i) => (
+                  {[cateringHeroLeftAsset, cateringHeroMiddleAsset, cateringHeroRightAsset].map((src, i) => (
                     <motion.img
                       key={i}
                       src={src}
@@ -2099,18 +2099,18 @@ const Meny = () => {
               {cateringSections.map(cat => {
                 const moved = movedCateringSectionIds.includes(cat.id);
                 const meta: Record<string, { img: string; Icon: typeof Utensils }> = {
-                  boxes: { img: cateringNavBuffeAsset.url, Icon: Utensils },
-                  snacks: { img: menuSweetFlavorsDeluxeAsset.url, Icon: Cookie },
-                  snack_erbjudanden: { img: cateringSamosaMikatéSnackAsset.url, Icon: Cookie },
+                  boxes: { img: cateringNavBuffeAsset, Icon: Utensils },
+                  snacks: { img: menuSweetFlavorsDeluxeAsset, Icon: Cookie },
+                  snack_erbjudanden: { img: cateringSamosaMikatéSnackAsset, Icon: Cookie },
                   bulk: { img: cateringNavBulk, Icon: Boxes },
-                  packages: { img: cateringNavPaketAsset.url, Icon: Crown },
-                  experiences: { img: cateringNavUpplevelserAsset.url, Icon: Sparkles },
-                  staff: { img: cateringNavStaffAsset.url, Icon: Utensils },
-                  entertainment: { img: cateringNavEntertainmentAsset.url, Icon: Utensils },
-                  decoration: { img: cateringNavDecorationAsset.url, Icon: Sparkles },
+                  packages: { img: cateringNavPaketAsset, Icon: Crown },
+                  experiences: { img: cateringNavUpplevelserAsset, Icon: Sparkles },
+                  staff: { img: cateringNavStaffAsset, Icon: Utensils },
+                  entertainment: { img: cateringNavEntertainmentAsset, Icon: Utensils },
+                  decoration: { img: cateringNavDecorationAsset, Icon: Sparkles },
                 };
                 const m = cat.id === 'logistics'
-                  ? { img: cateringLogisticsNavAsset.url, Icon: Truck }
+                  ? { img: cateringLogisticsNavAsset, Icon: Truck }
                   : meta[cat.id] ?? { img: menuCarousel1, Icon: Utensils };
                 const Icon = m.Icon;
                 const commonClass = 'group relative flex flex-col items-center w-20 md:w-36 transition-transform hover:-translate-y-1';

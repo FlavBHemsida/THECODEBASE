@@ -23,13 +23,13 @@ import photoGrillExtra4 from '@/assets/grill-extra-4.jpg';
 import photoGrillExtra5 from '@/assets/grill-extra-5.jpg';
 import photoGrillTshirtBack from '@/assets/grill-tshirt-back.jpg';
 import grillSolidSilhouette from '@/assets/grill-solid-silhouette.png';
-import grillCenterAsset from '@/assets/grill-center.jpg.asset.json';
-import grillBbqPalmAsset from '@/assets/grill-bbq-palm.jpg.asset.json';
-import grillFlavorbossTeeAsset from '@/assets/grill-flavorboss-tee.jpg.asset.json';
-import grillWingsFireNewAsset from '@/assets/grill-wings-fire-new.jpg.asset.json';
+import grillCenterAsset from '@/assets/grill-center.webp';
+import grillBbqPalmAsset from '@/assets/grill-bbq-palm.webp';
+import grillFlavorbossTeeAsset from '@/assets/grill-flavorboss-tee.webp';
+import grillWingsFireNewAsset from '@/assets/grill-wings-fire-new.webp';
 const grillUser2 = { url: photoGrillExtra4 };
-const grillUser3 = { url: grillCenterAsset.url };
-const grillUser4 = { url: grillFlavorbossTeeAsset.url };
+const grillUser3 = { url: grillCenterAsset };
+const grillUser4 = { url: grillFlavorbossTeeAsset };
 
 // Half-set of "Vårt Äventyr" journey patterns — keeps the background lively without overcrowding
 import patternPalm from '@/assets/journey/pattern-palm.png';
@@ -159,8 +159,8 @@ const Grill = () => {
                 { src: grillUser3.url,        x: '38%', y: '28%', w: 'w-[44%] sm:w-[36%] md:w-[32%]', rot: -3, z: 30, ring: '0 0 0 6px #ffee00, 0 0 0 10px #b00018' },
                 { src: grillUser2.url,        x: '6%',  y: '14%', w: 'w-[36%] sm:w-[28%] md:w-[24%]', rot: -8, z: 20, ring: '0 0 0 5px #ff7a00' },
                 { src: grillUser4.url,        x: '70%', y: '8%',  w: 'w-[34%] sm:w-[26%] md:w-[22%]', rot: 7,  z: 20, ring: '0 0 0 5px #ff7a00' },
-                { src: grillWingsFireNewAsset.url, x: '2%',  y: '60%', w: 'w-[32%] sm:w-[24%] md:w-[20%]', rot: 5,  z: 15, ring: '0 0 0 4px #ffee00' },
-                { src: grillBbqPalmAsset.url, x: '76%', y: '58%', w: 'w-[30%] sm:w-[22%] md:w-[20%]', rot: -6, z: 15, ring: '0 0 0 4px #ffee00' },
+                { src: grillWingsFireNewAsset, x: '2%',  y: '60%', w: 'w-[32%] sm:w-[24%] md:w-[20%]', rot: 5,  z: 15, ring: '0 0 0 4px #ffee00' },
+                { src: grillBbqPalmAsset, x: '76%', y: '58%', w: 'w-[30%] sm:w-[22%] md:w-[20%]', rot: -6, z: 15, ring: '0 0 0 4px #ffee00' },
                 { src: photoGrillExtra3,      x: '24%', y: '70%', w: 'w-[28%] sm:w-[20%] md:w-[18%]', rot: 9,  z: 12, ring: '0 0 0 4px #ff7a00' },
             ].map((p, i) => (
               <motion.div

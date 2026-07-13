@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { X, Instagram, Facebook } from 'lucide-react';
 import logoImg from '@/assets/logo-cutout.png';
-import bananaPlant from '@/assets/popup-banana-plant.webp.asset.json';
+import bananaPlant from '@/assets/popup-banana-plant.webp';
 
 import patternPalm from '@/assets/journey/pattern-palm.png';
 import patternArrow from '@/assets/journey/pattern-arrow.png';
@@ -125,7 +125,7 @@ const CampaignPopup = () => {
 
             {/* Banana plant anchored at bottom-left — fully inside the card, gently floating */}
             <motion.img
-              src={bananaPlant.url}
+              src={bananaPlant}
               alt=""
               aria-hidden="true"
               className="absolute z-20 pointer-events-none select-none hidden md:block"
@@ -159,11 +159,11 @@ const CampaignPopup = () => {
                 HUGO BOSS HOTAR MED STÄMNING FÖR VÅRT NAMN!
               </h2>
 
-              <p className="font-kurri text-white text-sm md:text-lg mt-5 md:mt-6 leading-tight">
+              <p className="font-kurriCaps text-white text-sm md:text-lg mt-5 md:mt-6 leading-tight">
                 Hjälp oss samla kraft &amp; stötta oss med din röst &amp; ekonomiskt här:
               </p>
 
-              <p className="font-kurri text-white text-sm md:text-base mt-5 md:mt-6 leading-snug">
+              <p className="font-kurriCaps text-white text-sm md:text-base mt-5 md:mt-6 leading-snug">
                 Skriv under namninsamlingen &amp; dela din röst via länken här
                 <br />
                 <a
@@ -176,7 +176,7 @@ const CampaignPopup = () => {
                 </a>
               </p>
 
-              <p className="font-kurri text-white text-sm md:text-base mt-5 md:mt-6 leading-snug">
+              <p className="font-kurriCaps text-white text-sm md:text-base mt-5 md:mt-6 leading-snug">
                 Swish: 1234989554, Flavor-Boss
                 <br />
                 Märk gåvan med #GoFlavorboss
@@ -196,7 +196,7 @@ const CampaignPopup = () => {
                 }}
               >
                 <p
-                  className="font-display font-extrabold uppercase text-white leading-tight text-sm md:text-base tracking-wide"
+                  className="font-kurriCaps font-extrabold uppercase text-white leading-tight text-sm md:text-base tracking-wide"
                   style={{ textShadow: '0 2px 6px rgba(0,0,0,0.4)' }}
                 >
                   FÖLJ OSS PÅ SOCIALA MEDIER FÖR UPPDATERING KRING VÅR KAMP!

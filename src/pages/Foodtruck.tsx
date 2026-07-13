@@ -159,7 +159,7 @@ const Foodtruck = () => {
           {/* Top black-lined pattern (under navbar) — full bleed across viewport */}
           <div
             aria-hidden="true"
-            className="absolute left-0 right-0 top-24 h-10 md:h-14 mb-12 select-none pointer-events-none w-screen"
+            className="absolute left-1/2 -translate-x-1/2 top-24 h-10 md:h-14 mb-12 select-none pointer-events-none w-screen"
             style={{
               backgroundImage: `url(${linePattern})`,
               backgroundRepeat: 'repeat-x',
@@ -354,19 +354,24 @@ const Foodtruck = () => {
             />
           </div>
 
-          {/* Bottom black-lined pattern — full bleed across viewport */}
-          <div
-            aria-hidden="true"
-            className="absolute left-0 right-0 bottom-0 h-10 md:h-14 select-none pointer-events-none w-screen z-10"
-            style={{
-              backgroundImage: `url(${linePattern})`,
-              backgroundRepeat: 'repeat-x',
-              backgroundSize: 'auto 100%',
-              backgroundPosition: 'left center',
-            }}
-          />
-                <TrustQuotes seed="foodtruck" count={2} variant="light" headingSv="Vad våra kunder säger" headingEn="What Our Clients Say" />
       </main>
+
+      {/* Full-bleed reviews — pulled out of the container so the panel reaches edge-to-edge,
+          with the line-pattern stripe laid on top of its top edge (same placement as before,
+          now spanning the full section since it's no longer trapped in the constrained container) */}
+      <div className="relative z-10">
+        <TrustQuotes seed="foodtruck" count={2} variant="light" headingSv="Vad våra kunder säger" headingEn="What Our Clients Say" />
+        <div
+          aria-hidden="true"
+          className="absolute inset-x-0 bottom-0 h-10 md:h-14 z-20 select-none pointer-events-none"
+          style={{
+            backgroundImage: `url(${linePattern})`,
+            backgroundRepeat: 'repeat-x',
+            backgroundSize: 'auto 100%',
+            backgroundPosition: 'left center',
+          }}
+        />
+      </div>
       </div>
     </>
   );

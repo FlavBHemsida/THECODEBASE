@@ -83,30 +83,30 @@ import uppMenu2 from '@/assets/upp-menu-2.png.asset.json';
 import uppMenu3 from '@/assets/upp-menu-3.png.asset.json';
 import uppMenu4 from '@/assets/upp-menu-4.png.asset.json';
 import uppMenu5 from '@/assets/upp-menu-5.png.asset.json';
-import uppEvent1 from '@/assets/upp-event-1.jpg.asset.json';
-import uppEvent2 from '@/assets/upp-event-2.jpg.asset.json';
-import uppEvent3 from '@/assets/upp-event-3.jpg.asset.json';
-import uppEvent4 from '@/assets/upp-event-4.jpg.asset.json';
-import uppEvent5 from '@/assets/upp-event-5.jpg.asset.json';
-import uppLunchPopup from '@/assets/upp-lunch-popup.jpg.asset.json';
-import uppFoodtruck1 from '@/assets/upp-foodtruck-1.jpg.asset.json';
-import uppFoodtruck2 from '@/assets/upp-foodtruck-2.jpg.asset.json';
-import uppFoodtruck3 from '@/assets/upp-foodtruck-3.jpg.asset.json';
-import uppFoodtruck4 from '@/assets/upp-foodtruck-4.jpg.asset.json';
-import cateringMikatéPhotoAsset from '@/assets/catering-mikate-photo.png.asset.json';
-import cateringMikatéPackAsset from '@/assets/catering-mikate-pack.png.asset.json';
-import cateringNavUpplevelserAsset from '@/assets/catering-nav-upplevelser-v2.png.asset.json';
-import uppDecoration1 from '@/assets/upp-decoration-1.png.asset.json';
-import uppDecoration2 from '@/assets/upp-decoration-2.png.asset.json';
-import uppDecoration3 from '@/assets/upp-decoration-3.png.asset.json';
-import uppDecoration4 from '@/assets/upp-decoration-4.png.asset.json';
-import uppDecoration5 from '@/assets/upp-decoration-5.png.asset.json';
-import uppBar1 from '@/assets/upp-bar-1.png.asset.json';
-import uppBar2 from '@/assets/upp-bar-2.png.asset.json';
-import uppBar3 from '@/assets/upp-bar-3.png.asset.json';
-import uppDj1 from '@/assets/upp-dj-1.png.asset.json';
-import uppDj2 from '@/assets/upp-dj-2.png.asset.json';
-import uppDj3 from '@/assets/upp-dj-3.png.asset.json';
+import uppEvent1 from '@/assets/upp-event-1.webp';
+import uppEvent2 from '@/assets/upp-event-2.webp';
+import uppEvent3 from '@/assets/upp-event-3.webp';
+import uppEvent4 from '@/assets/upp-event-4.webp';
+import uppEvent5 from '@/assets/upp-event-5.webp';
+import uppLunchPopup from '@/assets/upp-lunch-popup.webp';
+import uppFoodtruck1 from '@/assets/upp-foodtruck-1.webp';
+import uppFoodtruck2 from '@/assets/upp-foodtruck-2.webp';
+import uppFoodtruck3 from '@/assets/upp-foodtruck-3.webp';
+import uppFoodtruck4 from '@/assets/upp-foodtruck-4.webp';
+import cateringMikatéPhotoAsset from '@/assets/catering-mikate-photo.webp';
+import cateringMikatéPackAsset from '@/assets/catering-mikate-pack.webp';
+import cateringNavUpplevelserAsset from '@/assets/catering-nav-upplevelser-v2.webp';
+import uppDecoration1 from '@/assets/upp-decoration-1.webp';
+import uppDecoration2 from '@/assets/upp-decoration-2.webp';
+import uppDecoration3 from '@/assets/upp-decoration-3.webp';
+import uppDecoration4 from '@/assets/upp-decoration-4.webp';
+import uppDecoration5 from '@/assets/upp-decoration-5.webp';
+import uppBar1 from '@/assets/upp-bar-1.webp';
+import uppBar2 from '@/assets/upp-bar-2.webp';
+import uppBar3 from '@/assets/upp-bar-3.webp';
+import uppDj1 from '@/assets/upp-dj-1.webp';
+import uppDj2 from '@/assets/upp-dj-2.webp';
+import uppDj3 from '@/assets/upp-dj-3.webp';
 import TrustQuotes from '@/components/TrustQuotes';
 import CateringExtras from '@/components/CateringExtras';
 
@@ -225,11 +225,11 @@ const PhotoStrip = ({
   );
 };
 
-const menuStripImages = [uppMenu1.url, uppMenu2.url, uppMenu3.url, uppMenu4.url, uppMenu5.url, cateringNavUpplevelserAsset.url];
-const eventStripImages = [uppEvent1.url, uppEvent2.url, uppEvent3.url, uppEvent4.url, uppEvent5.url];
-const decorationStripImages = [uppDecoration1.url, uppDecoration2.url, uppDecoration3.url, uppDecoration4.url, uppDecoration5.url];
-const barStripImages = [uppBar1.url, uppBar2.url, uppBar3.url];
-const djStripImages = [uppDj1.url, uppDj2.url, uppDj3.url];
+const menuStripImages = [uppMenu1.url, uppMenu2.url, uppMenu3.url, uppMenu4.url, uppMenu5.url, cateringNavUpplevelserAsset];
+const eventStripImages = [uppEvent1, uppEvent2, uppEvent3, uppEvent4, uppEvent5];
+const decorationStripImages = [uppDecoration1, uppDecoration2, uppDecoration3, uppDecoration4, uppDecoration5];
+const barStripImages = [uppBar1, uppBar2, uppBar3];
+const djStripImages = [uppDj1, uppDj2, uppDj3];
 
 // Source PDFs/PNGs for download buttons — served from /public so the browser
 // downloads them directly without going through Vite's auth-protected dev routes.
@@ -406,7 +406,7 @@ const sections: Section[] = [
           'Afro-Karibisk lunchupplevelse direkt från Flavor-Boss Kitchen på Hantverkaregatan 4, Arlöv. Vi serverar prisbelönta Flavor Box, Veckans Gryta med fufu eller ris, samt Kids Box. Schema släpps löpande via sociala medier och via vårt nyhetsbrev.',
         descEn:
           'Rotating popup lunches featuring the award-winning Flavor-Box, a weekly West African stew served with fufu or rice, and a Kids Box. Schedules are released through social media and our newsletter during festival season.',
-        image: uppLunchPopup.url,
+        image: uppLunchPopup,
         downloadUrl: srcLunchPopup,
         downloadName: 'Flavor-Boss-Lunch-Popup.png',
         socialLinks: {
@@ -436,7 +436,7 @@ const sections: Section[] = [
         descEn:
           'Our award-winning Congolese donuts served with your choice of topping: Salted Caramel + Lotus Crush or White & Milk Chocolate + Oreo Crush. A dessert experience with its own championship title. Available as a fika deal for teams and groups — pre-order for pickup or delivery weekdays 11–16.',
         basketId: 'sweet_flavors_mikate',
-        image: cateringMikatéPhotoAsset.url,
+        image: cateringMikatéPhotoAsset,
         downloadUrl: srcSweetMikaté,
         downloadName: 'Flavor-Boss-Sweet-Mikaté.png',
       },
@@ -459,7 +459,7 @@ const sections: Section[] = [
         descEn:
           'Want to enjoy our award-winning flavors whenever it suits you? Pre-order & pick up your SNACK PACK by arrangement. Fry or heat at home when the weekend rolls in! Perfect for home parties, brunch, lunch boxes or cozy nights in with friends. Everything is pre-cooked (frozen) and ready — just fry/heat, serve & enjoy!',
         basketId: 'mikate_pack',
-        image: cateringMikatéPackAsset.url,
+        image: cateringMikatéPackAsset,
         downloadUrl: srcTakeHome,
         downloadName: 'Flavor-Boss-Take-Home-Snacks.png',
       },
@@ -482,7 +482,7 @@ const sections: Section[] = [
           'Med över 30 000 följare i sociala medier bidrar Flavor-Boss inte bara med mat – vi lockar människor till ert event. Vår färgstarka foodtruck passar butiksinvigningar, kundevent, sommarfester och nätverksträffar. Menyer är flexibla från smakportioner till fullständiga måltider.',
         descEn:
           "Let Flavor-Boss be the highlight of your event. Whether it's a store opening, customer event, summer party or networking meet — our menus scale from tasting portions to full meals for the whole team. We don't just bring food. We attract people to your event.",
-        slideshowImages: [uppFoodtruck1.url, uppFoodtruck2.url, uppFoodtruck3.url, uppFoodtruck4.url],
+        slideshowImages: [uppFoodtruck1, uppFoodtruck2, uppFoodtruck3, uppFoodtruck4],
         downloadUrl: srcFoodtruck,
         downloadName: 'Flavor-Boss-Foodtruck-Foretagsevent.png',
       },

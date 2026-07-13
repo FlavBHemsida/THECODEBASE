@@ -17,6 +17,7 @@ export default {
         display: ["'Barlow Condensed'", "sans-serif"],
         body: ["'DM Sans'", "sans-serif"],
         kurri: ["'Kurri Island'", "cursive"],
+        kurriCaps: ["'Kurri Island Caps'", "cursive"],
       },
       colors: {
         border: "hsl(var(--border))",

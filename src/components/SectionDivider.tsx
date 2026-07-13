@@ -1,4 +1,4 @@
-import yummyAsset from "@/assets/yummy-in-your-tummy.png.asset.json";
+import yummyAsset from "@/assets/yummy-in-your-tummy.png";
 
 const SectionDivider = ({ dark = false }: { dark?: boolean }) => {
   // Render many copies so the strip always covers the full viewport width
@@ -24,7 +24,7 @@ const SectionDivider = ({ dark = false }: { dark?: boolean }) => {
           {copies.map((_, i) => (
             <img
               key={i}
-              src={yummyAsset.url}
+              src={yummyAsset}
               alt=""
               className="h-[27px] md:h-[43px] w-auto select-none pointer-events-none mx-3 md:mx-5"
               draggable={false}
