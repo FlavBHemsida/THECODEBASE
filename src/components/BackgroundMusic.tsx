@@ -1,7 +1,7 @@
 import { useState, useRef, useEffect, useLayoutEffect } from 'react';
 import { Volume2, VolumeX } from 'lucide-react';
 
-const MUSIC_SRC = '/audio/bg-music.opus';
+const MUSIC_SRC = `${import.meta.env.BASE_URL}audio/bg-music.opus`;
 const TARGET_VOLUME = 0.35;
 const MUTE_STORAGE_KEY = 'fb-music-muted';
 
