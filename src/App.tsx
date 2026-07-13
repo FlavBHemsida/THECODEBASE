@@ -52,7 +52,7 @@ const App = () => (
       <LanguageProvider>
         <Toaster />
         <Sonner />
-        <BrowserRouter>
+        <BrowserRouter basename="/THECODEBASE/">
           <ScrollToTop />
           <BackgroundMusic />
           <CampaignPopup />
