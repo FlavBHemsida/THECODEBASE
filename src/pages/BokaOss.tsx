@@ -1,4 +1,4 @@
-import { useState, useCallback } from 'react';
+import { useState, useCallback, useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
 import { Button } from '@/components/ui/button';
 import { useLanguage } from '@/contexts/LanguageContext';
@@ -48,6 +48,13 @@ const BokaOss = () => {
 
   const [submitting, setSubmitting] = useState(false);
   const [sent, setSent] = useState(false);
+  const sentRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (sent) {
+      sentRef.current?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+  }, [sent]);
 
   const handleSubmit = useCallback(async (e: React.FormEvent) => {
     e.preventDefault();
@@ -215,6 +222,7 @@ const BokaOss = () => {
           <div className="container-site max-w-3xl relative z-10">
             {sent ? (
               <motion.div
+                ref={sentRef}
                 initial={{ opacity: 0, scale: 0.9 }}
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ duration: 0.4, ease: [0.25, 1, 0.5, 1] }}

@@ -254,6 +254,41 @@ const Meny = () => {
     }
   }, [location.hash]);
 
+  // Warm the browser's image cache for the Catering tab while the user is still
+  // browsing the Festival tab, so switching tabs feels instant instead of showing
+  // fresh network loads. Fires once on mount; harmless if the user lands straight
+  // on #catering since the real <img> tags will just reuse the same cached bytes.
+  useEffect(() => {
+    const cateringPreloadUrls = [
+      cateringHeroMobileAsset,
+      cateringHeroLeftAsset,
+      cateringHeroMiddleAsset,
+      cateringHeroRightAsset,
+      cateringNavBuffeAsset,
+      cateringNavBulk,
+      cateringNavPaketAsset,
+      cateringNavUpplevelserAsset,
+      cateringNavStaffAsset,
+      cateringNavEntertainmentAsset,
+      cateringNavDecorationAsset,
+      cateringCardFlavorbox,
+      cateringCardSnackbox,
+      cateringCardJerkbox,
+      cateringSamosaMikatéSnackAsset,
+      cateringCardSamosaPackAsset,
+      cateringMikatéPackAsset,
+      cateringMikatéPhotoAsset,
+      cateringLogisticsNavAsset,
+      jerkBoxPlateAsset,
+      cateringSnackboxCornAsset.url,
+      decorationLightAsset.url,
+    ];
+    cateringPreloadUrls.forEach((url) => {
+      const img = new Image();
+      img.src = url;
+    });
+  }, []);
+
   const handleSendOffer = async (e: React.FormEvent) => {
     e.preventDefault();
     const payload = {
@@ -1287,7 +1322,7 @@ const Meny = () => {
         }}
       />
       <main id="main-content">
-        {view === 'festival' && (
+        <div className={view === 'festival' ? '' : 'hidden'}>
         <section className="relative overflow-hidden px-0 py-8 sm:py-10 md:py-16">
           {/* Animated gradient background */}
           <div className="absolute inset-0 animate-gradient-shift" style={{
@@ -1817,9 +1852,14 @@ const Meny = () => {
                   })()}
                 </motion.div>
                 {!card.image && card.badge && (
-                  <span className="absolute -top-2 -right-2 z-20 funky-gradient text-primary-foreground px-2.5 py-1 rounded-full text-[10px] sm:text-[11px] font-bold uppercase tracking-wider shadow-xl ring-2 ring-white/40 whitespace-nowrap">
+                  <motion.span
+                    initial={{ opacity: 0, scale: 0.9 }}
+                    animate={revealedCount > idx ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.9 }}
+                    transition={{ duration: 0.6, ease: [0.25, 1, 0.5, 1] }}
+                    className="absolute -top-2 -right-2 z-20 funky-gradient text-primary-foreground px-2.5 py-1 rounded-full text-[10px] sm:text-[11px] font-bold uppercase tracking-wider shadow-xl ring-2 ring-white/40 whitespace-nowrap"
+                  >
                     {card.badge}
-                  </span>
+                  </motion.span>
                 )}
                 </div>
               ));
@@ -1848,9 +1888,9 @@ const Meny = () => {
             </motion.div>
           </div>
         </section>
-        )}
+        </div>
 
-        {view === 'catering' && (<>
+        <div className={view === 'catering' ? '' : 'hidden'}>
         {/* ═══════════════════════════════════════════════════════════════
             CATERING MENU — pick-and-choose with basket & checkout
             ═══════════════════════════════════════════════════════════════ */}
@@ -2356,7 +2396,7 @@ const Meny = () => {
             </div>
           )}
         </section>
-        </>)}
+        </div>
               <TrustQuotes seed="meny" count={3} variant="light" headingSv="Vad våra kunder säger" headingEn="What Our Clients Say" />
       </main>
     </>
