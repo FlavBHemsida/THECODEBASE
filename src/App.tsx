@@ -8,6 +8,7 @@ import { LanguageProvider } from "@/contexts/LanguageContext";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import BackgroundMusic from "@/components/BackgroundMusic";
+import SiteEntryGate from "@/components/SiteEntryGate";
 import CampaignPopup from "@/components/CampaignPopup";
 import Index from "./pages/Index.tsx";
 import Meny from "./pages/Meny.tsx";
@@ -54,6 +55,7 @@ const App = () => (
         <Sonner />
         <BrowserRouter basename="/THECODEBASE/">
           <ScrollToTop />
+          <SiteEntryGate />
           <BackgroundMusic />
           <CampaignPopup />
           <ConditionalNavbar />

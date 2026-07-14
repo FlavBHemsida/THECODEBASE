@@ -156,16 +156,31 @@ const CampaignPopup = () => {
                 className="font-display font-extrabold uppercase tracking-tight leading-[0.95] text-2xl md:text-4xl"
                 style={{ color: '#ffe50f', textShadow: '0 2px 8px rgba(0,0,0,0.35)' }}
               >
-                HUGO BOSS HOTAR MED STÄMNING FÖR VÅRT NAMN!
+                HUGO BOSS BACKAR FRÅN 75 % AV SIN INVÄNDNING
               </h2>
 
-              <p className="font-kurriCaps text-white text-sm md:text-lg mt-5 md:mt-6 leading-tight">
-                Hjälp oss samla kraft &amp; stötta oss med din röst &amp; ekonomiskt här:
+              <p className="font-kurriCaps text-white text-sm md:text-lg mt-5 md:mt-6 leading-snug">
+                Efter 18 månaders juridisk process har Hugo Boss dragit tillbaka sin invändning i tre av fyra delar.
+                <br />
+                <br />
+                En stor delseger för Flavor-Boss. Men ärendet är inte över.
+                <br />
+                <br />
+                Tack till alla som har stått med oss, delat vår historia och hjälpt oss att fortsätta kampen.
               </p>
 
               <p className="font-kurriCaps text-white text-sm md:text-base mt-5 md:mt-6 leading-snug">
-                Skriv under namninsamlingen &amp; dela din röst via länken här
-                <br />
+                <a
+                  href="https://www.skrivunder.com/hugo_boss_hotar_med_stamning_hjalp_oss_att_forsvara_vart_namn_med_din_rost"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="underline decoration-2 underline-offset-4 hover:opacity-80 transition-opacity"
+                >
+                  Skriv under namninsamlingen &amp; dela din röst via länken här
+                </a>
+              </p>
+
+              <p className="font-kurriCaps text-white text-sm md:text-base mt-5 md:mt-6 leading-snug">
                 <a
                   href="https://www.gofundme.com/f/small-business-vs-hugo-boss-stand-with-flavorboss"
                   target="_blank"
@@ -179,7 +194,10 @@ const CampaignPopup = () => {
               <p className="font-kurriCaps text-white text-sm md:text-base mt-5 md:mt-6 leading-snug">
                 Swish: 1234989554, Flavor-Boss
                 <br />
+                <br />
                 Märk gåvan med #GoFlavorboss
+                <br />
+                This isn't the end. It's just the next spicy chapter.
               </p>
 
               {/* Social CTA — tilted & floating */}

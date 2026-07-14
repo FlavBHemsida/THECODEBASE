@@ -21,7 +21,7 @@ const fadeUp = {
 const BokaOss = () => {
   const { t } = useLanguage();
   const [form, setForm] = useState({
-    name: '', email: '', phone: '', address: '', date: '', maxGuests: '', minGuests: '', eventType: '', specialDiet: '', menu: '', message: '',
+    name: '', email: '', phone: '', address: '', date: '', maxGuests: '', minGuests: '', eventType: '', specialDiet: '', deliveryMethod: '', menu: '', message: '',
   });
   const [menus, setMenus] = useState<string[]>([]);
   const toggleMenu = (value: string) =>
@@ -30,9 +30,18 @@ const BokaOss = () => {
   const [extras, setExtras] = useState({
     djFullon: false,
     djBoost: false,
+    popupMascot: false,
+    fullMascot: false,
     decoMedium: false,
     decoLuxury: false,
+    grillUpplevelse: false,
+    foodtruckUpplevelse: false,
+    bufféUpplevelse: false,
+    boozeTruck: false,
+    boozeBar: false,
     servingStaff: false,
+    exklusivVardinna: false,
+    bokaPatricia: false,
   });
 
   const toggleExtra = (key: keyof typeof extras) => setExtras(prev => ({ ...prev, [key]: !prev[key] }));
@@ -59,9 +68,24 @@ const BokaOss = () => {
       const res = await fetch('https://meggamind.app.n8n.cloud/webhook/CateringBokaOss', options);
       if (!res.ok) throw new Error('Request failed');
       setSent(true);
-      setForm({ name: '', email: '', phone: '', address: '', date: '', maxGuests: '', minGuests: '', eventType: '', specialDiet: '', menu: '', message: '' });
+      setForm({ name: '', email: '', phone: '', address: '', date: '', maxGuests: '', minGuests: '', eventType: '', specialDiet: '', deliveryMethod: '', menu: '', message: '' });
       setMenus([]);
-      setExtras({ djFullon: false, djBoost: false, decoMedium: false, decoLuxury: false, servingStaff: false });
+      setExtras({
+        djFullon: false,
+        djBoost: false,
+        popupMascot: false,
+        fullMascot: false,
+        decoMedium: false,
+        decoLuxury: false,
+        grillUpplevelse: false,
+        foodtruckUpplevelse: false,
+        bufféUpplevelse: false,
+        boozeTruck: false,
+        boozeBar: false,
+        servingStaff: false,
+        exklusivVardinna: false,
+        bokaPatricia: false,
+      });
     } catch {
       alert(t('Något gick fel. Försök igen senare.', 'Something went wrong. Please try again later.'));
     } finally {
@@ -80,8 +104,30 @@ const BokaOss = () => {
   const inputClass = "h-[52px] px-4 rounded-xl bg-card shadow-[0_0_0_1px_hsl(var(--border))] focus:shadow-[0_0_0_2px_hsl(var(--ring))] focus:outline-none text-foreground text-sm font-body w-full transition-shadow";
 
   const menuOptions = [
-    { value: 'flavor-box', label: 'Flavor Box', desc: t('Komplett måltid — Jerk Chicken, Jollof Rice, Samosa, Coleslaw, grillad majs, Mikaté m.m.', 'Complete meal — Jerk Chicken, Jollof Rice, Samosa, Coleslaw, grilled corn, Mikaté etc.') },
-    { value: 'snack-box', label: 'Snack Box', desc: t('Smakportion — Jerk Chicken, Samosa, grillad majs, Mikaté', 'Tasting portion — Jerk Chicken, Samosa, grilled corn, Mikaté') },
+    {
+      value: 'flavor-box',
+      label: 'Flavor Box',
+      desc: t(
+        'Vår signaturbox och vinnare i Streetfood-SM fyra år i rad: Grillad kaneldoftande Jamaican fusioned jerk chicken och jerk cauliflower serveras med smakrikt jollof rice, krämig coleslaw, grillad majs med vitlöksolja, krispiga västafrikanska samosas och våra Sweet Food Champion Donuts – söta kongolesiska donuts "Mikate". Serveras med Boss Garlic Sauce och FlavorHeat Dancing Hot Sauce.',
+        'Our signature box and four-time Streetfood-SM winner: Grilled cinnamon-scented Jamaican fusioned jerk chicken and jerk cauliflower served with rich jollof rice, creamy coleslaw, grilled corn with garlic oil, crispy West African samosas and our Sweet Food Champion Donuts — sweet Congolese donuts "Mikate". Served with Boss Garlic Sauce and FlavorHeat Dancing Hot Sauce.'
+      ),
+    },
+    {
+      value: 'snack-box',
+      label: 'Snack Box',
+      desc: t(
+        'En smakmeny av vår prisbelönta meny: Jamaican fusioned Jerk Chicken eller Jerk Cauliflower (vegan), serveras med smakrikt jollof rice, krämig coleslaw, våra Sweet Food Champion Donuts – söta kongolesiska donuts "Mikate". Serveras med Boss Garlic Sauce och FlavorHeat Dancing Hot Sauce',
+        'A tasting menu from our award-winning menu: Jamaican fusioned Jerk Chicken or Jerk Cauliflower (vegan), served with rich jollof rice, creamy coleslaw, our Sweet Food Champion Donuts — sweet Congolese donuts "Mikate". Served with Boss Garlic Sauce and FlavorHeat Dancing Hot Sauce'
+      ),
+    },
+    {
+      value: 'jerk-jollof-box',
+      label: t('Jerk & Jollof Box', 'Jerk & Jollof Box'),
+      desc: t(
+        'Swedish Champion Box 2022: Jamaican Fusioned Jerk Chicken eller Jerk Cauliflower (veganskt), serveras med smakrikt Jollof Rice (veganskt), krämig coleslaw, våra Sweet Food Champion Donuts – söta kongolesiska donuts "Mikate". Serveras med Boss Garlic Sauce och FlavorHeat Dancing Hot Sauce.',
+        'Swedish Champion Box 2022: Jamaican Fusioned Jerk Chicken or Jerk Cauliflower (vegan), served with rich Jollof Rice (vegan), creamy coleslaw, our Sweet Food Champion Donuts — sweet Congolese donuts "Mikate". Served with Boss Garlic Sauce and FlavorHeat Dancing Hot Sauce.'
+      ),
+    },
     { value: 'custom', label: t('Anpassad meny', 'Custom menu'), desc: t('Berätta om dina önskemål i meddelandefältet nedan', 'Describe your wishes in the message field below') },
   ];
 
@@ -280,6 +326,20 @@ const BokaOss = () => {
                 <input id="specialDiet" type="text" placeholder={t('T.ex. vegetariskt, glutenfritt, allergier...', 'E.g. vegetarian, gluten-free, allergies...')} className={inputClass} value={form.specialDiet} onChange={e => setForm({ ...form, specialDiet: e.target.value })} />
               </div>
 
+              {/* Leveranssätt */}
+              <div>
+                <label htmlFor="deliveryMethod" className="text-sm font-bold mb-1 block">{t('Leveranssätt', 'Delivery method')}</label>
+                <select id="deliveryMethod" className={inputClass} value={form.deliveryMethod} onChange={e => setForm({ ...form, deliveryMethod: e.target.value })}>
+                  <option value="">{t('Välj leveranssätt...', 'Choose delivery method...')}</option>
+                  <option value="fullservice">{t('Fullservice-beställning', 'Full-service order')}</option>
+                  <option value="enkel">{t('Enkel leverans', 'Simple delivery')}</option>
+                </select>
+                <div className="mt-2 rounded-xl border-2 border-accent/30 bg-accent/10 p-3 space-y-1.5 text-xs text-foreground">
+                  <p><span className="font-bold">{t('Fullservice-beställning:', 'Full-service order:')}</span> {t('Vi levererar och dukar upp buffén och bjuder därefter på en energifylld presentation av smakupplevelsen.', 'We deliver and set up the buffet, then give an energetic presentation of the tasting experience.')}</p>
+                  <p><span className="font-bold">{t('Enkel leverans:', 'Simple delivery:')}</span> {t('Maten levereras varm i engångsförpackningar och ni tar själva hand om uppdukningen.', 'The food is delivered hot in disposable packaging and you handle the setup yourselves.')}</p>
+                </div>
+              </div>
+
               {/* ── Önskade menyer (Checkboxes — multi-select) ── */}
               <div>
                 <p className="text-sm font-bold mb-3">{t('Önskade menyer', 'Desired menus')}</p>
@@ -332,6 +392,24 @@ const BokaOss = () => {
                         <p className="text-xs text-muted-foreground">{t('Musikvagn + high-energy mix', 'Music wagon + high-energy mix')}</p>
                       </div>
                     </label>
+                    <label className="flex items-start gap-3 cursor-pointer group">
+                      <button type="button" onClick={() => toggleExtra('popupMascot')} className={checkboxClass(extras.popupMascot)}>
+                        {extras.popupMascot && <svg className="w-3 h-3 text-primary-foreground" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3}><path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" /></svg>}
+                      </button>
+                      <div>
+                        <span className="text-sm font-semibold group-hover:text-primary transition-colors">{t('Pop-up Mascot Show', 'Pop-up Mascot Show')}</span>
+                        <p className="text-xs text-muted-foreground">{t('Vår färgsprakande maskot dansar & skojar med gästerna och gör en show under cirka 20-30min', 'Our colorful mascot dances & jokes with guests, putting on a show for about 20-30 min')}</p>
+                      </div>
+                    </label>
+                    <label className="flex items-start gap-3 cursor-pointer group">
+                      <button type="button" onClick={() => toggleExtra('fullMascot')} className={checkboxClass(extras.fullMascot)}>
+                        {extras.fullMascot && <svg className="w-3 h-3 text-primary-foreground" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3}><path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" /></svg>}
+                      </button>
+                      <div>
+                        <span className="text-sm font-semibold group-hover:text-primary transition-colors">{t('Full Mascot Experience', 'Full Mascot Experience')}</span>
+                        <p className="text-xs text-muted-foreground">{t('Maskoten minglar, dansar och sprider energi under eventet. På plats i 2h varav ca 1h är showtime och dans.', 'The mascot mingles, dances and spreads energy throughout the event. On site for 2h, of which about 1h is showtime and dancing.')}</p>
+                      </div>
+                    </label>
                   </div>
                 </div>
 
@@ -362,6 +440,69 @@ const BokaOss = () => {
                   </div>
                 </div>
 
+                {/* Serveringssätt */}
+                <div>
+                  <p className="text-sm font-bold mb-2 flex items-center gap-2">
+                    🔥 {t('Serveringssätt', 'Serving style')}
+                  </p>
+                  <div className="space-y-2">
+                    <label className="flex items-start gap-3 cursor-pointer group">
+                      <button type="button" onClick={() => toggleExtra('grillUpplevelse')} className={checkboxClass(extras.grillUpplevelse)}>
+                        {extras.grillUpplevelse && <svg className="w-3 h-3 text-primary-foreground" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3}><path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" /></svg>}
+                      </button>
+                      <div>
+                        <span className="text-sm font-semibold group-hover:text-primary transition-colors">{t('Grillupplevelse', 'Grill Experience')}</span>
+                        <p className="text-xs text-muted-foreground">{t('Låt vår grillmaster bjuda på en väldoftande upplevelse; grillad Jamaican Fusioned Jerk direkt från grillen. Inkl. personal på plats och service.', 'Let our grill master offer a fragrant experience; grilled Jamaican Fusioned Jerk straight off the grill. Incl. staff on site and service.')}</p>
+                      </div>
+                    </label>
+                    <label className="flex items-start gap-3 cursor-pointer group">
+                      <button type="button" onClick={() => toggleExtra('foodtruckUpplevelse')} className={checkboxClass(extras.foodtruckUpplevelse)}>
+                        {extras.foodtruckUpplevelse && <svg className="w-3 h-3 text-primary-foreground" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3}><path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" /></svg>}
+                      </button>
+                      <div>
+                        <span className="text-sm font-semibold group-hover:text-primary transition-colors">{t('Foodtruckupplevelse', 'Food Truck Experience')}</span>
+                        <p className="text-xs text-muted-foreground">{t('Upplev äkta Afro-Karibiska smaker serverade från vår färgstarka foodtruck. En levande kulinarisk resa, musik och energi som mättar alla era sinnen.', 'Experience genuine Afro-Caribbean flavors served from our colorful food truck. A lively culinary journey, music and energy that satisfies all your senses.')}</p>
+                      </div>
+                    </label>
+                    <label className="flex items-start gap-3 cursor-pointer group">
+                      <button type="button" onClick={() => toggleExtra('bufféUpplevelse')} className={checkboxClass(extras.bufféUpplevelse)}>
+                        {extras.bufféUpplevelse && <svg className="w-3 h-3 text-primary-foreground" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3}><path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" /></svg>}
+                      </button>
+                      <div>
+                        <span className="text-sm font-semibold group-hover:text-primary transition-colors">{t('Catering Bufféupplevelse', 'Catering Buffet Experience')}</span>
+                        <p className="text-xs text-muted-foreground">{t('Njut av en varm och riklig buffé. Välj ditt önskade leveranssätt så tar vi hand om resten.', 'Enjoy a warm and generous buffet. Choose your preferred delivery method and we take care of the rest.')}</p>
+                      </div>
+                    </label>
+                  </div>
+                </div>
+
+                {/* Flavor-Booze Bar Experience */}
+                <div>
+                  <p className="text-sm font-bold mb-2 flex items-center gap-2">
+                    🍹 {t('Flavor-Booze Bar Experience', 'Flavor-Booze Bar Experience')}
+                  </p>
+                  <div className="space-y-2">
+                    <label className="flex items-start gap-3 cursor-pointer group">
+                      <button type="button" onClick={() => toggleExtra('boozeTruck')} className={checkboxClass(extras.boozeTruck)}>
+                        {extras.boozeTruck && <svg className="w-3 h-3 text-primary-foreground" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3}><path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" /></svg>}
+                      </button>
+                      <div>
+                        <span className="text-sm font-semibold group-hover:text-primary transition-colors">{t('Flavor-Booze Truck Experience', 'Flavor-Booze Truck Experience')}</span>
+                        <p className="text-xs text-muted-foreground">{t('Upplev vår färgsprakande bartruck fylld med Afro-Karibiska smaker, musik & good vibes!', 'Experience our colorful bar truck filled with Afro-Caribbean flavors, music & good vibes!')}</p>
+                      </div>
+                    </label>
+                    <label className="flex items-start gap-3 cursor-pointer group">
+                      <button type="button" onClick={() => toggleExtra('boozeBar')} className={checkboxClass(extras.boozeBar)}>
+                        {extras.boozeBar && <svg className="w-3 h-3 text-primary-foreground" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3}><path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" /></svg>}
+                      </button>
+                      <div>
+                        <span className="text-sm font-semibold group-hover:text-primary transition-colors">{t('Flavor-Booze Bar Experience', 'Flavor-Booze Bar Experience')}</span>
+                        <p className="text-xs text-muted-foreground">{t('Smak, rytm & vibes - direkt från vår Flavor-Booze Bar!', 'Flavor, rhythm & vibes - straight from our Flavor-Booze Bar!')}</p>
+                      </div>
+                    </label>
+                  </div>
+                </div>
+
                 {/* The Service */}
                 <div>
                   <p className="text-sm font-bold mb-2 flex items-center gap-2">
@@ -387,6 +528,23 @@ const BokaOss = () => {
                             {t('Rekommenderas för 40+ gäster för en smidig bufféupplevelse.', 'Recommended for 40+ guests to ensure a smooth buffet flow.')}
                           </TooltipContent>
                         </Tooltip>
+                      </div>
+                    </label>
+                    <label className="flex items-start gap-3 cursor-pointer group">
+                      <button type="button" onClick={() => toggleExtra('exklusivVardinna')} className={checkboxClass(extras.exklusivVardinna)}>
+                        {extras.exklusivVardinna && <svg className="w-3 h-3 text-primary-foreground" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3}><path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" /></svg>}
+                      </button>
+                      <div>
+                        <span className="text-sm font-semibold group-hover:text-primary transition-colors">{t('Exklusiv värdinna upplevelse', 'Exclusive Hostess Experience')}</span>
+                        <p className="text-xs text-muted-foreground">{t('Boka en av våra professionella värdinnor för en mer avslappnad fest. Värdinnan tar hand om allt så att du kan njuta fullt ut.', 'Book one of our professional hostesses for a more relaxed party. The hostess takes care of everything so you can fully enjoy yourself.')}</p>
+                      </div>
+                    </label>
+                    <label className="flex items-start gap-3 cursor-pointer group">
+                      <button type="button" onClick={() => toggleExtra('bokaPatricia')} className={checkboxClass(extras.bokaPatricia)}>
+                        {extras.bokaPatricia && <svg className="w-3 h-3 text-primary-foreground" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3}><path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" /></svg>}
+                      </button>
+                      <div>
+                        <span className="text-sm font-semibold group-hover:text-primary transition-colors">{t('Boka Patricia Dianda #flavorbosstrich som exklusiv värdinna', 'Book Patricia Dianda #flavorbosstrich as exclusive hostess')}</span>
                       </div>
                     </label>
                   </div>

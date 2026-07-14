@@ -58,7 +58,7 @@ const journeyIcons = [
 const photos = [foodtruck1, foodtruck2, foodtruck3];
 
 const Foodtruck = () => {
-  const { t } = useLanguage();
+  const { t, lang } = useLanguage();
   const [mode, setMode] = useState<'foretag' | 'privat'>('foretag');
 
   useEffect(() => {
@@ -214,13 +214,40 @@ const Foodtruck = () => {
               )}
             </p>
               </>
+            ) : lang === 'sv' ? (
+              <>
+                <p>
+                  Vi förvandlar studentfiranden, födelsedagar, bröllop och sommarfester till en färgsprakande afro-karibisk upplevelse fylld av{' '}
+                  <span className="font-display font-extrabold" style={{ color: '#ffe50f' }}>
+                    SMAK, ENERGI OCH GLÄDJE
+                  </span>
+                  .
+                </p>
+                <p>
+                  Från första servering till sista tuggan skapar vi en vibe där gästerna inte bara äter - de upplever, samlas och minns. Med våra prisbelönta menyer, där Flavor Boxen är publikfavoriten, levererar vi inte bara mat utan en helhetskänsla som sätter tonen för hela eventet.
+                </p>
+                <p className="font-display font-extrabold" style={{ color: '#ffe50f' }}>
+                  MAT, MUSIK OCH SKÖNA VIBES
+                </p>
+                <p>- direkt från vår foodtruck till din fest.</p>
+              </>
             ) : (
-              <p className="italic text-white/85">
-                {t(
-                  'Text för Privat Event kommer snart.',
-                  'Private Event copy coming soon.'
-                )}
-              </p>
+              <>
+                <p>
+                  We turn student celebrations, birthdays, weddings and summer parties into a vibrant Afro-Caribbean experience full of{' '}
+                  <span className="font-display font-extrabold" style={{ color: '#ffe50f' }}>
+                    FLAVOR, ENERGY AND JOY
+                  </span>
+                  .
+                </p>
+                <p>
+                  From the first serving to the last bite we create a vibe where guests don't just eat - they experience, gather and remember. With our award-winning menus, where the Flavor Box is the crowd favorite, we deliver more than food - a whole feeling that sets the tone for the entire event.
+                </p>
+                <p className="font-display font-extrabold" style={{ color: '#ffe50f' }}>
+                  FOOD, MUSIC AND GOOD VIBES
+                </p>
+                <p>- straight from our food truck to your party.</p>
+              </>
             )}
           </motion.div>
 

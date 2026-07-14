@@ -6,8 +6,7 @@ import SEOHead from '@/components/SEOHead';
 import { useLanguage } from '@/contexts/LanguageContext';
 
 // Launch date — bump this when you want to shift the countdown.
-// Currently set to 20 days from July 13, 2026.
-export const ADVENTURE_LAUNCH_DATE = new Date('2026-08-02T12:00:00+02:00');
+export const ADVENTURE_LAUNCH_DATE = new Date('2026-07-22T12:00:00+02:00');
 
 const pad = (n: number) => String(Math.max(0, n)).padStart(2, '0');
 

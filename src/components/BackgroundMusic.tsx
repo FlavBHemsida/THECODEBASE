@@ -105,9 +105,9 @@ const BackgroundMusic = () => {
       <button
         onClick={toggle}
         className="fixed bottom-5 right-5 z-50 w-12 h-12 rounded-full bg-surface-dark flex items-center justify-center shadow-lg hover:scale-110 transition-transform border border-primary/30"
-        aria-label={muted || needsGesture ? 'Unmute music' : 'Mute music'}
+        aria-label={muted ? 'Unmute music' : 'Mute music'}
       >
-        {muted || needsGesture ? (
+        {muted ? (
           <VolumeX className="w-5 h-5 text-primary" />
         ) : (
           <Volume2 className="w-5 h-5 text-primary" />

@@ -5,6 +5,7 @@ import { useLanguage } from '@/contexts/LanguageContext';
 import SEOHead from '@/components/SEOHead';
 import TimelineJourney from '@/components/journey/TimelineJourney';
 import InstagramFeed from '@/components/home/InstagramFeed';
+import AdventureGate from '@/components/AdventureGate';
 
 import patternPalm from '@/assets/journey/pattern-palm.png';
 import patternArrow from '@/assets/journey/pattern-arrow.png';
@@ -79,69 +80,7 @@ const VarResa = () => {
       <main id="main-content" className="min-h-screen">
         <AnimatePresence mode="wait">
           {step === 'landing' ? (
-            <motion.div
-              key="landing"
-              className="fixed inset-0 flex items-center justify-center z-50 overflow-hidden"
-              style={{
-                background: 'linear-gradient(135deg, #ffae30, #ff612b)',
-              }}
-              exit={{ opacity: 0, scale: 1.1 }}
-              transition={{ duration: 0.8, ease: [0.25, 1, 0.5, 1] }}
-            >
-              {/* Dancing floating icons */}
-              {floatingIcons.map((icon, i) => (
-                <motion.img
-                  key={i}
-                  src={icon.src}
-                  alt=""
-                  className="absolute pointer-events-none select-none"
-                  style={{
-                    left: icon.x,
-                    top: icon.y,
-                    width: icon.size,
-                    height: icon.size,
-                    objectFit: 'contain',
-                    opacity: 0.5,
-                    filter: 'brightness(1.3) drop-shadow(0 2px 8px rgba(0,0,0,0.1))',
-                  }}
-                  initial={{ opacity: 0, scale: 0 }}
-                  animate={{
-                    opacity: 0.5,
-                    scale: 1,
-                    y: [0, -18, 5, -12, 0],
-                    x: [0, 10, -8, 12, 0],
-                    rotate: [0, 20, -15, 25, -10, 0],
-                  }}
-                  transition={{
-                    opacity: { duration: 0.6, delay: icon.delay },
-                    scale: { duration: 0.6, delay: icon.delay },
-                    y: { duration: 4 + i * 0.3, repeat: Infinity, ease: 'easeInOut', delay: icon.delay },
-                    x: { duration: 5 + i * 0.4, repeat: Infinity, ease: 'easeInOut', delay: icon.delay },
-                    rotate: { duration: 3.5 + i * 0.2, repeat: Infinity, ease: 'easeInOut', delay: icon.delay },
-                  }}
-                />
-              ))}
-
-              <motion.button
-                onClick={() => setStep('intro')}
-                className="relative z-10 px-12 py-5 text-2xl md:text-3xl font-display font-extrabold uppercase tracking-wider text-white"
-                style={{
-                  background: 'linear-gradient(135deg, #ff612b, #ffae30)',
-                  borderRadius: '2rem 1rem 2rem 1rem',
-                  boxShadow: '0 0 40px rgba(255, 97, 43, 0.5), 0 0 80px rgba(255, 174, 48, 0.3)',
-                }}
-                whileHover={{
-                  scale: 1.08,
-                  boxShadow: '0 0 60px rgba(255, 97, 43, 0.7), 0 0 120px rgba(255, 174, 48, 0.5)',
-                }}
-                whileTap={{ scale: 0.95 }}
-                initial={{ opacity: 0, y: 30 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, delay: 0.3 }}
-              >
-                {t('Follow The Adventure', 'Follow The Adventure')}
-              </motion.button>
-            </motion.div>
+            <AdventureGate key="landing" onEnter={() => setStep('intro')} />
           ) : step === 'intro' ? (
             <motion.div
               key="intro"
