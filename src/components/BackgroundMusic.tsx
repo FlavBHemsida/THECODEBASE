@@ -44,15 +44,30 @@ const BackgroundMusic = () => {
     audio.volume = 0;
     audio.muted = false;
 
-    const startAfterHeaderVideo = () => {
-      if (userMutedRef.current) return;
+    let started = false;
+    const start = () => {
+      if (started || userMutedRef.current) return;
+      started = true;
       audio.muted = false;
       audio.volume = 0.01;
-      audio.play().then(() => fadeIn(audio)).catch(() => setNeedsGesture(true));
+      audio.play().then(() => fadeIn(audio)).catch(() => {
+        started = false;
+        setNeedsGesture(true);
+      });
     };
 
-    window.addEventListener('flavorboss:hero-video-started', startAfterHeaderVideo, { once: true });
-    return () => window.removeEventListener('flavorboss:hero-video-started', startAfterHeaderVideo);
+    // Try immediately (works if browser allows autoplay), then fall back to
+    // the hero video's playing event, then to the very first user interaction.
+    start();
+
+    const interactionEvents: (keyof WindowEventMap)[] = ['pointerdown', 'keydown', 'touchstart', 'wheel'];
+    interactionEvents.forEach((evt) => window.addEventListener(evt, start, { once: true, passive: true }));
+    window.addEventListener('flavorboss:hero-video-started', start, { once: true });
+
+    return () => {
+      interactionEvents.forEach((evt) => window.removeEventListener(evt, start));
+      window.removeEventListener('flavorboss:hero-video-started', start);
+    };
   }, []);
 
   const toggle = () => {
