@@ -9,18 +9,9 @@ import accentDashesLeft from '@/assets/grill-accent-dashes-left.png';
 import accentDashesRight from '@/assets/grill-accent-dashes-right.png';
 import overlayPattern from '@/assets/grill-overlay-pattern.png';
 
-// Real photography to bring the grill page to life
-import photoGrill1 from '@/assets/grill-1.jpg';
-import photoGrill2 from '@/assets/grill-2.jpg';
-import photoGrillMasterSmoke from '@/assets/grill-master-smoke.jpg';
-import photoGrillWingsFire from '@/assets/grill-wings-fire.jpg';
-
 // Extra hero photos shown directly under the main image collage
-import photoGrillExtra1 from '@/assets/grill-extra-1.jpg';
-import photoGrillExtra2 from '@/assets/grill-extra-2.jpg';
 import photoGrillExtra3 from '@/assets/grill-extra-3.jpg';
 import photoGrillExtra4 from '@/assets/grill-extra-4.jpg';
-import photoGrillExtra5 from '@/assets/grill-extra-5.jpg';
 import photoGrillTshirtBack from '@/assets/grill-tshirt-back.jpg';
 import grillSolidSilhouette from '@/assets/grill-solid-silhouette.png';
 import grillCenterAsset from '@/assets/grill-center.webp';
@@ -179,7 +170,8 @@ const Grill = () => {
                 <img
                   src={p.src}
                   alt={t(`Flavor-Boss grill upplevelse ${i + 1}`, `Flavor-Boss grill experience ${i + 1}`)}
-                  loading={i < 3 ? 'eager' : 'lazy'}
+                  loading="eager"
+                  fetchPriority="high"
                   className="w-full h-full object-cover"
                 />
                 <div
@@ -202,92 +194,11 @@ const Grill = () => {
             className="w-full h-auto object-contain object-center mb-12 select-none pointer-events-none"
           />
 
-          {/* (Old hero collage kept below intentionally removed — replaced by the scattered bundle above) */}
-          <motion.div
-            initial={{ opacity: 0, y: 40 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.9, ease: [0.25, 1, 0.5, 1] }}
-            className="hidden relative max-w-5xl mx-auto mb-16 h-[300px] md:h-[480px]"
-          >
-            {/* Big center image */}
-            <motion.div
-              animate={{ y: [0, -8, 0, 6, 0], rotate: [-1.5, -1, -2, -1, -1.5] }}
-              transition={{ duration: 8, repeat: Infinity, ease: 'easeInOut' }}
-              className="absolute left-1/2 top-[45%] -translate-x-1/2 -translate-y-1/2 w-[55%] md:w-[55%] aspect-[4/3] rounded-3xl overflow-hidden z-20"
-              style={{
-                boxShadow: '0 30px 80px rgba(0,0,0,0.45), 0 0 0 6px #ffee00, 0 0 0 10px #b00018',
-              }}
-            >
-              <img src={photoGrill1} alt={t('Grillmaster vid grillen', 'Grillmaster at the grill')} className="w-full h-full object-cover" loading="eager" fetchPriority="high" />
-            </motion.div>
-
-            {/* Left image */}
-            <motion.div
-              animate={{ y: [0, 10, 0, -8, 0], rotate: [-7, -5, -8, -6, -7] }}
-              transition={{ duration: 9, repeat: Infinity, ease: 'easeInOut', delay: 0.3 }}
-              className="absolute left-0 top-[15%] w-[40%] md:w-[34%] md:top-1/2 md:-translate-y-1/2 aspect-square rounded-3xl overflow-hidden z-10"
-              style={{
-                boxShadow: '0 20px 50px rgba(0,0,0,0.4), 0 0 0 5px #ff7a00',
-              }}
-            >
-              <img src={photoGrillMasterSmoke} alt={t('Grillmaster vid röken', 'Grillmaster in the smoke')} className="w-full h-full object-cover" loading="eager" fetchPriority="high" />
-            </motion.div>
-
-            {/* Right image */}
-            <motion.div
-              animate={{ y: [0, -12, 0, 8, 0], rotate: [6, 8, 5, 7, 6] }}
-              transition={{ duration: 7.5, repeat: Infinity, ease: 'easeInOut', delay: 0.6 }}
-              className="absolute right-0 top-[5%] w-[40%] md:w-[34%] md:top-1/2 md:-translate-y-1/2 aspect-square rounded-3xl overflow-hidden z-10"
-              style={{
-                boxShadow: '0 20px 50px rgba(0,0,0,0.4), 0 0 0 5px #ff7a00',
-              }}
-            >
-              <img src={photoGrillWingsFire} alt={t('Kycklingvingar på grillen', 'Chicken wings on the grill')} className="w-full h-full object-cover" loading="eager" fetchPriority="high" />
-            </motion.div>
-          </motion.div>
-
-          {/* Secondary photo row — replaced by the scattered bundle above */}
+          {/* Title + intro */}
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 0.15, ease: [0.25, 1, 0.5, 1] }}
-            className="hidden grid-cols-2 md:grid-cols-5 gap-3 md:gap-4 max-w-5xl mx-auto mb-16 px-2"
-          >
-            {[photoGrillExtra1, photoGrillExtra2, photoGrillExtra3, photoGrillExtra4, photoGrillExtra5].map((src, i) => (
-              <motion.div
-                key={i}
-                whileHover={{ scale: 1.04, rotate: 0 }}
-                animate={{ rotate: [(i % 2 === 0 ? -1.5 : 1.5), (i % 2 === 0 ? -2.5 : 2.5), (i % 2 === 0 ? -1.5 : 1.5)] }}
-                transition={{ rotate: { duration: 7 + i, repeat: Infinity, ease: 'easeInOut' } }}
-                className="relative aspect-square overflow-hidden rounded-2xl shadow-2xl"
-                style={{
-                  boxShadow: '0 18px 40px rgba(0,0,0,0.4), 0 0 0 4px #ffee00',
-                }}
-              >
-                <img
-                  src={src}
-                  alt={t(`Flavor-Boss grill upplevelse ${i + 1}`, `Flavor-Boss grill experience ${i + 1}`)}
-                  loading="lazy"
-                  className="w-full h-full object-cover"
-                />
-                {/* Warm tint so the photos blend with the page palette */}
-                <div
-                  aria-hidden="true"
-                  className="absolute inset-0 pointer-events-none mix-blend-multiply"
-                  style={{
-                    background:
-                      'linear-gradient(180deg, rgba(233,131,57,0.25) 0%, rgba(217,58,57,0.35) 100%)',
-                  }}
-                />
-              </motion.div>
-            ))}
-          </motion.div>
-
-          {/* Title + intro — moved BELOW the hero collage so images load first */}
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.2, ease: [0.25, 1, 0.5, 1] }}
+            transition={{ duration: 0.8, ease: [0.25, 1, 0.5, 1] }}
             className="text-center mb-16"
           >
             <div className="relative inline-flex items-center justify-center gap-4 md:gap-8 mb-4">
@@ -339,7 +250,7 @@ const Grill = () => {
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.3, ease: [0.25, 1, 0.5, 1] }}
+              transition={{ duration: 0.6, ease: [0.25, 1, 0.5, 1] }}
               className="px-4"
             >
             <div className="text-center max-w-2xl mx-auto">
@@ -387,7 +298,7 @@ const Grill = () => {
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.7, delay: 0.65, ease: [0.25, 1, 0.5, 1] }}
+              transition={{ duration: 0.7, ease: [0.25, 1, 0.5, 1] }}
               className="relative z-10 grid grid-cols-3 gap-3 md:gap-6 max-w-3xl mx-auto px-2"
             >
               {[
@@ -403,7 +314,7 @@ const Grill = () => {
                   className="bg-white p-2 md:p-3 pb-6 md:pb-10 shadow-2xl"
                 >
                   <div className="aspect-square overflow-hidden">
-                    <img src={p.src} alt={p.label} className="w-full h-full object-cover" loading="lazy" />
+                    <img src={p.src} alt={p.label} className="w-full h-full object-cover" loading="eager" />
                   </div>
                   <div className="text-center mt-2 font-display font-extrabold uppercase text-xs md:text-sm tracking-wider text-[#b00018]">
                     {p.label}
@@ -416,7 +327,7 @@ const Grill = () => {
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.75, ease: [0.25, 1, 0.5, 1] }}
+              transition={{ duration: 0.6, ease: [0.25, 1, 0.5, 1] }}
               className="flex justify-center px-4 mt-4"
             >
               <Link
