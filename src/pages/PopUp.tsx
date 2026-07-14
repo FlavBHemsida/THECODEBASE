@@ -70,13 +70,18 @@ const PopUp = () => {
   const events = [
     { name: 'Österlen Gardenshow', date: '16–17 maj',           monthIdx: 4, firstDay: 16, place: 'Tomelilla',            secret: false, url: 'https://osterlengardenshow.se/' },
     { name: 'Streetfoodfestivalen', date: '29–30 maj',          monthIdx: 4, firstDay: 29, place: 'Jönköping',            secret: false, url: 'https://www.jonkoping.se/evenemangskalender/evenemangskalender/evenemang/2026-01-09-street-food-festivalen' },
-    { name: 'Jubileumsfest',        date: 'Ons 10 juni',        monthIdx: 5, firstDay: 10, place: 'Flavor-Boss Kitchen',  secret: false, url: 'https://www.google.com/maps/dir//Flavor-Boss+Catering,+Foodtruck+och+Events,+Hantverkaregatan+4,+232+34+Arl%C3%B6v/@55.5974656,13.0023424,13z/data=!4m8!4m7!1m0!1m5!1m1!1s0x4653a384d94f0b8f:0xb3fe10397dd7fec2!2m2!1d13.0766103!2d55.6361508' },
     { name: 'Hampafestivalen',      date: '25–27 juni',         monthIdx: 5, firstDay: 25, place: 'Lund',                 secret: false, url: 'https://www.hampafestivalen.xyz/' },
+    { name: 'Jubileumsfest',        date: 'Fredag 3 juli',      monthIdx: 6, firstDay: 3,  place: 'Flavor-Boss Kitchen',  secret: false, url: 'https://www.google.com/maps/dir//Flavor-Boss+Catering,+Foodtruck+och+Events,+Hantverkaregatan+4,+232+34+Arl%C3%B6v/@55.5974656,13.0023424,13z/data=!4m8!4m7!1m0!1m5!1m1!1s0x4653a384d94f0b8f:0xb3fe10397dd7fec2!2m2!1d13.0766103!2d55.6361508' },
+    { name: 'Sjöbo Marknad',        date: '16–17 juli',         monthIdx: 6, firstDay: 16, place: 'Sjöbo',                secret: false, url: 'https://www.sjobo.se/arkiv/nyhetsarkiv/nyheter/2026-07-13-valkommen-till-sjobo-marknad-den-16-17-juli-2026.html#:~:text=Den%2016%E2%80%9317%20juli%20%C3%A4r,st%C3%B6rsta%20och%20mest%20levande%20marknadsplatser' },
     { name: 'Street Food Festivalen', date: '23–25 juli',       monthIdx: 6, firstDay: 23, place: 'Stockholm',            secret: false, url: 'https://streetfoodfestivalen.se/' },
+    { name: 'Limhamn Hamnfestivalen', date: '23–26 juli',       monthIdx: 6, firstDay: 23, place: 'Limhamn',              secret: false, url: 'https://www.kokkolit.se/hamnfestivalen-pa-limhamn-23-26-juli-2026' },
     { name: 'Kristianstaddagarna', date: '30 juli – 1 augusti', monthIdx: 6, firstDay: 30, place: 'Kristianstad',         secret: false, url: 'https://www.kristianstadstadsfestival.com/' },
     { name: 'Reggaefestival',       date: '31 juli – 1 augusti', monthIdx: 6, firstDay: 31, place: 'Uppsala',             secret: false, url: 'https://uppsalareggaefestival.com/' },
     { name: 'Streetfoodfestivalen', date: '27–30 augusti',      monthIdx: 7, firstDay: 27, place: 'Göteborg',             secret: false, url: 'https://streetfoodfestivalen.se/goteborg/' },
     { name: 'NGBG Festival',        date: '4–6 september',      monthIdx: 8, firstDay: 4,  place: 'Malmö',                secret: false, url: 'https://gatufest.se/' },
+    { name: 'Helsingborg Foodtruckfestival', date: '10–12 september', monthIdx: 8, firstDay: 10, place: 'Helsingborg',   secret: false, url: 'https://hbgcity.se/evenemang/foodtruck-festival/' },
+    { name: 'Kulturnatten Lund',    date: '19 september',       monthIdx: 8, firstDay: 19, place: 'Lund',                 secret: false, url: 'https://lund.se/uppleva-och-gora/vad-hander-i-lunds-kommun/kulturnatten' },
+    { name: 'Trelleborg Citysamverkan', date: '26 september',   monthIdx: 8, firstDay: 26, place: 'Trelleborg',           secret: false, url: 'https://evenemang.visittrelleborg.se/sv/food-truck-festival' },
   ];
 
   const monthNamesSV = ['Januari','Februari','Mars','April','Maj','Juni','Juli','Augusti','September','Oktober','November','December'];
