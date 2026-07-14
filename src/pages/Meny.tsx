@@ -254,41 +254,6 @@ const Meny = () => {
     }
   }, [location.hash]);
 
-  // Warm the browser's image cache for the Catering tab while the user is still
-  // browsing the Festival tab, so switching tabs feels instant instead of showing
-  // fresh network loads. Fires once on mount; harmless if the user lands straight
-  // on #catering since the real <img> tags will just reuse the same cached bytes.
-  useEffect(() => {
-    const cateringPreloadUrls = [
-      cateringHeroMobileAsset,
-      cateringHeroLeftAsset,
-      cateringHeroMiddleAsset,
-      cateringHeroRightAsset,
-      cateringNavBuffeAsset,
-      cateringNavBulk,
-      cateringNavPaketAsset,
-      cateringNavUpplevelserAsset,
-      cateringNavStaffAsset,
-      cateringNavEntertainmentAsset,
-      cateringNavDecorationAsset,
-      cateringCardFlavorbox,
-      cateringCardSnackbox,
-      cateringCardJerkbox,
-      cateringSamosaMikatéSnackAsset,
-      cateringCardSamosaPackAsset,
-      cateringMikatéPackAsset,
-      cateringMikatéPhotoAsset,
-      cateringLogisticsNavAsset,
-      jerkBoxPlateAsset,
-      cateringSnackboxCornAsset.url,
-      decorationLightAsset.url,
-    ];
-    cateringPreloadUrls.forEach((url) => {
-      const img = new Image();
-      img.src = url;
-    });
-  }, []);
-
   const handleSendOffer = async (e: React.FormEvent) => {
     e.preventDefault();
     const payload = {
