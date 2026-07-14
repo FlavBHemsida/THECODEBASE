@@ -823,16 +823,17 @@ const Upplevelser = () => {
                     key={i}
                     src={src}
                     alt=""
-                    loading="lazy"
+                    loading="eager"
+                    fetchPriority="high"
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.6, delay: i * 0.1 }}
+                    transition={{ duration: 0.6 }}
                     className="w-full h-full object-cover rounded-2xl shadow-2xl ring-2 ring-white/20"
                   />
                 ))}
               </div>
               <div className="absolute inset-0 -z-0 md:hidden rounded-2xl overflow-hidden">
-                <img src={cateringHeroMiddle} alt="" loading="lazy" className="w-full h-full object-cover" />
+                <img src={cateringHeroMiddle} alt="" loading="eager" fetchPriority="high" className="w-full h-full object-cover" />
               </div>
               <div className="relative z-10 h-full md:h-auto flex items-center justify-center py-10 md:py-16">
             <motion.h1
