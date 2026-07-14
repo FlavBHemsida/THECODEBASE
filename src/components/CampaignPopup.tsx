@@ -71,7 +71,7 @@ const CampaignPopup = () => {
             exit={{ scale: 0.95, y: 10, opacity: 0 }}
             transition={{ duration: 0.4, ease: [0.25, 1, 0.5, 1] }}
             onClick={(e) => e.stopPropagation()}
-            className="relative w-full max-w-3xl rounded-3xl shadow-2xl overflow-hidden"
+            className="relative w-full max-w-3xl max-h-[85vh] md:max-h-[90vh] rounded-3xl shadow-2xl overflow-hidden flex flex-col"
             style={{
               backgroundImage: 'linear-gradient(135deg, #F07020 0%, #eb8a35 45%, #db4335 100%)',
             }}
@@ -150,7 +150,7 @@ const CampaignPopup = () => {
             />
 
             {/* Content — fully centered */}
-            <div className="relative z-10 flex flex-col items-center text-center px-6 md:px-10 pt-20 md:pt-24 pb-10 md:pb-12">
+            <div className="relative z-10 flex flex-col items-center text-center px-6 md:px-10 pt-20 md:pt-24 pb-10 md:pb-12 overflow-y-auto min-h-0 flex-1">
               <h2
                 id="campaign-popup-title"
                 className="font-display font-extrabold uppercase tracking-tight leading-[0.95] text-2xl md:text-4xl"

@@ -840,7 +840,7 @@ const Upplevelser = () => {
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.2, duration: 0.7, ease: [0.25, 1, 0.5, 1] }}
-              className="font-display font-extrabold uppercase text-[2.8125rem] md:text-[5.625rem] lg:text-[7.5rem] tracking-tight leading-[0.95] text-white drop-shadow-[0_4px_20px_rgba(0,0,0,0.35)]"
+              className="font-display font-extrabold uppercase text-[clamp(1.5rem,9vw,2.8125rem)] md:text-[5.625rem] lg:text-[7.5rem] tracking-tight leading-[0.95] text-white drop-shadow-[0_4px_20px_rgba(0,0,0,0.35)] break-words px-2"
             >
               {t('Helhetsupplevelse', 'Complete Experience')}
             </motion.h1>
