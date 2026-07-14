@@ -2,9 +2,11 @@ import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { cateringSections, type SectionData, type CardData } from '@/data/cateringMenuStructured';
-import { Send, X } from 'lucide-react';
+import { Send, X, Download } from 'lucide-react';
 import { useEffect, useState } from 'react';
 import { brochuresByCardId, type Brochure } from '@/data/brochures';
+
+const festivalMenuBrochure = `${import.meta.env.BASE_URL}brochures/00_FlavBoss_MenySV_A5_2026_DIG.pdf`;
 
 const MOVED_IDS = ['bulk', 'packages', 'experiences', 'decoration', 'entertainment', 'staff', 'logistics'];
 
@@ -203,7 +205,7 @@ const CateringExtras = () => {
         </p>
       </div>
 
-      <div className="text-center pt-2">
+      <div className="flex flex-col items-center gap-4 pt-2">
         <Link
           to="/boka-oss"
           onClick={() => window.scrollTo({ top: 0, behavior: 'auto' })}
@@ -215,6 +217,17 @@ const CateringExtras = () => {
           <Send className="w-4 h-4" />
           {t('Skicka offertförfrågan', 'Send quote request')}
         </Link>
+        <a
+          href={festivalMenuBrochure}
+          download="Flavor-Boss-Festival-Meny.pdf"
+          className="inline-flex items-center gap-2 font-display font-extrabold uppercase tracking-wide text-white text-sm md:text-base px-8 py-4 rounded-full shadow-xl transition-transform duration-300 hover:scale-105 border-2 border-white/60"
+          style={{
+            backgroundImage: 'linear-gradient(135deg, #2D6A4F 0%, #1a3c2a 100%)',
+          }}
+        >
+          <Download className="w-4 h-4" />
+          {t('Se Vår Festival Meny', 'Se Vår Festival Meny')}
+        </a>
       </div>
       {activeBrochure && (
         <BrochureModal brochure={activeBrochure} onClose={() => setActiveBrochure(null)} />

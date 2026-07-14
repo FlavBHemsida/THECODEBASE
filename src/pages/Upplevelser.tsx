@@ -247,6 +247,23 @@ const srcDekoration = '/sources/Dekorations_upplevelse.png';
 const srcBoozeTruck = '/sources/09_FB_FlavorBoozeTruck_A5_Q1_2026_1.png';
 const srcDjPaket = '/sources/dj_paket.png';
 
+// Downloadable brochure PDFs — served from /public/brochures for direct browser download.
+// Prefixed with BASE_URL (the app is deployed under the /THECODEBASE/ subpath) so the
+// browser resolves them against the deployed site instead of the domain root.
+const brochureFlavorBox = `${import.meta.env.BASE_URL}brochures/13_FB_FlavorBox_A5_2026_Dig.pdf`;
+const brochureSnackBox = `${import.meta.env.BASE_URL}brochures/14_FB_SnackBox_A5_2026_Dig.pdf`;
+const brochureCateringBuffe = `${import.meta.env.BASE_URL}brochures/03_FB_CateringBuffeupplevelseA5_2026_Dig.pdf`;
+const brochureFoodtruckForetag = `${import.meta.env.BASE_URL}brochures/04_FB_FoodtruckUppl_Businessevenemang_A5_Dig.pdf`;
+const brochureLightDekoration = `${import.meta.env.BASE_URL}brochures/05_FB_LightCateringExp_A5_Dig.pdf`;
+const brochureMediumDekoration = `${import.meta.env.BASE_URL}brochures/06_FB_MedCateringExp_A5_2026_Dig.pdf`;
+const brochureBoozeTruck = `${import.meta.env.BASE_URL}brochures/10_FB_FlavorBoozeTruck_A5_2026_Dig.pdf`;
+const brochureLunchPopup = `${import.meta.env.BASE_URL}brochures/16_FB_LunchPopupA5_2026_Dig.pdf`;
+const brochureTakeHome = `${import.meta.env.BASE_URL}brochures/17_FB_TameddigFlavornhemA5_2026_Dig.pdf`;
+const brochureSamosaMikaté = `${import.meta.env.BASE_URL}brochures/18_FB_ErbjudandeA5_2026_Dig.pdf`;
+const brochureSweetMikaté = `${import.meta.env.BASE_URL}brochures/19_FB_AddsomethingsweetA5_2026_Dig.pdf`;
+const brochureDjSim = `${import.meta.env.BASE_URL}brochures/20_FB_DJ-paketA5_Q1_2026_Dig.pdf`;
+const brochureFoodtruckPrivat = `${import.meta.env.BASE_URL}brochures/25_FB_Foodtruckupplevelse-PrivEvent_2026_Dig.pdf`;
+
 const sectionCircleImages: Record<string, string> = {
   menus: circleMenus,
   catering: circleEvent,
@@ -329,6 +346,8 @@ type Item = {
   slideshowImages?: string[];
   downloadUrl?: string;
   downloadName?: string;
+  brochureUrl?: string;
+  brochureName?: string;
   socialLinks?: { instagram?: string; facebook?: string; tiktok?: string };
   newsletter?: boolean;
 };
@@ -388,6 +407,8 @@ const sections: Section[] = [
         image: flavorBox,
         downloadUrl: srcFlavorBox,
         downloadName: 'Flavor-Boss-Flavor-Box.png',
+        brochureUrl: brochureFlavorBox,
+        brochureName: 'Flavor-Boss-Flavor-Box-Broschyr.pdf',
       },
       {
         titleSv: 'Snackbox',
@@ -398,6 +419,8 @@ const sections: Section[] = [
           'A taste of the Flavor Box experience — same bold flavors, perfectly portioned. Ideal for lunches, mingles and corporate events.',
         downloadUrl: srcSnackBox,
         downloadName: 'Flavor-Boss-Snack-Box.png',
+        brochureUrl: brochureSnackBox,
+        brochureName: 'Flavor-Boss-Snack-Box-Broschyr.pdf',
       },
       {
         titleSv: 'Lunch Popup',
@@ -409,6 +432,8 @@ const sections: Section[] = [
         image: uppLunchPopup,
         downloadUrl: srcLunchPopup,
         downloadName: 'Flavor-Boss-Lunch-Popup.png',
+        brochureUrl: brochureLunchPopup,
+        brochureName: 'Flavor-Boss-Lunch-Popup-Broschyr.pdf',
         socialLinks: {
           instagram: 'https://instagram.com/flavorboss',
           facebook: 'https://facebook.com/flavorboss',
@@ -439,6 +464,8 @@ const sections: Section[] = [
         image: cateringMikatéPhotoAsset,
         downloadUrl: srcSweetMikaté,
         downloadName: 'Flavor-Boss-Sweet-Mikaté.png',
+        brochureUrl: brochureSweetMikaté,
+        brochureName: 'Flavor-Boss-Sweet-Mikaté-Broschyr.pdf',
       },
       {
         titleSv: 'Samosa & Mikaté Snack-upplevelse',
@@ -450,6 +477,8 @@ const sections: Section[] = [
         basketId: 'samosa_mikate_snack',
         downloadUrl: srcSamosaMikaté,
         downloadName: 'Flavor-Boss-Samosa-Mikaté.png',
+        brochureUrl: brochureSamosaMikaté,
+        brochureName: 'Flavor-Boss-Samosa-Mikaté-Broschyr.pdf',
       },
       {
         titleSv: 'TA MED DIG FLAVRON HEM — Snackpack',
@@ -462,6 +491,8 @@ const sections: Section[] = [
         image: cateringMikatéPackAsset,
         downloadUrl: srcTakeHome,
         downloadName: 'Flavor-Boss-Take-Home-Snacks.png',
+        brochureUrl: brochureTakeHome,
+        brochureName: 'Flavor-Boss-Take-Home-Snacks-Broschyr.pdf',
       },
     ],
   },
@@ -485,6 +516,8 @@ const sections: Section[] = [
         slideshowImages: [uppFoodtruck1, uppFoodtruck2, uppFoodtruck3, uppFoodtruck4],
         downloadUrl: srcFoodtruck,
         downloadName: 'Flavor-Boss-Foodtruck-Foretagsevent.png',
+        brochureUrl: brochureFoodtruckForetag,
+        brochureName: 'Flavor-Boss-Foodtruck-Foretagsevent-Broschyr.pdf',
       },
       {
         titleSv: 'Foodtruck Upplevelse — Privat',
@@ -493,6 +526,8 @@ const sections: Section[] = [
           'Upplev äkta afro-karibiska smaker serverade från vår färgstarka foodtruck — en levande kulinarisk resa fylld av dofter, musik och energi som mättar alla era sinnen.',
         descEn:
           'Experience authentic Afro-Caribbean flavors served from our colorful foodtruck — a vibrant culinary journey filled with aromas, music and energy that feeds all your senses.',
+        brochureUrl: brochureFoodtruckPrivat,
+        brochureName: 'Flavor-Boss-Foodtruck-Privat-Broschyr.pdf',
       },
       {
         titleSv: 'Catering-buffé Upplevelse',
@@ -503,6 +538,8 @@ const sections: Section[] = [
           'A warm, generous buffet fusing West African, Central African and Caribbean flavors. Choose how you want it delivered — we handle the rest. Full-service includes delivery, setup and a live presentation. Simple delivery is also available for those who want to handle setup themselves. Afro-Caribbean tablecloths and lanterns are included with every order.',
         downloadUrl: srcCateringBuffe,
         downloadName: 'Flavor-Boss-Catering-Buffe-Upplevelse.png',
+        brochureUrl: brochureCateringBuffe,
+        brochureName: 'Flavor-Boss-Catering-Buffe-Upplevelse-Broschyr.pdf',
       },
       {
         titleSv: 'Light Catering Upplevelse',
@@ -547,6 +584,8 @@ const sections: Section[] = [
 
         downloadUrl: srcDekoration,
         downloadName: 'Flavor-Boss-Dekoration-Light.png',
+        brochureUrl: brochureLightDekoration,
+        brochureName: 'Flavor-Boss-Dekoration-Light-Broschyr.pdf',
       },
       {
         titleSv: 'Medium Dekorations paket',
@@ -558,6 +597,8 @@ const sections: Section[] = [
 
         downloadUrl: srcDekoration,
         downloadName: 'Flavor-Boss-Dekoration-Medium.png',
+        brochureUrl: brochureMediumDekoration,
+        brochureName: 'Flavor-Boss-Dekoration-Medium-Broschyr.pdf',
       },
       {
         titleSv: 'The Flavor-Boss Experience',
@@ -592,6 +633,8 @@ const sections: Section[] = [
           'A full bar and snacks experience on wheels. Lager, IPA, wine, exotic cocktails and non-alcoholic options. Pair the bar with Samosa Snack Packs, Sweet Flavors Mikaté or a warming Peppeh Soup for the perfect late-night kick. Available as a full bartruck experience or as a bar setup without the truck. Ideal for corporate events and private parties. Requires advance booking due to serving permits.',
         downloadUrl: srcBoozeTruck,
         downloadName: 'Flavor-Boss-Booze-Truck.png',
+        brochureUrl: brochureBoozeTruck,
+        brochureName: 'Flavor-Boss-Booze-Truck-Broschyr.pdf',
       },
     ],
   },
@@ -614,6 +657,8 @@ const sections: Section[] = [
           'Turn your event into a dance floor. DJ Sim delivers professional DJ sets with full sound and light setups. Choose from a light DJ package for intimate events, a music wagon experience for something bigger, or a full-blown all-in production that maxes out the party. Extra hours available. Follow the vibe at @simthedj / djsim.se.',
         downloadUrl: srcDjPaket,
         downloadName: 'Flavor-Boss-DJ-Sim.png',
+        brochureUrl: brochureDjSim,
+        brochureName: 'Flavor-Boss-DJ-Sim-Broschyr.pdf',
       },
     ],
   },
@@ -771,7 +816,7 @@ const Upplevelser = () => {
               {t('FLAVOR-BOSS PRESENTERAR', 'FLAVOR-BOSS PRESENTS')}
             </motion.p>
             {/* Backdrop: three hero images (desktop) / single mobile image, behind the title block only */}
-            <div className="relative">
+            <div className="relative aspect-square md:aspect-auto">
               <div className="absolute inset-0 -z-0 pointer-events-none hidden md:grid grid-cols-3 gap-4 md:gap-6 px-2 md:px-8">
                 {[cateringHeroLeft, cateringHeroMiddle, cateringHeroRight].map((src, i) => (
                   <motion.img
@@ -789,12 +834,12 @@ const Upplevelser = () => {
               <div className="absolute inset-0 -z-0 md:hidden rounded-2xl overflow-hidden">
                 <img src={cateringHeroMiddle} alt="" loading="lazy" className="w-full h-full object-cover" />
               </div>
-              <div className="relative z-10 py-10 md:py-16">
+              <div className="relative z-10 h-full md:h-auto flex items-center justify-center py-10 md:py-16">
             <motion.h1
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.2, duration: 0.7, ease: [0.25, 1, 0.5, 1] }}
-              className="font-display font-extrabold uppercase text-4xl md:text-7xl lg:text-8xl tracking-tight leading-[0.95] text-white drop-shadow-[0_4px_20px_rgba(0,0,0,0.35)]"
+              className="font-display font-extrabold uppercase text-[2.8125rem] md:text-[5.625rem] lg:text-[7.5rem] tracking-tight leading-[0.95] text-white drop-shadow-[0_4px_20px_rgba(0,0,0,0.35)]"
             >
               {t('Helhetsupplevelse', 'Complete Experience')}
             </motion.h1>
@@ -1051,9 +1096,8 @@ const Upplevelser = () => {
                           {item.titleSv === 'DJ Sim — Ljud, Ljus & Vibes' ? (
                             <div className="mt-5 flex flex-wrap items-center gap-4">
                               <a
-                                href="https://www.djsim.se/"
-                                target="_blank"
-                                rel="noopener noreferrer"
+                                href={item.brochureUrl}
+                                download={item.brochureName}
                                 className="inline-flex items-center gap-2 px-5 py-3 rounded-[1.5rem_2rem_1.5rem_2rem] hover:rounded-[2rem_1.5rem_2rem_1.5rem] font-display font-extrabold uppercase tracking-wider text-xs md:text-sm transition-all duration-200 hover:-translate-y-0.5 border-2 border-white/60 ring-1 ring-black/20"
                                 style={{
                                   backgroundImage: bookingStyle.background.includes('gradient') ? bookingStyle.background : undefined,
@@ -1068,7 +1112,7 @@ const Upplevelser = () => {
                                 }}
                               >
                                 <ArrowRight className="w-4 h-4" />
-                                {t('Boka DJ', 'Book DJ')}
+                                {t('Ladda ner broschyr', 'Download Flyer')}
                               </a>
                               <span
                                 className="text-xl md:text-2xl leading-none tracking-wide"
@@ -1081,6 +1125,26 @@ const Upplevelser = () => {
                                 FOLLOW THE VIBE!
                               </span>
                             </div>
+                          ) : item.brochureUrl ? (
+                            <a
+                              href={item.brochureUrl}
+                              download={item.brochureName}
+                              className="mt-5 inline-flex items-center gap-2 px-5 py-3 rounded-[1.5rem_2rem_1.5rem_2rem] hover:rounded-[2rem_1.5rem_2rem_1.5rem] font-display font-extrabold uppercase tracking-wider text-xs md:text-sm transition-all duration-200 hover:-translate-y-0.5 border-2 border-white/60 ring-1 ring-black/20"
+                              style={{
+                                backgroundImage: bookingStyle.background.includes('gradient') ? bookingStyle.background : undefined,
+                                backgroundColor: bookingStyle.background.includes('gradient') ? undefined : bookingStyle.background,
+                                color: bookingStyle.color,
+                                opacity: 1,
+                                boxShadow: '0 6px 18px rgba(0,0,0,0.45), 0 2px 6px rgba(0,0,0,0.35)',
+                                textShadow:
+                                  bookingStyle.color.toLowerCase() === '#ffffff'
+                                    ? '0 1px 2px rgba(0,0,0,0.35)'
+                                    : '0 1px 1px rgba(255,255,255,0.35)',
+                              }}
+                            >
+                              <ArrowRight className="w-4 h-4" />
+                              {t('Ladda ner broschyr', 'Download Flyer')}
+                            </a>
                           ) : (
                             <Link
                               to="/boka-oss"
