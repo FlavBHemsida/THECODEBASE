@@ -834,6 +834,7 @@ const Upplevelser = () => {
               </div>
               <div className="absolute inset-0 -z-0 md:hidden rounded-2xl overflow-hidden">
                 <img src={cateringHeroMiddle} alt="" loading="eager" fetchPriority="high" className="w-full h-full object-cover" />
+                <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/30 to-black/70" />
               </div>
               <div className="relative z-10 h-full md:h-auto flex items-center justify-center py-10 md:py-16">
             <motion.h1
