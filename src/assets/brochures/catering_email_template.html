@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>New Catering Request</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background-color: #f5f5f5;
+      padding: 40px 20px;
+    }
+
+    .email-container {
+      max-width: 700px;
+      margin: 0 auto;
+      background: #ffffff;
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+    }
+
+    /* Header with diagonal gradient */
+    .header {
+      background: linear-gradient(135deg, #febc47 0%, #912cb3 100%);
+      padding: 50px 40px;
+      text-align: center;
+    }
+
+    .header h1 {
+      color: #ffffff;
+      font-size: 32px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-shadow: 0 2px 10px rgba(0,0,0,0.2);
+    }
+
+    .header p {
+      color: rgba(255,255,255,0.9);
+      font-size: 15px;
+      margin-top: 8px;
+      font-weight: 400;
+    }
+
+    .content {
+      padding: 40px;
+    }
+
+    .section-title {
+      font-size: 20px;
+      font-weight: 700;
+      color: #912cb3;
+      margin-bottom: 20px;
+      padding-bottom: 10px;
+      border-bottom: 3px solid;
+      border-image: linear-gradient(90deg, #febc47, #912cb3) 1;
+      display: inline-block;
+    }
+
+    /* Table styling */
+    .info-table {
+      width: 100%;
+      border-collapse: separate;
+      border-spacing: 0;
+      margin-bottom: 35px;
+      border-radius: 14px;
+      overflow: hidden;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+    }
+
+    .info-table thead tr {
+      background: linear-gradient(135deg, #febc47 0%, #912cb3 100%);
+    }
+
+    .info-table thead th {
+      color: #ffffff;
+      font-weight: 700;
+      font-size: 14px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      padding: 16px 20px;
+      text-align: left;
+    }
+
+    .info-table tbody tr {
+      background: #ffffff;
+      transition: background 0.2s ease;
+    }
+
+    .info-table tbody tr:nth-child(even) {
+      background: #faf7ff;
+    }
+
+    .info-table tbody tr:hover {
+      background: #f0e6ff;
+    }
+
+    .info-table tbody td {
+      padding: 14px 20px;
+      font-size: 14px;
+      color: #333;
+      border-bottom: 1px solid #eee;
+    }
+
+    .info-table tbody td:first-child {
+      font-weight: 600;
+      color: #912cb3;
+      width: 40%;
+    }
+
+    .info-table tbody td:last-child {
+      font-weight: 500;
+    }
+
+    /* Yes/No badge styling */
+    .badge {
+      display: inline-block;
+      padding: 4px 14px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .badge-yes {
+      background: linear-gradient(135deg, #febc47, #f0a030);
+      color: #ffffff;
+    }
+
+    .badge-no {
+      background: #e8e8e8;
+      color: #999;
+    }
+
+    /* Footer */
+    .footer {
+      background: linear-gradient(135deg, #febc47 0%, #912cb3 100%);
+      padding: 30px 40px;
+      text-align: center;
+    }
+
+    .footer p {
+      color: rgba(255,255,255,0.85);
+      font-size: 13px;
+      font-weight: 400;
+    }
+
+    .footer strong {
+      color: #ffffff;
+      font-weight: 700;
+    }
+
+    /* Responsive */
+    @media (max-width: 600px) {
+      .header { padding: 30px 20px; }
+      .header h1 { font-size: 24px; }
+      .content { padding: 25px 20px; }
+      .info-table thead th, .info-table tbody td { padding: 12px 14px; font-size: 13px; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="email-container">
+
+    <!-- Header -->
+    <div class="header">
+      <h1>New Catering Request</h1>
+      <p>A new booking has been submitted. Review the details below.</p>
+    </div>
+
+    <div class="content">
+
+      <!-- Client Information -->
+      <h2 class="section-title">Client Information</h2>
+      <table class="info-table">
+        <thead>
+          <tr>
+            <th>Field</th>
+            <th>Details</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td><strong>Name</strong></td><td>{{ $json.name }}</td></tr>
+          <tr><td><strong>Email</strong></td><td>{{ $json.email }}</td></tr>
+          <tr><td><strong>Phone</strong></td><td>{{ $json.phone }}</td></tr>
+          <tr><td><strong>Address</strong></td><td>{{ $json.address }}</td></tr>
+          <tr><td><strong>Date</strong></td><td>{{ $json.date }}</td></tr>
+          <tr><td><strong>Max Guests</strong></td><td>{{ $json.maxGuests }}</td></tr>
+          <tr><td><strong>Min Guests</strong></td><td>{{ $json.minGuests }}</td></tr>
+          <tr><td><strong>Event Type</strong></td><td>{{ $json.eventType }}</td></tr>
+          <tr><td><strong>Special Diet</strong></td><td>{{ $json.specialDiet }}</td></tr>
+          <tr><td><strong>Delivery Method</strong></td><td>{{ $json.deliveryMethod }}</td></tr>
+          <tr><td><strong>Menu</strong></td><td>{{ $json.menu || "—" }}</td></tr>
+          <tr><td><strong>Message</strong></td><td>{{ $json.message }}</td></tr>
+        </tbody>
+      </table>
+
+      <!-- Menu Selections -->
+      <h2 class="section-title">Menu Selections</h2>
+      <table class="info-table">
+        <thead>
+          <tr>
+            <th>Menu Item</th>
+            <th>Selected</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Flavor Box</strong></td>
+            <td><span class="badge {{ $json.menu_flavorBox === 'Yes' ? 'badge-yes' : 'badge-no' }}">{{ $json.menu_flavorBox }}</span></td>
+          </tr>
+          <tr>
+            <td><strong>Snack Box</strong></td>
+            <td><span class="badge {{ $json.menu_snackBox === 'Yes' ? 'badge-yes' : 'badge-no' }}">{{ $json.menu_snackBox }}</span></td>
+          </tr>
+          <tr>
+            <td><strong>Jerk Jollof Box</strong></td>
+            <td><span class="badge {{ $json.menu_jerkJollofBox === 'Yes' ? 'badge-yes' : 'badge-no' }}">{{ $json.menu_jerkJollofBox }}</span></td>
+          </tr>
+          <tr>
+            <td><strong>Custom</strong></td>
+            <td><span class="badge {{ $json.menu_custom === 'Yes' ? 'badge-yes' : 'badge-no' }}">{{ $json.menu_custom }}</span></td>
+          </tr>
+        </tbody>
+      </table>
+
+      <!-- Extras Selections -->
+      <h2 class="section-title">Extras & Add-ons</h2>
+      <table class="info-table">
+        <thead>
+          <tr>
+            <th>Extra Item</th>
+            <th>Selected</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>DJ Full On</strong></td>
+            <td><span class="badge {{ $json.extra_djFullon === 'Yes' ? 'badge-yes' : 'badge-no' }}">{{ $json.extra_djFullon }}</span></td>
+          </tr>
+          <tr>
+            <td><strong>DJ Boost</strong></td>
+            <td><span class="badge {{ $json.extra_djBoost === 'Yes' ? 'badge-yes' : 'badge-no' }}">{{ $json.extra_djBoost }}</span></td>
+          </tr>
+          <tr>
+            <td><strong>Popup Mascot</strong></td>
+            <td><span class="badge {{ $json.extra_popupMascot === 'Yes' ? 'badge-yes' : 'badge-no' }}">{{ $json.extra_popupMascot }}</span></td>
+          </tr>
+          <tr>
+            <td><strong>Full Mascot</strong></td>
+            <td><span class="badge {{ $json.extra_fullMascot === 'Yes' ? 'badge-yes' : 'badge-no' }}">{{ $json.extra_fullMascot }}</span></td>
+          </tr>
+          <tr>
+            <td><strong>Deco Medium</strong></td>
+            <td><span class="badge {{ $json.extra_decoMedium === 'Yes' ? 'badge-yes' : 'badge-no' }}">{{ $json.extra_decoMedium }}</span></td>
+          </tr>
+          <tr>
+            <td><strong>Deco Luxury</strong></td>
+            <td><span class="badge {{ $json.extra_decoLuxury === 'Yes' ? 'badge-yes' : 'badge-no' }}">{{ $json.extra_decoLuxury }}</span></td>
+          </tr>
+          <tr>
+            <td><strong>Grill Upplevelse</strong></td>
+            <td><span class="badge {{ $json.extra_grillUpplevelse === 'Yes' ? 'badge-yes' : 'badge-no' }}">{{ $json.extra_grillUpplevelse }}</span></td>
+          </tr>
+          <tr>
+            <td><strong>Foodtruck Upplevelse</strong></td>
+            <td><span class="badge {{ $json.extra_foodtruckUpplevelse === 'Yes' ? 'badge-yes' : 'badge-no' }}">{{ $json.extra_foodtruckUpplevelse }}</span></td>
+          </tr>
+          <tr>
+            <td><strong>Buffé Upplevelse</strong></td>
+            <td><span class="badge {{ $json.extra_buffeUpplevelse === 'Yes' ? 'badge-yes' : 'badge-no' }}">{{ $json.extra_buffeUpplevelse }}</span></td>
+          </tr>
+          <tr>
+            <td><strong>Booze Truck</strong></td>
+            <td><span class="badge {{ $json.extra_boozeTruck === 'Yes' ? 'badge-yes' : 'badge-no' }}">{{ $json.extra_boozeTruck }}</span></td>
+          </tr>
+          <tr>
+            <td><strong>Booze Bar</strong></td>
+            <td><span class="badge {{ $json.extra_boozeBar === 'Yes' ? 'badge-yes' : 'badge-no' }}">{{ $json.extra_boozeBar }}</span></td>
+          </tr>
+          <tr>
+            <td><strong>Serving Staff</strong></td>
+            <td><span class="badge {{ $json.extra_servingStaff === 'Yes' ? 'badge-yes' : 'badge-no' }}">{{ $json.extra_servingStaff }}</span></td>
+          </tr>
+          <tr>
+            <td><strong>Exklusiv Värdinna</strong></td>
+            <td><span class="badge {{ $json.extra_exklusivVardinna === 'Yes' ? 'badge-yes' : 'badge-no' }}">{{ $json.extra_exklusivVardinna }}</span></td>
+          </tr>
+          <tr>
+            <td><strong>Boka Patricia</strong></td>
+            <td><span class="badge {{ $json.extra_bokaPatricia === 'Yes' ? 'badge-yes' : 'badge-no' }}">{{ $json.extra_bokaPatricia }}</span></td>
+          </tr>
+        </tbody>
+      </table>
+
+    </div>
+
+    <!-- Footer -->
+    <div class="footer">
+      <p>This request was submitted on <strong>{{ new Date().toLocaleDateString() }}</strong></p>
+      <p style="margin-top:6px;">Please follow up with the client within 24 hours.</p>
+    </div>
+
+  </div>
+
+</body>
+</html>

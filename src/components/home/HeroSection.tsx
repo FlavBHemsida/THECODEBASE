@@ -19,8 +19,8 @@ const HeroSection = () => {
         playsInline
         preload="auto"
         className="absolute inset-0 w-full h-full object-cover"
-        src={`${import.meta.env.BASE_URL}videos/hero-bg.mp4`}
-        poster={`${import.meta.env.BASE_URL}videos/hero-poster.webp`}
+        src="/videos/hero-bg.mp4"
+        poster="/videos/hero-poster.webp"
         onPlaying={() => window.dispatchEvent(new Event('flavorboss:hero-video-started'))}
       />
 
