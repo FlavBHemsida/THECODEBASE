@@ -89,6 +89,12 @@ const BackgroundMusic = () => {
     if (muted) {
       userMutedRef.current = false;
       audio.muted = false;
+      // Some mobile browsers silently pause a muted <audio> element in the
+      // background. Re-calling play() (without touching currentTime) guarantees
+      // playback actually resumes from where it was instead of staying paused.
+      if (audio.paused) {
+        audio.play().catch(() => {});
+      }
       setMuted(false);
       sessionStorage.setItem(MUTE_STORAGE_KEY, 'false');
     } else {
