@@ -196,7 +196,7 @@ const Foodtruck = () => {
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.25, ease: [0.25, 1, 0.5, 1] }}
+            transition={{ duration: 0.6, ease: [0.25, 1, 0.5, 1] }}
             className="max-w-2xl mx-auto text-center text-white/95 px-4 space-y-5 text-base md:text-lg leading-relaxed"
           >
             {mode === 'foretag' ? (
@@ -255,7 +255,7 @@ const Foodtruck = () => {
           <motion.div
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.6, delay: 0.45, ease: [0.25, 1, 0.5, 1] }}
+            transition={{ duration: 0.6, ease: [0.25, 1, 0.5, 1] }}
             className="relative max-w-2xl mx-auto mt-12 px-4"
           >
             <div
@@ -286,7 +286,7 @@ const Foodtruck = () => {
                 key={i}
                 initial={{ opacity: 0, y: 30, rotate: i % 2 === 0 ? -2 : 2 }}
                 animate={{ opacity: 1, y: 0, rotate: i % 2 === 0 ? -1.5 : 1.5 }}
-                transition={{ duration: 0.6, delay: 0.55 + i * 0.12, ease: [0.25, 1, 0.5, 1] }}
+                transition={{ duration: 0.6, ease: [0.25, 1, 0.5, 1] }}
                 whileHover={{ rotate: 0, scale: 1.03 }}
                 className="rounded-2xl overflow-hidden shadow-2xl"
                 style={{
@@ -300,7 +300,7 @@ const Foodtruck = () => {
                     `Flavor-Boss foodtruck event ${i + 1}`,
                     `Flavor-Boss food truck event ${i + 1}`
                   )}
-                  loading="lazy"
+                  loading="eager"
                   className="w-full h-56 md:h-64 object-cover rounded-xl"
                 />
               </motion.div>
@@ -311,7 +311,7 @@ const Foodtruck = () => {
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 1, ease: [0.25, 1, 0.5, 1] }}
+            transition={{ duration: 0.6, ease: [0.25, 1, 0.5, 1] }}
             className="flex justify-center px-4 mt-16"
           >
             <Link

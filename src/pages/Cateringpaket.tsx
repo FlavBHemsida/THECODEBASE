@@ -151,7 +151,7 @@ const Cateringpaket = () => {
                   key={i}
                   src={src}
                   alt=""
-                  loading="lazy"
+                  loading="eager"
                   className="h-[130px] w-auto object-cover flex-shrink-0"
                 />
               ))}
@@ -163,7 +163,7 @@ const Cateringpaket = () => {
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.3, ease: [0.25, 1, 0.5, 1] }}
+              transition={{ duration: 0.6, ease: [0.25, 1, 0.5, 1] }}
               className="text-center px-4"
             >
               <h2
@@ -183,7 +183,7 @@ const Cateringpaket = () => {
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.45, ease: [0.25, 1, 0.5, 1] }}
+              transition={{ duration: 0.6, ease: [0.25, 1, 0.5, 1] }}
               className="text-center px-4"
             >
               <h2
@@ -203,7 +203,7 @@ const Cateringpaket = () => {
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.6, ease: [0.25, 1, 0.5, 1] }}
+              transition={{ duration: 0.6, ease: [0.25, 1, 0.5, 1] }}
               className="flex justify-center px-4"
             >
               <img
@@ -219,7 +219,7 @@ const Cateringpaket = () => {
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.65, ease: [0.25, 1, 0.5, 1] }}
+              transition={{ duration: 0.6, ease: [0.25, 1, 0.5, 1] }}
               className="text-center px-4"
             >
               <h2
@@ -239,7 +239,7 @@ const Cateringpaket = () => {
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.75, ease: [0.25, 1, 0.5, 1] }}
+              transition={{ duration: 0.6, ease: [0.25, 1, 0.5, 1] }}
               className="flex justify-center px-4"
             >
               <Link

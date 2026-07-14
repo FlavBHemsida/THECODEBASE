@@ -209,8 +209,8 @@ const staggerItem = {
 const Meny = () => {
   const location = useLocation();
   const { t, lang } = useLanguage();
-  const [revealedCount, setRevealedCount] = useState(0);
-  const [headerRevealed, setHeaderRevealed] = useState(false);
+  const [revealedCount, setRevealedCount] = useState(Infinity);
+  const [headerRevealed, setHeaderRevealed] = useState(true);
   const [view, setView] = useState<'festival' | 'catering'>('festival');
   const [flavorBoxMode, setFlavorBoxMode] = useState<'standard' | 'vegetarian' | 'vegan'>('standard');
   const [expandedCards, setExpandedCards] = useState<Record<string, boolean>>({});
@@ -1226,12 +1226,6 @@ const Meny = () => {
       window.dispatchEvent(new Event('navbar:show'));
     };
   }, [view]);
-
-  // After 1s of empty screen, start revealing cards one by one
-  useEffect(() => {
-    const start = setTimeout(() => setRevealedCount(1), 1000);
-    return () => clearTimeout(start);
-  }, []);
 
   // Land the user already centered on the first menu card row — no visible scroll glitch.
   useEffect(() => {
