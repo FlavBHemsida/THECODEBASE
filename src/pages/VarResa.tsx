@@ -125,15 +125,15 @@ const VarResa = () => {
                 />
               ))}
 
-              <div className="relative z-10 container-site py-16 md:py-24 flex flex-col items-center text-center">
-                <motion.span
+              <div className="relative z-10 container-site py-8 md:py-24 flex flex-col items-center text-center">
+                <motion.p
                   initial={{ opacity: 0, y: -20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.15, duration: 0.6 }}
-                  className="inline-block uppercase tracking-[0.4em] text-xs md:text-sm font-bold text-white/90 mb-5 px-4 py-1.5 rounded-full bg-white/10 ring-1 ring-white/30 backdrop-blur"
+                  className="text-subheading text-secondary mb-3 md:mb-6 tracking-[0.14em] md:tracking-[0.2em] text-[0.68rem] leading-tight md:text-base max-w-[18rem] md:max-w-none mx-auto"
                 >
                   {t('Vårt Äventyr', 'Our Adventure')}
-                </motion.span>
+                </motion.p>
 
                 <motion.h1
                   initial={{ opacity: 0, scale: 0.9, rotate: -2 }}
@@ -141,18 +141,19 @@ const VarResa = () => {
                   transition={{ delay: 0.25, duration: 0.7, ease: [0.25, 1, 0.5, 1] }}
                   className="font-display font-extrabold uppercase text-white text-5xl md:text-7xl lg:text-8xl leading-[0.95] drop-shadow-[0_6px_30px_rgba(0,0,0,0.25)] max-w-4xl"
                 >
-                  {t('Innan resan börjar', 'Before the journey begins')}
+                  {t('Every queue has a story', 'Every queue has a story')}
+                  <span className="block text-secondary">{t('This is ours', 'This is ours')}</span>
                 </motion.h1>
 
                 <motion.p
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.45, duration: 0.6 }}
-                  className="mt-8 max-w-2xl text-white/95 text-base md:text-lg leading-relaxed"
+                  className="mt-5 md:mt-8 max-w-2xl text-white/95 text-sm md:text-lg leading-relaxed whitespace-pre-line"
                 >
                   {t(
-                    'Patricia Dianda "Flavor-Boss Trich" — från sitt hemmakök i Malmö till en av Sveriges mest prisbelönta streetfood-entreprenörer. Sedan 2016 har hon byggt Flavor-Boss till ett afro-karibiskt smakimperium och en mobil mötesplats där mat, kultur och människor möts. Det som började med matlådor växte snabbt till backyard BBQs, foodtruck-events och catering över hela Sverige. Flavor-Boss är mer än mat. Det är en rörelse.',
-                    'Patricia Dianda "Flavor-Boss Trich" — from her home kitchen in Malmö to one of Sweden\'s most award-winning streetfood entrepreneurs. Since 2016 she has built Flavor-Boss into an Afro-Caribbean flavor empire and a mobile meeting place where food, culture and people come together. What started as meal boxes quickly grew into backyard BBQs, food truck events and catering across all of Sweden. Flavor-Boss is more than food. It is a movement.'
+                    'Du står förmodligen i en av våra köer just nu.\nKanske har du redan hört musiken.\nKanske känner du doften från grillen.\nKanske undrar du varför människor väntar så länge på en Flavor-Box.\nSvaret handlar egentligen inte om maten.\nDet handlar om människorna.\nOm kulturen.\nOm känslan.\nOch om en resa som började långt innan den första foodtrucken rullade ut.\nFrån en dröm i ett hemmakök i Malmö.\nTill festivaler.\nTV.\nTre foodtrucks.\nFyra svenska mästerskap.\nNordiska mästare.\nTill internationella möten och arrangemang med människor från hela världen.\nOch en vision som fortfarande bara är i början.\nSå…\ninnan du tar första tuggan.\nFölj med tillbaka.\nDär äventyret började.',
+                    'You\'re probably standing in one of our queues right now.\nMaybe you\'ve already heard the music.\nMaybe you can smell the grill.\nMaybe you\'re wondering why people wait so long for a Flavor-Box.\nThe answer isn\'t really about the food.\nIt\'s about the people.\nAbout the culture.\nAbout the feeling.\nAnd about a journey that began long before the first food truck rolled out.\nFrom a dream in a home kitchen in Malmö.\nTo festivals.\nTV.\nThree food trucks.\nFour Swedish championships.\nNordic champions.\nTo international meetings and events with people from all over the world.\nAnd a vision that is still only just beginning.\nSo…\nbefore you take the first bite.\nCome back with us.\nTo where the adventure began.'
                   )}
                 </motion.p>
 
@@ -163,9 +164,9 @@ const VarResa = () => {
                   whileHover={{ scale: 1.06 }}
                   whileTap={{ scale: 0.96 }}
                   onClick={() => setStep('journey')}
-                  className="mt-10 px-10 py-4 text-lg md:text-xl font-display font-extrabold uppercase tracking-wider text-white"
+                  className="mt-6 md:mt-10 px-10 py-4 text-lg md:text-xl font-display font-extrabold uppercase tracking-wider text-white"
                   style={{
-                    background: 'linear-gradient(135deg, #2D6A4F, #1a3c2a)',
+                    background: 'linear-gradient(135deg, hsl(22 95% 52%), hsl(332 90% 48%), hsl(280 60% 45%))',
                     borderRadius: '2rem 1rem 2rem 1rem',
                     boxShadow: '0 0 30px rgba(0,0,0,0.25), 0 10px 30px rgba(0,0,0,0.2)',
                   }}
@@ -174,9 +175,9 @@ const VarResa = () => {
                 </motion.button>
               </div>
 
-              {/* Socials block, same as Hem page */}
+              {/* Socials block, same as Hem page — compact so it stays as close to the fold as possible */}
               <div className="relative z-10">
-                <InstagramFeed />
+                <InstagramFeed compact />
               </div>
             </motion.div>
           ) : (

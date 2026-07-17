@@ -125,7 +125,7 @@ const YearPage = ({
   const restLines = bodyLines.slice(1);
 
   // Renders a paragraph, parsing inline markdown-style links: [label](url)
-  const renderExpandableLine = (line: string, key: number) => {
+  const renderExpandableLine = (line: string, key: number, emphasis = false) => {
     const parts: ReactNode[] = [];
     const regex = /\[([^\]]+)\]\(([^)]+)\)/g;
     let lastIndex = 0;
@@ -147,21 +147,29 @@ const YearPage = ({
       lastIndex = match.index + match[0].length;
     }
     if (lastIndex < line.length) parts.push(line.slice(lastIndex));
-    return <p key={key}>{parts}</p>;
+    return (
+      <p key={key} className={emphasis ? 'font-display font-bold uppercase tracking-wide text-lg md:text-xl' : undefined}>
+        {parts}
+      </p>
+    );
   };
 
   // Render expandable text; supports a [[IMAGE]] marker that renders the
-  // expandableImage inline between paragraph blocks.
+  // expandableImage inline between paragraph blocks. The final line of the
+  // final segment is emphasized to match the body text's bold closing line.
   const renderExpandableContent = () => {
     if (!expandableText) return null;
     const imagesList = expandableImages && expandableImages.length > 0
       ? expandableImages
       : (expandableImage ? [expandableImage] : []);
     const segments = expandableText.split(/\n?\[\[IMAGE\]\]\n?/);
-    return segments.map((segment, segIdx) => (
+    return segments.map((segment, segIdx) => {
+      const lines = segment.split('\n').filter(Boolean);
+      const isLastSegment = segIdx === segments.length - 1;
+      return (
       <div key={`seg-${segIdx}`}>
         <div className="space-y-3 text-white/95 text-base md:text-lg font-body leading-snug">
-          {segment.split('\n').filter(Boolean).map((line, i) => renderExpandableLine(line, i))}
+          {lines.map((line, i) => renderExpandableLine(line, i, isLastSegment && i === lines.length - 1))}
         </div>
         {segIdx < segments.length - 1 && imagesList[segIdx] && (
           <div className="my-5 md:my-7">
@@ -174,7 +182,8 @@ const YearPage = ({
           </div>
         )}
       </div>
-    ));
+      );
+    });
   };
 
   const expandableSlot = expandableText ? (

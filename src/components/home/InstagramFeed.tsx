@@ -58,11 +58,16 @@ const socials = [
   },
 ];
 
-const InstagramFeed = () => {
+interface InstagramFeedProps {
+  /** Tighter spacing/sizing for contexts where vertical space is at a premium (e.g. the /var-resa intro screen). */
+  compact?: boolean;
+}
+
+const InstagramFeed = ({ compact = false }: InstagramFeedProps) => {
   const { t } = useLanguage();
 
   return (
-    <section className="section-padding bg-surface-dark relative overflow-hidden">
+    <section className={`${compact ? 'pt-6 pb-10 md:section-padding' : 'section-padding'} bg-surface-dark relative overflow-hidden`}>
       <div className="absolute inset-0 opacity-[0.04]" style={{
         backgroundImage: `radial-gradient(circle, hsl(var(--surface-dark-foreground)) 1px, transparent 1px)`,
         backgroundSize: '24px 24px',
@@ -72,14 +77,14 @@ const InstagramFeed = () => {
       <div className="absolute bottom-20 right-10 w-36 h-36 bg-primary/10 rounded-full blur-3xl animate-blob" style={{ animationDelay: '2s' }} />
 
       <div className="container-site relative z-10">
-        <motion.div {...fadeUp} className="text-center mb-10">
-          <h2 className="text-3xl md:text-5xl font-display font-extrabold text-surface-dark-foreground mb-3">
+        <motion.div {...fadeUp} className={compact ? 'text-center mb-4' : 'text-center mb-10'}>
+          <h2 className={`${compact ? 'text-xl md:text-5xl mb-1' : 'text-3xl md:text-5xl mb-3'} font-display font-extrabold text-surface-dark-foreground`}>
             {t('Följ Oss', 'Follow Us')}
           </h2>
           <p className="text-subheading text-primary">@flavorbosstrich</p>
         </motion.div>
 
-        <div className="grid grid-cols-2 sm:grid-cols-4 gap-6 max-w-4xl mx-auto">
+        <div className={`grid grid-cols-2 sm:grid-cols-4 ${compact ? 'gap-3 md:gap-6' : 'gap-6'} max-w-4xl mx-auto`}>
           {socials.map((social, i) => (
             <motion.a
               key={social.name}
@@ -91,10 +96,10 @@ const InstagramFeed = () => {
               viewport={{ once: true }}
               transition={{ delay: i * 0.1, duration: 0.5 }}
               whileHover={{ y: -8, scale: 1.05 }}
-              className={`aspect-square rounded-3xl bg-gradient-to-br ${social.gradient} flex flex-col items-center justify-center p-5 shadow-lg hover:shadow-2xl transition-shadow group relative overflow-hidden`}
+              className={`aspect-square rounded-3xl bg-gradient-to-br ${social.gradient} flex flex-col items-center justify-center ${compact ? 'p-3 md:p-5' : 'p-5'} shadow-lg hover:shadow-2xl transition-shadow group relative overflow-hidden`}
             >
               <div className="absolute inset-0 bg-foreground/0 group-hover:bg-foreground/10 transition-colors duration-300" />
-              <div className="text-primary-foreground mb-3 relative z-10 group-hover:scale-110 transition-transform">
+              <div className={`text-primary-foreground ${compact ? 'mb-1 md:mb-3' : 'mb-3'} relative z-10 group-hover:scale-110 transition-transform`}>
                 {social.icon}
               </div>
               <p className="text-primary-foreground text-xs font-display font-bold uppercase text-center relative z-10">{social.name}</p>

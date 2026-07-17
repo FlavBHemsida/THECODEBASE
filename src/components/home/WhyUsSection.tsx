@@ -11,8 +11,8 @@ const fadeUp = {
 };
 
 const timeline = [
-  { year: '2016', sv: 'PATRICIA DIANDA VD & GRUNDARE', en: 'PATRICIA DIANDA CEO & FOUNDER' },
-  { year: '2017', sv: 'RYKTET SPRIDS',                 en: 'WORD SPREADS' },
+  { year: '2016', sv: 'EVERY ENDING BECOMES A BEGINNING', en: 'EVERY ENDING BECOMES A BEGINNING' },
+  { year: '2017', sv: 'RYKTET SPRIDER SIG',              en: 'WORD SPREADS' },
   { year: '2018', sv: 'RIKTNINGEN SÄTTS',              en: 'THE DIRECTION IS SET' },
   { year: '2019', sv: 'GENOMBROTTET',                  en: 'THE BREAKTHROUGH' },
   { year: '2020', sv: 'VÄRLDEN STANNAR',               en: 'THE WORLD STOPS' },
