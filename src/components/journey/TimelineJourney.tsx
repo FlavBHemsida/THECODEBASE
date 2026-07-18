@@ -45,6 +45,9 @@ type YearEntry = {
   accentColor?: string;       // hex accent for highlights / pin
   pattern?: 'palms' | 'waves' | 'tribal' | 'burst' | 'mask' | 'notes' | 'sun' | 'zigzag' | 'dancer' | 'hut';
   layout?: 'imageLeft' | 'imageRight' | 'imageBackdrop' | 'twoUp' | 'centered';
+  // Render the main text as one uniform block (no oversized lead line, no
+  // forced-bold last line) so it reads as a single continuous piece.
+  uniformText?: boolean;
 };
 
 const years: YearEntry[] = [
@@ -58,6 +61,7 @@ const years: YearEntry[] = [
     accentColor: '#fbbf24',
     pattern: 'palms',
     layout: 'twoUp',
+    uniformText: true,
     images: [img2016flavorBox, img2016patricia, img2016team],
     extraTextSv: 'Flavor-Boss började aldrig med en affärsplan.\nDet började med en dröm.\nEfter att livet tagit en oväntad vändning föddes en ny drivkraft i Patricia Dianda, grundaren av Flavor-Boss. En vilja att bygga något som kunde leva vidare. Något som samlade människor, skapade glädje och gav livet en ny riktning.\nMed rötter från Kongo, Sverige och familj från Kuba började en vision ta form.\nInte om en restaurang eller en specifik plats.\nUtan om en mobil upplevelse.\nEn plats där mat, musik, färg, kultur och människor möts.\nOch alla känner sig välkomna och inkluderade.',
     extraTextEn: 'Flavor-Boss never began with a business plan.\nIt began with a dream.\nAfter life took an unexpected turn, a new drive was born in Patricia Dianda, the founder of Flavor-Boss. A will to build something that could live on. Something that brought people together, created joy and gave life a new direction.\nWith roots in Congo, Sweden and family from Cuba, a vision began to take shape.\nNot about a restaurant or a specific place.\nBut about a mobile experience.\nA place where food, music, color, culture and people meet.\nAnd everyone feels welcome and included.',
@@ -81,6 +85,7 @@ const years: YearEntry[] = [
     accentColor: '#fde047',
     pattern: 'tribal',
     layout: 'imageBackdrop',
+    uniformText: true,
     images: [img2017banner],
     extraTextSv: 'Flavor-Boss hade hittat sin publik.\nDe första följarna började hitta fram.\nPatricias Backyard BBQ:s på Värnhem blev större.\nKöerna blev längre.\nHemmaköket blev mindre.\nDet blev tydligt att drömmen hade vuxit ur platsen där allting började.',
     extraTextEn: 'Flavor-Boss had found its audience.\nThe first followers began to find their way.\nPatricia’s Backyard BBQs at Värnhem grew bigger.\nThe queues got longer.\nThe home kitchen got smaller.\nIt became clear that the dream had outgrown the place where it all began.',
@@ -362,6 +367,7 @@ const TimelineJourney = ({ initialYear }: TimelineJourneyProps = {}) => {
           accentColor={years[currentIndex].accentColor}
           pattern={years[currentIndex].pattern}
           layout={years[currentIndex].layout}
+          uniformText={years[currentIndex].uniformText}
           yearIndex={currentIndex}
           totalYears={years.length}
           fromIndex={fromIndex}

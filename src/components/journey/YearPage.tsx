@@ -35,6 +35,7 @@ interface YearPageProps {
   accentColor?: string;
   pattern?: PatternKind;
   layout?: LayoutKind;
+  uniformText?: boolean;
   yearIndex: number;
   totalYears: number;
   fromIndex?: number;
@@ -75,6 +76,7 @@ const YearPage = ({
   accentColor = '#fde047',
   pattern = 'palms',
   layout = 'centered',
+  uniformText = false,
   yearIndex,
   totalYears,
   fromIndex,
@@ -335,6 +337,7 @@ const YearPage = ({
                 title={title}
                 lead={lead}
                 restLines={restLines}
+                uniformText={uniformText}
                 images={images}
                 accentColor={accentColor}
                 expandableSlot={expandableSlot}
@@ -480,10 +483,29 @@ interface ContentLayoutProps {
   title?: string;
   lead?: string;
   restLines: string[];
+  uniformText?: boolean;
   images?: string[];
   accentColor: string;
   expandableSlot?: ReactNode;
 }
+
+// Renders the whole main text as one continuous block — same size/weight for
+// every line, no emphasized lead or last line. Used when uniformText is set.
+const UniformBody = ({ lines }: { lines: string[] }) => {
+  if (lines.length === 0) return null;
+  return (
+    <motion.div
+      className="space-y-2 md:space-y-3 text-white/95 text-base md:text-lg lg:text-xl font-body leading-snug max-w-2xl"
+      initial={{ opacity: 0, y: 15 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ delay: 0.6, duration: 0.6 }}
+    >
+      {lines.map((line, i) => (
+        <p key={i}>{line}</p>
+      ))}
+    </motion.div>
+  );
+};
 
 const TitleBlock = ({ title, accentColor }: { title?: string; accentColor: string }) => {
   if (!title) return null;
@@ -554,9 +576,21 @@ const ImageOne = ({ src, rotate = -3, delay = 0.6 }: { src: string; rotate?: num
   </motion.div>
 );
 
-const ContentLayout = ({ layout, title, lead, restLines, images, accentColor, expandableSlot }: ContentLayoutProps) => {
+const ContentLayout = ({ layout, title, lead, restLines, uniformText, images, accentColor, expandableSlot }: ContentLayoutProps) => {
   const firstImage = images?.[0];
   const secondImage = images?.[1];
+
+  // When uniformText is set, the main text is rendered as one continuous block
+  // instead of the lead + body split.
+  const allLines = lead ? [lead, ...restLines] : restLines;
+  const textBlock = uniformText ? (
+    <UniformBody lines={allLines} />
+  ) : (
+    <>
+      <LeadBlock lead={lead} accentColor={accentColor} />
+      <BodyBlock restLines={restLines} />
+    </>
+  );
 
   if (layout === 'imageBackdrop' && firstImage) {
     return (
@@ -572,9 +606,8 @@ const ContentLayout = ({ layout, title, lead, restLines, images, accentColor, ex
         />
         <div className="relative z-10 p-6 md:p-12 lg:p-16 backdrop-blur-[2px]">
           <TitleBlock title={title} accentColor={accentColor} />
-          <LeadBlock lead={lead} accentColor={accentColor} />
+          {textBlock}
           {expandableSlot}
-          <BodyBlock restLines={restLines} />
         </div>
       </div>
     );
@@ -589,9 +622,8 @@ const ContentLayout = ({ layout, title, lead, restLines, images, accentColor, ex
         </div>
         <div className="order-2 lg:order-2">
           <TitleBlock title={title} accentColor={accentColor} />
-          <LeadBlock lead={lead} accentColor={accentColor} />
+          {textBlock}
           {expandableSlot}
-          <BodyBlock restLines={restLines} />
         </div>
       </div>
     );
