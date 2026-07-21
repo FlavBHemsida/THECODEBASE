@@ -19,9 +19,9 @@ const timeline = [
   { year: '2021', sv: 'MOD BELÖNAS',                   en: 'BOLDEST BET' },
   { year: '2022', sv: 'VÄRLDEN ÖPPNAR UPP IGEN',        en: 'THE WORLD OPENS UP AGAIN' },
   { year: '2023', sv: 'ALL IN. INGEN VÄG TILLBAKA.',    en: 'ALL IN. NO WAY BACK.' },
-  { year: '2024', sv: 'HUGO BOSS VS FLAVOR BOSS',      en: 'HUGO BOSS VS FLAVOR BOSS' },
-  { year: '2025', sv: 'OSTOPPBAR',                     en: 'UNSTOPPABLE' },
-  { year: '2026', sv: 'NÄSTA KAPITEL',                 en: 'THE NEXT CHAPTER' },
+  { year: '2024', sv: 'STORMEN FÖRE NÄSTA NIVÅ',       en: 'THE STORM BEFORE THE NEXT LEVEL' },
+  { year: '2025', sv: 'EN VÄRLD TAR FORM',              en: 'A WORLD TAKES SHAPE' },
+  { year: '2026', sv: 'EN VÄRLD TAR FORM',              en: 'A WORLD TAKES SHAPE' },
 ];
 
 const palette = ['bg-primary', 'bg-accent', 'bg-surface-green', 'bg-secondary'];

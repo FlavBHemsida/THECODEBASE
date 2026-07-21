@@ -24,6 +24,95 @@ interface SourceItem {
   label: string;
 }
 
+// Parses inline markdown-style spans within a single line of text:
+// links: [label](url), bold: **text**, and emphasized red-bold: ==text==
+const parseInlineMarkdown = (line: string, keyPrefix: string): ReactNode[] => {
+  const parts: ReactNode[] = [];
+  const regex = /\[([^\]]+)\]\(([^)]+)\)|\*\*([^*]+)\*\*|==([^=]+)==/g;
+  let lastIndex = 0;
+  let match: RegExpExecArray | null;
+  let i = 0;
+  while ((match = regex.exec(line)) !== null) {
+    if (match.index > lastIndex) parts.push(line.slice(lastIndex, match.index));
+    if (match[1] !== undefined) {
+      parts.push(
+        <a
+          key={`a-${keyPrefix}-${i++}`}
+          href={match[2]}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="underline decoration-2 underline-offset-4 font-bold text-yellow-300 hover:text-yellow-200"
+        >
+          {match[1]}
+        </a>
+      );
+    } else if (match[3] !== undefined) {
+      parts.push(
+        <strong key={`b-${keyPrefix}-${i++}`} className="font-bold text-white">
+          {match[3]}
+        </strong>
+      );
+    } else if (match[4] !== undefined) {
+      parts.push(
+        <strong key={`r-${keyPrefix}-${i++}`} className="font-bold text-red-500">
+          {match[4]}
+        </strong>
+      );
+    }
+    lastIndex = match.index + match[0].length;
+  }
+  if (lastIndex < line.length) parts.push(line.slice(lastIndex));
+  return parts;
+};
+
+// Renders an array of body-text lines, honoring inline "[[IMAGE]]" / "[[VIDEO]]"
+// marker lines (consuming from bodyImages in order / rendering bodyVideo) and
+// parsing inline markdown on ordinary text lines. Optionally emphasizes the
+// last non-marker line to match the site's default "punchline" styling.
+const renderTextLines = (
+  lines: string[],
+  keyPrefix: string,
+  opts: { bodyImages?: string[]; bodyVideo?: string; boldLast?: boolean } = {}
+): ReactNode[] => {
+  const { bodyImages, bodyVideo, boldLast = false } = opts;
+  let imageIdx = 0;
+  const textLineCount = lines.filter((l) => l !== '[[IMAGE]]' && l !== '[[VIDEO]]').length;
+  let textLineSeen = 0;
+  return lines.map((line, i) => {
+    if (line === '[[IMAGE]]' && bodyImages?.[imageIdx]) {
+      return (
+        <div key={`${keyPrefix}-img-${i}`} className="my-4 md:my-5">
+          <img
+            src={bodyImages[imageIdx++]}
+            alt=""
+            loading="lazy"
+            className="w-full max-w-md rounded-2xl shadow-[0_20px_50px_rgba(0,0,0,0.45)] border-4 border-white/40"
+          />
+        </div>
+      );
+    }
+    if (line === '[[VIDEO]]' && bodyVideo) {
+      return (
+        <video
+          key={`${keyPrefix}-vid-${i}`}
+          src={bodyVideo}
+          controls
+          playsInline
+          preload="metadata"
+          className="w-full max-w-md rounded-2xl shadow-[0_20px_50px_rgba(0,0,0,0.45)] border-4 border-white/40 my-3"
+        />
+      );
+    }
+    const isLast = boldLast && textLineSeen === textLineCount - 1;
+    textLineSeen += 1;
+    return (
+      <p key={`${keyPrefix}-p-${i}`} className={isLast ? 'font-display font-bold uppercase text-lg md:text-xl tracking-wide' : ''}>
+        {parseInlineMarkdown(line, `${keyPrefix}-${i}`)}
+      </p>
+    );
+  });
+};
+
 type LayoutKind = 'imageLeft' | 'imageRight' | 'imageBackdrop' | 'twoUp' | 'centered';
 type PatternKind = 'palms' | 'waves' | 'tribal' | 'burst' | 'mask' | 'notes' | 'sun' | 'zigzag' | 'dancer' | 'hut';
 
@@ -37,6 +126,10 @@ interface YearPageProps {
   layout?: LayoutKind;
   uniformText?: boolean;
   bodyBackline?: boolean;
+  leftAlignedContent?: boolean;
+  bodyVideo?: string;
+  bodyImages?: string[];
+  centerVertically?: boolean;
   yearIndex: number;
   totalYears: number;
   fromIndex?: number;
@@ -54,6 +147,7 @@ interface YearPageProps {
   expandableImage?: string;
   expandableImageAlt?: string;
   expandableImages?: string[];
+  expandableVideo?: string;
 }
 
 const patternMap: Record<PatternKind, string> = {
@@ -79,6 +173,10 @@ const YearPage = ({
   layout = 'centered',
   uniformText = false,
   bodyBackline = false,
+  leftAlignedContent = false,
+  bodyVideo,
+  bodyImages,
+  centerVertically = false,
   yearIndex,
   totalYears,
   fromIndex,
@@ -96,6 +194,7 @@ const YearPage = ({
   expandableImage,
   expandableImageAlt,
   expandableImages,
+  expandableVideo,
 }: YearPageProps) => {
   const { t } = useLanguage();
   const [isExpanded, setIsExpanded] = useState(false);
@@ -128,66 +227,61 @@ const YearPage = ({
   const lead = bodyLines[0];
   const restLines = bodyLines.slice(1);
 
-  // Renders a paragraph, parsing inline markdown-style links: [label](url)
-  const renderExpandableLine = (line: string, key: number, emphasis = false) => {
-    const parts: ReactNode[] = [];
-    const regex = /\[([^\]]+)\]\(([^)]+)\)/g;
-    let lastIndex = 0;
-    let match: RegExpExecArray | null;
-    let i = 0;
-    while ((match = regex.exec(line)) !== null) {
-      if (match.index > lastIndex) parts.push(line.slice(lastIndex, match.index));
-      parts.push(
-        <a
-          key={`a-${key}-${i++}`}
-          href={match[2]}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="underline decoration-2 underline-offset-4 font-bold text-yellow-300 hover:text-yellow-200"
-        >
-          {match[1]}
-        </a>
-      );
-      lastIndex = match.index + match[0].length;
-    }
-    if (lastIndex < line.length) parts.push(line.slice(lastIndex));
-    return (
-      <p key={key} className={emphasis ? 'font-display font-bold uppercase tracking-wide text-lg md:text-xl' : undefined}>
-        {parts}
-      </p>
-    );
-  };
+  // Renders a paragraph, parsing inline markdown-style spans via parseInlineMarkdown
+  const renderExpandableLine = (line: string, key: number, emphasis = false) => (
+    <p key={key} className={emphasis ? 'font-display font-bold uppercase tracking-wide text-lg md:text-xl' : undefined}>
+      {parseInlineMarkdown(line, `exp-${key}`)}
+    </p>
+  );
 
-  // Render expandable text; supports a [[IMAGE]] marker that renders the
-  // expandableImage inline between paragraph blocks. The final line of the
-  // final segment is emphasized to match the body text's bold closing line.
+  // Render expandable text; supports [[IMAGE]] and [[VIDEO]] markers that
+  // render expandableImage(s)/expandableVideo inline between paragraph
+  // blocks. The final line of the final segment is emphasized to match the
+  // body text's bold closing line.
   const renderExpandableContent = () => {
     if (!expandableText) return null;
     const imagesList = expandableImages && expandableImages.length > 0
       ? expandableImages
       : (expandableImage ? [expandableImage] : []);
-    const segments = expandableText.split(/\n?\[\[IMAGE\]\]\n?/);
-    return segments.map((segment, segIdx) => {
+    const parts = expandableText.split(/\n?\[\[(IMAGE|VIDEO)\]\]\n?/);
+    let imageIdx = 0;
+    const elements: ReactNode[] = [];
+    for (let idx = 0; idx < parts.length; idx += 2) {
+      const segment = parts[idx];
+      const marker = parts[idx + 1];
       const lines = segment.split('\n').filter(Boolean);
-      const isLastSegment = segIdx === segments.length - 1;
-      return (
-      <div key={`seg-${segIdx}`}>
-        <div className="space-y-3 text-white/95 text-base md:text-lg font-body leading-snug">
-          {lines.map((line, i) => renderExpandableLine(line, i, isLastSegment && i === lines.length - 1))}
-        </div>
-        {segIdx < segments.length - 1 && imagesList[segIdx] && (
-          <div className="my-5 md:my-7">
-            <img
-              src={imagesList[segIdx]}
-              alt={expandableImageAlt || ''}
-              loading="lazy"
-              className="w-full max-w-md mx-auto rounded-2xl shadow-[0_20px_50px_rgba(0,0,0,0.45)] border-4 border-white/40"
-            />
+      const isLastSegment = idx + 2 >= parts.length;
+      const currentImage = marker === 'IMAGE' ? imagesList[imageIdx++] : undefined;
+      elements.push(
+        <div key={`seg-${idx}`}>
+          <div className="space-y-3 text-white/95 text-base md:text-lg font-body leading-snug">
+            {lines.map((line, i) => renderExpandableLine(line, i, isLastSegment && i === lines.length - 1))}
           </div>
-        )}
-      </div>
+          {marker === 'IMAGE' && currentImage && (
+            <div className="my-5 md:my-7">
+              <img
+                src={currentImage}
+                alt={expandableImageAlt || ''}
+                loading="lazy"
+                className="w-full max-w-md mx-auto rounded-2xl shadow-[0_20px_50px_rgba(0,0,0,0.45)] border-4 border-white/40"
+              />
+            </div>
+          )}
+          {marker === 'VIDEO' && expandableVideo && (
+            <div className="my-5 md:my-7">
+              <video
+                src={expandableVideo}
+                controls
+                playsInline
+                preload="metadata"
+                className="w-full max-w-md mx-auto rounded-2xl shadow-[0_20px_50px_rgba(0,0,0,0.45)] border-4 border-white/40"
+              />
+            </div>
+          )}
+        </div>
       );
-    });
+    }
+    return elements;
   };
 
   const expandableSlot = expandableText ? (
@@ -333,7 +427,7 @@ const YearPage = ({
             animate={{ opacity: 1 }}
             transition={{ duration: 0.6, delay: 0.3 }}
           >
-            <div className="min-h-full w-full px-4 pt-24 pb-32 md:px-12 lg:px-20 md:pt-16 md:pb-28 flex flex-col">
+            <div className={`min-h-full w-full px-4 pt-24 pb-32 md:px-12 lg:px-20 md:pt-16 md:pb-28 flex flex-col ${centerVertically ? 'justify-center' : ''}`}>
               <ContentLayout
                 layout={effectiveLayout}
                 title={title}
@@ -341,6 +435,9 @@ const YearPage = ({
                 restLines={restLines}
                 uniformText={uniformText}
                 bodyBackline={bodyBackline}
+                leftAlignedContent={leftAlignedContent}
+                bodyVideo={bodyVideo}
+                bodyImages={bodyImages}
                 images={images}
                 accentColor={accentColor}
                 expandableSlot={expandableSlot}
@@ -488,6 +585,9 @@ interface ContentLayoutProps {
   restLines: string[];
   uniformText?: boolean;
   bodyBackline?: boolean;
+  leftAlignedContent?: boolean;
+  bodyVideo?: string;
+  bodyImages?: string[];
   images?: string[];
   accentColor: string;
   expandableSlot?: ReactNode;
@@ -495,7 +595,9 @@ interface ContentLayoutProps {
 
 // Renders the whole main text as one continuous block — same size/weight for
 // every line, no emphasized lead or last line. Used when uniformText is set.
-const UniformBody = ({ lines }: { lines: string[] }) => {
+// A line equal to the literal marker "[[VIDEO]]" renders bodyVideo inline
+// instead of a paragraph.
+const UniformBody = ({ lines, bodyVideo }: { lines: string[]; bodyVideo?: string }) => {
   if (lines.length === 0) return null;
   return (
     <motion.div
@@ -505,7 +607,18 @@ const UniformBody = ({ lines }: { lines: string[] }) => {
       transition={{ delay: 0.6, duration: 0.6 }}
     >
       {lines.map((line, i) => (
-        <p key={i}>{line}</p>
+        line === '[[VIDEO]]' && bodyVideo ? (
+          <video
+            key={i}
+            src={bodyVideo}
+            controls
+            playsInline
+            preload="metadata"
+            className="w-full max-w-md rounded-2xl shadow-[0_20px_50px_rgba(0,0,0,0.45)] border-4 border-white/40 my-3"
+          />
+        ) : (
+          <p key={i}>{line}</p>
+        )
       ))}
     </motion.div>
   );
@@ -559,7 +672,7 @@ const BodyBlock = ({ restLines, backline = false, accentColor }: { restLines: st
     >
       {restLines.map((line, i) => (
         <p key={i} className={i === restLines.length - 1 ? 'font-display font-bold uppercase text-lg md:text-xl tracking-wide' : ''}>
-          {line}
+          {parseInlineMarkdown(line, `bl-${i}`)}
         </p>
       ))}
     </motion.div>
@@ -581,7 +694,7 @@ const ImageOne = ({ src, rotate = -3, delay = 0.6 }: { src: string; rotate?: num
   </motion.div>
 );
 
-const ContentLayout = ({ layout, title, lead, restLines, uniformText, bodyBackline, images, accentColor, expandableSlot }: ContentLayoutProps) => {
+const ContentLayout = ({ layout, title, lead, restLines, uniformText, bodyBackline, leftAlignedContent, bodyVideo, bodyImages, images, accentColor, expandableSlot }: ContentLayoutProps) => {
   const firstImage = images?.[0];
   const secondImage = images?.[1];
 
@@ -590,7 +703,7 @@ const ContentLayout = ({ layout, title, lead, restLines, uniformText, bodyBackli
   // "backline" bar moves off the lead line and onto the body block.
   const allLines = lead ? [lead, ...restLines] : restLines;
   const textBlock = uniformText ? (
-    <UniformBody lines={allLines} />
+    <UniformBody lines={allLines} bodyVideo={bodyVideo} />
   ) : (
     <>
       <LeadBlock lead={lead} accentColor={accentColor} noBackline={bodyBackline} />
@@ -684,30 +797,87 @@ const ContentLayout = ({ layout, title, lead, restLines, uniformText, bodyBackli
         </motion.h2>
       )}
       {lead && (
-        <motion.p
-          className="font-display font-bold uppercase text-white text-2xl md:text-3xl lg:text-4xl leading-tight mb-5 md:mb-7"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.7, duration: 0.6 }}
-        >
-          {lead}
-        </motion.p>
+        leftAlignedContent ? (
+          <motion.div
+            className="text-left max-w-3xl mx-auto mb-5 md:mb-7"
+            style={{ borderLeft: `4px solid ${accentColor}`, paddingLeft: '1rem' }}
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.7, duration: 0.6 }}
+          >
+            <p className="font-display font-bold uppercase text-white text-2xl md:text-3xl lg:text-4xl leading-tight">
+              {lead}
+            </p>
+          </motion.div>
+        ) : (
+          <motion.p
+            className="font-display font-bold uppercase text-white text-2xl md:text-3xl lg:text-4xl leading-tight mb-5 md:mb-7"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.7, duration: 0.6 }}
+          >
+            {lead}
+          </motion.p>
+        )
       )}
       {restLines.length > 0 && (
-        <motion.div
-          className="space-y-3 text-white/95 text-lg md:text-xl lg:text-2xl font-body leading-snug max-w-3xl mx-auto"
-          initial={{ opacity: 0, y: 15 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.9, duration: 0.6 }}
-        >
-          {restLines.map((line, i) => (
-            <p key={i} className={i === restLines.length - 1 ? 'font-display font-bold uppercase text-xl md:text-2xl tracking-wide' : ''}>
-              {line}
-            </p>
-          ))}
-        </motion.div>
+        leftAlignedContent ? (
+          <motion.div
+            className="space-y-3 text-white/95 text-lg md:text-xl lg:text-2xl font-body leading-snug max-w-3xl mx-auto text-left"
+            initial={{ opacity: 0, y: 15 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.9, duration: 0.6 }}
+          >
+            {renderTextLines(restLines, 'la', { bodyImages, bodyVideo })}
+          </motion.div>
+        ) : bodyBackline ? (
+          <>
+            <motion.div
+              className="text-left max-w-3xl mx-auto mb-3 md:mb-4"
+              style={{ borderLeft: `4px solid ${accentColor}`, paddingLeft: '1rem' }}
+              initial={{ opacity: 0, y: 15 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.9, duration: 0.6 }}
+            >
+              <p className="font-display font-bold uppercase text-white text-xl md:text-2xl tracking-wide">
+                {restLines[0]}
+              </p>
+            </motion.div>
+            {restLines.length > 1 && (
+              <motion.div
+                className="space-y-3 text-white/95 text-lg md:text-xl lg:text-2xl font-body leading-snug max-w-3xl mx-auto text-left"
+                initial={{ opacity: 0, y: 15 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 1.0, duration: 0.6 }}
+              >
+                {restLines.slice(1).map((line, i) => (
+                  <p key={i}>{line}</p>
+                ))}
+              </motion.div>
+            )}
+          </>
+        ) : (
+          <motion.div
+            className="space-y-3 text-white/95 text-lg md:text-xl lg:text-2xl font-body leading-snug max-w-3xl mx-auto"
+            initial={{ opacity: 0, y: 15 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.9, duration: 0.6 }}
+          >
+            {restLines.map((line, i) => (
+              <p key={i} className={i === restLines.length - 1 ? 'font-display font-bold uppercase text-xl md:text-2xl tracking-wide' : ''}>
+                {line}
+              </p>
+            ))}
+          </motion.div>
+        )
       )}
-      {expandableSlot && <div className="mt-6 flex justify-center">{expandableSlot}</div>}
+      {expandableSlot && (
+        leftAlignedContent ? (
+          <div className="mt-6 max-w-3xl mx-auto text-left">{expandableSlot}</div>
+        ) : (
+          <div className="mt-6 flex justify-center">{expandableSlot}</div>
+        )
+      )}
     </div>
   );
 };
