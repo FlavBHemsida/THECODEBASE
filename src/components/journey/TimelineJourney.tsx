@@ -13,7 +13,6 @@ import img2018korkort from '@/assets/journey/2018-korkort.png';
 import img2018distortion from '@/assets/journey/2018-distortion.jpg';
 import img2019mataam from '@/assets/journey/2019-mataam.png';
 import img2019truck from '@/assets/journey/2019-truck.png';
-import img2019africa from '@/assets/journey/2019-africa.jpg';
 import img2019mataamArticle from '@/assets/journey/2019-mataam-article.jpg';
 import img2020team from '@/assets/journey/2020-team.png';
 import img2021friskt from '@/assets/journey/2021-friskt-vagat.png';
@@ -48,6 +47,9 @@ type YearEntry = {
   // Render the main text as one uniform block (no oversized lead line, no
   // forced-bold last line) so it reads as a single continuous piece.
   uniformText?: boolean;
+  // Move the accent-colored left "backline" bar from the lead line onto the
+  // body block instead (used when the emphasized callout is the body text).
+  bodyBackline?: boolean;
 };
 
 const years: YearEntry[] = [
@@ -109,17 +111,18 @@ const years: YearEntry[] = [
     year: '2018',
     sv: '2018 — Verksamheten växer organiskt',
     en: '2018 — The business grows organically',
-    titleSv: 'RIKTNINGEN SÄTTS',
-    titleEn: 'THE DIRECTION IS SET',
+    titleSv: 'DRÖMMEN TAR FORM',
+    titleEn: 'THE DREAM TAKES SHAPE',
     gradient: 'linear-gradient(135deg,#1e1b4b 0%,#0e7490 40%,#f97316 90%)',
     accentColor: '#fde047',
     pattern: 'hut',
     layout: 'imageLeft',
+    bodyBackline: true,
     images: [img2018distortion],
-    extraTextSv: 'Under 2018 fortsatte Flavor Boss att växa – organiskt och på riktigt.\n\nGårdsfesterna blev fler och köerna blev längre och längre.\n\nAfrokaribiska Backyard BBQ festerna på Klaffbron fortsatte att växa, människor kom tillbaka, tog med sig andra och började sprida känslan vidare.',
-    extraTextEn: 'During 2018 Flavor Boss kept growing — organically and for real.\n\nThe backyard parties grew in number and the queues kept getting longer.\n\nThe Afro-Caribbean Backyard BBQ events at Klaffbron kept growing, people came back, brought others with them and started spreading the feeling further.',
-    expandableTextSv: 'Från Klaffbron byggdes verksamheten vidare genom festivaler, grillar och nya sammanhang – från [Distortion i Köpenhamn](https://www.instagram.com/p/BjeviMYFQE-/) till att erbjuda grillupplevelser på Hamnfestivalen i Limhamn och flera nya scener.\n\nFlavor Boss började ta plats utanför den egna gården.\n\nSamtidigt växte en tydlig vision fram.\n\nEfter en målmedveten satsning tog Patricia sitt körkort och började arbeta mot målet att skapa en egen foodtruck.\n[[IMAGE]]\nGenom internationella möten och resor – från matlagning med en internationell Tv-kock som uppmärksammades utomlands till en första [USA resa](https://www.instagram.com/p/BocahUqny0o/?img_index=5) där nya smaker utforskades – utvecklades både hantverket och identiteten.\n\nDet blev klart att det här var än där det började.\n\nAtt det behövde röra sig, nå fler människor och ta nya ytor.\n\nDet var här riktningen sattes.\n\nOch grunden för nästa steg började byggas.',
-    expandableTextEn: 'From Klaffbron the business was built further through festivals, grills and new contexts – from [Distortion in Copenhagen](https://www.instagram.com/p/BjeviMYFQE-/) to offering grill experiences at Hamnfestivalen in Limhamn and several new stages.\n\nFlavor Boss began to take space outside its own backyard.\n\nAt the same time a clear vision emerged.\n\nAfter a deliberate effort, Patricia got her driver’s license and started working toward the goal of building her own food truck.\n[[IMAGE]]\nThrough international meetings and travels – from cooking with an international TV chef that was noticed abroad to a first [USA trip](https://www.instagram.com/p/BocahUqny0o/?img_index=5) where new flavors were explored – both the craft and the identity grew.\n\nIt became clear that this was where it began.\n\nThat it needed to move, reach more people, take new spaces.\n\nThis is where the direction was set.\n\nAnd the foundation for the next step began to be built.',
+    extraTextSv: 'Visionen var tydlig. Nu återstod bara att bygga den.\nEtt nytt kapitel tog sin början.\nKlaffbron blev den nya mötesplatsen.\nVisionen växte.\nOch för första gången började drömmen få en tydlig riktning.\nStora drömmar.\nSmå resurser.\nIngen färdig karta.\nBara viljan att hitta vägen.',
+    extraTextEn: 'The vision was clear. All that remained was to build it.\nA new chapter began.\nKlaffbron became the new meeting place.\nThe vision grew.\nAnd for the first time the dream began to take a clear direction.\nBig dreams.\nSmall resources.\nNo finished map.\nJust the will to find the way.',
+    expandableTextSv: 'Backyard BBQ:s blev större.\nFestivalerna blev fler.\nOch Flavor-Boss började hitta sin identitet.\nPatricia gjorde sin första TV-debut på Serbiens största TV-kanal tillsammans med en välkänd TV-kock. Plötsligt hade Flavor-Boss hittat följare även utanför Sveriges gränser.\nDet blev tydligt att människor inte bara kom för maten.\nDe kom för musiken, kulturen och känslan.\nFestivaler.\nFoodtrucks.\nCatering.\nEvents.\nInte olika verksamheter.\nOlika sätt att uppleva samma vision.\n[[IMAGE]]',
+    expandableTextEn: 'Backyard BBQs grew bigger.\nThe festivals grew in number.\nAnd Flavor-Boss began to find its identity.\nPatricia made her first TV debut on Serbia’s biggest TV channel together with a well-known TV chef. Suddenly Flavor-Boss had found followers even beyond Sweden’s borders.\nIt became clear that people didn’t come only for the food.\nThey came for the music, the culture and the feeling.\nFestivals.\nFood trucks.\nCatering.\nEvents.\nNot different businesses.\nDifferent ways to experience the same vision.\n[[IMAGE]]',
     inlineNext: true,
     expandableImage: img2018korkort,
   },
@@ -134,12 +137,12 @@ const years: YearEntry[] = [
     pattern: 'burst',
     layout: 'imageLeft',
     images: [img2019mataamArticle],
-    extraTextSv: '2019 blev ett avgörande år både personligt och professionellt.',
-    extraTextEn: '2019 became a pivotal year — both personally and professionally.',
-    expandableTextSv: 'Det var första gången [Patricia reste till Afrika](https://www.instagram.com/p/Btf7dvwFOem/).\nEn resa som förändrade allt.\n\nDär mötte hon kulturen, gemenskapen och värmen på riktigt.\nEn upplevelse hon länge saknat – att få känna sina egna rötter fullt ut.\n\nUppvuxen i en stad där många kulturer möts, men där hennes egna varit underrepresenterade, fick hon för första gången uppleva det hon burit inom sig.\n\nDet var inte bara en resa – det var ett återknytande.\n\nDet var här allt föll på plats.\nKänslan. Identiteten. Riktningen.\n\nSamma år tog allt fart på riktigt.\n\nFrån ett DM till en plats i [TV-programmet Mataam](https://filmguide.nu/2019/04/12/nya-matlagningsserien-mataam-till-viafree/) tog Patricia sig hela vägen till final som topp 4 – och satte Flavor Boss på kartan.\n[[IMAGE]]\nDet var här nästa nivå började.\nInte bara i köket – utan i hela tänket.\n\nKonceptet förfinades.\nVarumärket växte.\nSjälvförtroendet tog plats.\n\nDet människor redan hade börjat känna på gårdarna började nu synas för fler.\n\nSamtidigt växte trycket hemma i Malmö.\nBackyard BBQ-festerna hade nått sin gräns – köerna fyllde gatorna och det blev tydligt:\ndet här var för stort för att stanna kvar där det började.\n\nMöjligheterna började öppna sig.\nScenerna blev större.\nSamarbetena fler.\n\nOch mitt i allt tog en ny vision form –\natt ta Flavor Boss vidare ut i rörelse.\n\nInte bara som en plats.\nUtan som en upplevelse som kan nå människor överallt.\n\nDet var här nästa kapitel började byggas.\n[[IMAGE]]\nGrunden till den första foodtrucken var lagd.',
-    expandableTextEn: 'It was the first time [Patricia traveled to Africa](https://www.instagram.com/p/Btf7dvwFOem/).\nA journey that changed everything.\n\nThere she truly met the culture, the community and the warmth.\nAn experience she had long been missing – to feel her own roots fully.\n\nGrowing up in a city where many cultures meet, but where her own had been underrepresented, she got to experience for the first time what she had carried inside her.\n\nIt wasn’t just a trip – it was a reconnection.\n\nThis is where everything fell into place.\nThe feeling. The identity. The direction.\n\nThat same year, everything truly took off.\n\nFrom a DM to a spot on the [TV show Mataam](https://filmguide.nu/2019/04/12/nya-matlagningsserien-mataam-till-viafree/), Patricia made it all the way to the final as top 4 – and put Flavor Boss on the map.\n[[IMAGE]]\nThis is where the next level began.\nNot only in the kitchen – but in the whole mindset.\n\nThe concept was refined.\nThe brand grew.\nConfidence took its place.\n\nWhat people had already begun to feel in the backyards now started to be seen by many more.\n\nMeanwhile the pressure grew at home in Malmö.\nThe Backyard BBQ parties had reached their limit – the queues filled the streets and it became clear:\nthis was too big to stay where it had started.\n\nOpportunities started to open up.\nThe stages got bigger.\nThe collaborations more.\n\nAnd in the middle of it all, a new vision took shape –\nto take Flavor Boss out into movement.\n\nNot only as a place.\nBut as an experience that can reach people everywhere.\n\nThis is where the next chapter began to be built.\n[[IMAGE]]\nThe foundation for the first food truck was laid.',
+    extraTextSv: 'Drömmen hade fått fart. Nu började världen svara tillbaka.\n2019 blev året då allt började falla på plats.\nFör första gången reste Patricia till Afrika.\nEn resa som blev mer än ett resmål.\nDen blev ett återseende med rötterna.\nFärgerna.\nKulturen.\nGemenskapen.\nDet som länge hade funnits inom henne fick nu ta plats på riktigt och blev en självklar del av Flavor-Boss identitet.',
+    extraTextEn: 'The dream had gained momentum. Now the world started answering back.\n2019 became the year everything started falling into place.\nFor the first time, Patricia traveled to Africa.\nA trip that became more than a destination.\nIt became a reunion with her roots.\nThe colors.\nThe culture.\nThe community.\nWhat had long existed within her now truly took its place and became a natural part of Flavor-Boss’s identity.',
+    expandableTextSv: 'Samtidigt började dörrarna öppnas.\nEtt enkelt DM ledde hela vägen till Halebop Mataam, ett mat- och koncepttävlingsprogram där Patricia tog sig hela vägen till topp 4. Tillsammans med juryn, matprofilen Zeina Mourtada (Zeinas Kitchen), och programledaren Filip Dikmen, komiker och TV-profil, utmanades deltagarna att utveckla både sin mat och sitt koncept.\nDet blev en vändpunkt.\nInte bara för maten.\nUtan för hela visionen.\nFlavor-Boss började hitta sin plats i världen.\nEfter programmet tog resan fart. Med stöd från Halebop fortsatte Flavor-Boss ut på festivalerna, bland annat Malmöfestivalen och Big Slap. Det blev steget som gjorde den första Flavor-Boss foodtrucken möjlig.\nMöjligheterna fortsatte att växa. Flavor-Boss tog plats i nya sammanhang, från festivaler till musikvärlden, där Patricia medverkade i Cherries musikvideo Mami. Visionen började hitta sin väg.\n[[IMAGE]]\nGrunden till den första foodtrucken var lagd.',
+    expandableTextEn: 'At the same time, doors started to open.\nA simple DM led all the way to Halebop Mataam, a food and concept competition show where Patricia made it all the way to the top 4. Together with the jury — food personality Zeina Mourtada (Zeinas Kitchen) and host Filip Dikmen, comedian and TV personality — the contestants were challenged to develop both their food and their concept.\nIt became a turning point.\nNot just for the food.\nBut for the whole vision.\nFlavor-Boss began to find its place in the world.\nAfter the show, the journey picked up speed. With support from Halebop, Flavor-Boss went on to festivals, including Malmöfestivalen and Big Slap. It became the step that made the first Flavor-Boss food truck possible.\nThe opportunities kept growing. Flavor-Boss took its place in new contexts, from festivals to the music world, where Patricia appeared in Cherrie’s music video Mami. The vision began to find its way.\n[[IMAGE]]\nThe foundation for the first food truck was laid.',
     inlineNext: true,
-    expandableImages: [img2019africa, img2019truck],
+    expandableImages: [img2019truck],
     sources: [
       {
         url: 'https://www.facebook.com/halebop/posts/10156061773126297/',
@@ -152,17 +155,17 @@ const years: YearEntry[] = [
     year: '2020',
     sv: '2020 — Hela världen stannar. Patricia startar.',
     en: '2020 — The whole world stops. Patricia starts.',
-    titleSv: 'VÄRLDEN STANNAR',
-    titleEn: 'THE WORLD STOPS',
+    titleSv: 'NÄR VÄRLDEN STANNADE… FORTSATTE VI',
+    titleEn: 'WHEN THE WORLD STOPPED… WE KEPT GOING',
     gradient: 'linear-gradient(135deg,#1e1b4b 0%,#581c87 45%,#be185d 100%)',
     accentColor: '#f9a8d4',
     pattern: 'mask',
     layout: 'imageLeft',
     images: [img2020team],
-    extraTextSv: 'En pandemi. Inställda bokningar. Inget inkommande.\n\nSedan dess har Patricia byggt verksamheten steg för steg från matlådor och gårdsfester till festivaler, TV, foodtruck, catering, stora event och nationella tävlingar. Hon har blivit finalist i Halebop Mataam, vunnit Rapidus "Årets Friskt Vågat", blivit svensk och nordisk mästare i streetfood och utsetts till en av Sveriges mest uppmärksammade unga entreprenörer.\n\nOch när rocklubben Plan B slår igen sina dörrar öppnar Patricia dem igen — som afro-karibisk restaurang.\n\nAlla sa att det var fel tid.\n\nDet visade sig vara rätt.',
-    extraTextEn: 'A pandemic. Cancelled bookings. Nothing coming in.\n\nSince then, Patricia has built the business step by step — from food boxes and backyard parties to festivals, TV, food truck, catering, major events and national competitions. She has been a Halebop Mataam finalist, won Rapidus "Boldest Bet of the Year", been crowned Swedish and Nordic Street Food Champion, and named one of Sweden\'s most acclaimed young entrepreneurs.\n\nAnd when the rock club Plan B closes its doors, Patricia opens them again — as an Afro-Caribbean restaurant.\n\nEveryone said it was the wrong time.\n\nIt turned out to be the right one.',
-    expandableTextSv: 'Flavor Boss är idag mer än mat.\nDet är energi. Kultur. Motståndskraft. Glädje.\nEn upplevelse där människor samlas, köar, dansar, äter och blir en del av något större.',
-    expandableTextEn: 'Flavor Boss is today more than food.\nIt is energy. Culture. Resilience. Joy.\nAn experience where people gather, queue, dance, eat and become part of something bigger.',
+    extraTextSv: 'Flavor-Boss hade lärt sig att varje motgång kunde bli början på nästa kapitel.\n2020 skulle bli året då den första Flavor-Boss foodtrucken rullade ut.\nIstället stannade världen.\nFestivaler ställdes in.\nBokningar försvann.\nPlaner ritades om.\nMen en sak förändrades aldrig.\nViljan att hitta nya vägar.\n\nAlla sa att det var fel tid.',
+    extraTextEn: 'Flavor-Boss had learned that every setback could become the start of the next chapter.\n2020 was supposed to be the year the first Flavor-Boss food truck rolled out.\nInstead, the world stopped.\nFestivals were cancelled.\nBookings disappeared.\nPlans were redrawn.\nBut one thing never changed.\nThe will to find new ways forward.\n\nEveryone said it was the wrong time.',
+    expandableTextSv: 'När pandemin slog till blev kreativiteten Flavor-Boss starkaste drivkraft.\nEtt samarbete med Plan B förvandlade rockklubben till en afro-karibisk restaurang när världen stod still. Kort därefter flyttade Flavor-Boss vidare till Sofielunds Folkets Hus, där nya idéer tog form genom matlådor, lokala samarbeten och nya mötesplatser.\nTillsammans med Hela Malmö fick Flavor-Boss sin första grafiska profil sponsrad och skapad av designern Fedja. Samtidigt växte uppdragen vidare, från områdes fester på MKB:s gårdar och köpcentret Malmö Mobilia till en livestream från Malmö Live i samarbete med Nöjesguiden och Jubel Agency.\nMitt i allt lanserades den första foodtrucken.\nGamla Bettan.\nEn färgsprakande dröm på hjul.\nPremiären blev minst sagt minnesvärd när Bettan gav sig ut på ett oväntat äventyr innan hon hittade hem igen.\nNär året summerades belönades omställningen med Rapidus "Årets Friskt Vågat", ett erkännande för modet att tänka nytt när nästan allt annat stod still.\nFlavor-Boss hade lärt sig att varje motgång kunde bli början på nästa kapitel.',
+    expandableTextEn: 'When the pandemic hit, creativity became Flavor-Boss’s strongest driving force.\nA collaboration with Plan B turned the rock club into an Afro-Caribbean restaurant while the world stood still. Shortly after, Flavor-Boss moved on to Sofielunds Folkets Hus, where new ideas took shape through meal boxes, local collaborations and new meeting places.\nTogether with Hela Malmö, Flavor-Boss got its first graphic profile sponsored and created by designer Fedja. At the same time, the assignments kept growing, from neighborhood parties at MKB’s courtyards and the Malmö Mobilia shopping center to a livestream from Malmö Live in collaboration with Nöjesguiden and Jubel Agency.\nIn the middle of it all, the first food truck launched.\nGamla Bettan.\nA colorful dream on wheels.\nThe premiere became memorable, to say the least, when Bettan set off on an unexpected adventure before finding her way home again.\nWhen the year was summed up, the turnaround was rewarded with Rapidus’s “Boldest Bet of the Year,” a recognition for the courage to think new when almost everything else stood still.\nFlavor-Boss had learned that every setback could become the start of the next chapter.',
     sources: [
       {
         url: 'https://www.sydsvenskan.se/2020-04-15/rockklubben-plan-b-forvandlas-till-afro-karibisk-restaurang-under-coronakrisen',
@@ -175,15 +178,17 @@ const years: YearEntry[] = [
     year: '2021',
     sv: '2021 — Sverige börjar förstå vad Patricia redan visste',
     en: '2021 — Sweden starts to understand what Patricia already knew',
-    titleSv: 'ÅRETS FRISKT VÅGAT',
+    titleSv: 'MOD BELÖNAS',
     titleEn: 'BOLDEST BET',
     gradient: 'linear-gradient(135deg,#0c4a6e 0%,#0e7490 40%,#fb923c 100%)',
     accentColor: '#fde047',
     pattern: 'sun',
     layout: 'imageRight',
     images: [img2021friskt],
-    extraTextSv: 'Den 13 april 2021 ringer det igen.\n\nDen här gången är det ett pris.\n\nRapidus utser henne till "Årets Friskt Vågat" — för modet att satsa när ingen annan vågade.\n\nSom om det fanns något annat alternativ för Patricia.\n\nHon sitter även i juryn för Malmö Gastronomy Awards.\n\nInte längre en utmanare. Nu en auktoritet.',
-    extraTextEn: 'On April 13, 2021, the phone rings again.\n\nThis time it’s an award.\n\nRapidus names her "Boldest Bet of the Year" — for daring when no one else did.\n\nAs if there was ever another option for Patricia.\n\nShe also joins the jury of the Malmö Gastronomy Awards.\n\nNo longer a challenger. Now an authority.',
+    extraTextSv: 'Det som en gång började med en grill i ett hemmakök hade nu fått en plats runt borden där framtiden diskuterades.\n\nNär världen sakta började öppna upp igen började också nya dörrar öppnas för Flavor-Boss.\n\nDet som hade byggts genom hårt arbete, kreativitet och envishet började nu uppmärksammas av fler.',
+    extraTextEn: 'What had once begun with a grill in a home kitchen had now earned a seat at the tables where the future was being discussed.\n\nAs the world slowly began to open up again, new doors also started opening for Flavor-Boss.\n\nWhat had been built through hard work, creativity and persistence was now starting to be noticed by more people.',
+    expandableTextSv: 'Patricia tilldelades Rapidus "Årets Friskt Vågat", ett pris som uppmärksammade modet att tänka nytt och våga ställa om när världen förändrades.\n\nSamtidigt började en ny resa.\n\nInte bara bakom grillen.\n\nUtan även på scen.\n\nPå en catering till nätverket Västra Hamnen på Oh Boy Hotel kom en oväntad inbjudan att hålla sin första presentation. Nervöst, ovant och långt utanför komfortzonen. Men det blev också början på något nytt.\n\nFlavor-Boss började ta plats i samtalen om entreprenörskap, kreativitet och framtidens matupplevelser.\n\nSamma år bjöds Patricia in som jurymedlem i Malmö Gastronomy Awards.\n\nDet blev ännu ett kvitto på att Flavor-Boss inte längre bara växte genom gästerna.\n\nBranschen hade också börjat lägga märke till resan.',
+    expandableTextEn: 'Patricia was awarded Rapidus\' "Boldest Bet of the Year," a prize recognizing the courage to think differently and dare to change course as the world was changing.\n\nAt the same time, a new journey began.\n\nNot just behind the grill.\n\nBut also on stage.\n\nAt a catering event for the Västra Hamnen network at Oh Boy Hotel came an unexpected invitation to give her first presentation. Nerve-wracking, unfamiliar and far outside her comfort zone. But it also became the start of something new.\n\nFlavor-Boss began to take part in conversations about entrepreneurship, creativity and the future of food experiences.\n\nThat same year, Patricia was invited to join the jury of the Malmö Gastronomy Awards.\n\nIt became yet another sign that Flavor-Boss was no longer growing only through its guests.\n\nThe industry, too, had started to take notice of the journey.',
     sources: [
       {
         url: 'https://rapidus.se/tre-fragor-till-arets-friskt-vagat-2/',
@@ -201,14 +206,16 @@ const years: YearEntry[] = [
     year: '2022',
     sv: '2022 — Sex år. Från ett Facebook-inlägg till Sveriges bästa.',
     en: '2022 — Six years. From a Facebook post to Sweden’s best.',
-    titleSv: 'SVERIGES BÄSTA',
-    titleEn: 'SWEDEN’S BEST',
+    titleSv: 'VÄRLDEN ÖPPNAR UPP IGEN',
+    titleEn: 'THE WORLD OPENS UP AGAIN',
     gradient: 'linear-gradient(135deg,#422006 0%,#b45309 40%,#fde047 100%)',
     accentColor: '#fef08a',
     pattern: 'burst',
     layout: 'centered',
-    extraTextSv: 'Patricia packar Flavor Boss och åker till Tyskland.\n\nHon ställer sig mot Europas bästa foodtrucks — och vinner.\n\nEuropean Street Food Awards. Sveriges representant. Europas vinnare.\n\nOch när hon kommer hem? Sverigemästare i Streetfood 2022.\n\nTvå titlar. Ett år. Sex år efter att hon sålde sin första matlåda ur sitt eget kök.',
-    extraTextEn: 'Patricia packs Flavor Boss and heads to Germany.\n\nShe lines up against Europe’s best food trucks — and wins.\n\nEuropean Street Food Awards. Sweden’s representative. Europe’s winner.\n\nAnd when she comes home? Swedish Street Food Champion 2022.\n\nTwo titles. One year. Six years after selling her first food box out of her own kitchen.',
+    extraTextSv: 'När världen öppnade upp igen var Flavor-Boss redo.\n\nDet blev året då drömmen bevisade att den hörde hemma bland de bästa.',
+    extraTextEn: 'When the world opened up again, Flavor-Boss was ready.\n\nThis became the year the dream proved it belonged among the best.',
+    expandableTextSv: 'Flavor-Boss tog hem sin allra första titel som Sverigemästare i Streetfood.\n\nEtt ögonblick som förändrade allt.\n\nMen vägen dit var långt ifrån enkel.\n\nGamla Bettan hade kämpat sig genom ännu en säsong och började säga ifrån. Motorn gav upp på vägen in, bilen fick bärgas hem och under sommaren blev teamet lika mycket mekaniker som kockar. Mellan festivalerna lagades, skruvades och löstes problem, bara för att kunna rulla vidare mot nästa destination.\n\nDet blev tydligt att nästa kapitel krävde en ny investering.\n\nEn ny foodtruck.\n\nSamtidigt började Patricia hålla sina första inspirationsföreläsningar om entreprenörskap. Flavor-Boss inspirerade nu människor, inte bara genom maten, utan också genom berättelsen bakom den.',
+    expandableTextEn: 'Flavor-Boss took home its very first title as Swedish Street Food Champion.\n\nA moment that changed everything.\n\nBut the road there was far from easy.\n\nGamla Bettan had fought its way through yet another season and started to give out. The engine gave up on the way there, the truck had to be towed home, and over the summer the team became just as much mechanics as cooks. Between festivals, things were fixed, tightened and solved, just to be able to roll on to the next destination.\n\nIt became clear that the next chapter required a new investment.\n\nA new food truck.\n\nAt the same time, Patricia began holding her first inspirational talks on entrepreneurship. Flavor-Boss now inspired people not only through the food, but also through the story behind it.',
     sources: [
       {
         url: 'https://europeanstreetfood.com/2022/06/19/for-sverige-i-tiden/',
@@ -221,14 +228,16 @@ const years: YearEntry[] = [
     year: '2023',
     sv: '2023 — Segrar, strid och en fasad som vägrade tystas',
     en: '2023 — Victories, a fight, and a facade that refused to be silenced',
-    titleSv: 'FASADEN SOM VÄGRADE TYSTAS',
-    titleEn: 'THE WALL THAT REFUSED TO BE SILENCED',
+    titleSv: 'ALL IN. INGEN VÄG TILLBAKA.',
+    titleEn: 'ALL IN. NO WAY BACK.',
     gradient: 'linear-gradient(135deg,#831843 0%,#be123c 40%,#f59e0b 100%)',
     accentColor: '#fde047',
     pattern: 'dancer',
     layout: 'centered',
-    extraTextSv: 'Patricia öppnar äntligen sin egna lokal i Arlöv.\n\nEn färgstark fasadmålning — full av liv, precis som hon.\n\nKommunen nekar bygglov. Vill ta bort den.\n\nEn namninsamling startar. Malmö reagerar.\n\nMitt i den striden vinner Patricia Årets Unga Företagare i Burlöv, försvarar sin nationella streetfood-titel, koras till Nordiska Mästare och tar hem Barnens Favorit.\n\nTre titlar. En strid. Noll steg bakåt.',
-    extraTextEn: 'Patricia finally opens her own venue in Arlöv.\n\nA bold facade mural — full of life, just like her.\n\nThe municipality denies the permit. Wants it removed.\n\nA petition starts. Malmö reacts.\n\nIn the middle of that fight, Patricia wins Young Entrepreneur of the Year in Burlöv, defends her national street food title, is crowned Nordic Champion, and takes home Kids’ Favourite.\n\nThree titles. One fight. Zero steps back.',
+    extraTextSv: 'Flavor-Boss hade blivit en destination.\n\n2023 blev året då Flavor-Boss satsade fullt ut.\n\nEfter flera år av festivaler, catering och foodtrucks var det dags att bygga något som kunde bära visionen ännu längre.',
+    extraTextEn: 'Flavor-Boss had become a destination.\n\n2023 became the year Flavor-Boss went all in.\n\nAfter several years of festivals, catering and food trucks, it was time to build something that could carry the vision even further.',
+    expandableTextSv: 'Flavor-Boss expanderade från Malmö och öppnade sitt första egna cateringkök, Flavor-Boss Kitchen, i Arlöv.\n\nEn anonym industrilokal förvandlades till en färgsprakande mötesplats. Byggd med stora drömmar, små resurser och tusentals timmar av hårt arbete.\n\nInvigningen lockade hundratals besökare.\n\nFör första gången fick människor kliva rakt in i Flavor-Boss värld.\n\nKort därefter tog resan en oväntad vändning.\n\nDen färgsprakande fasadmålningen ifrågasattes och ombads tas bort.\n\nDet som först såg ut som ett bakslag blev istället ett av de finaste ögonblicken i Flavor-Boss historia.\n\nTusentals människor.\nGrannar.\nFöretagare.\nFöljare från hela Sverige.\n\nDe ställde sig bakom visionen.\n\nDet blev aldrig bara en fasadmålning. Det blev en symbol för modet att sticka ut, sätta färg på tillvaron och våga tänka annorlunda.\n\nMed stöd från Företagarna i Burlöv överklagades beslutet och fasaden fick till slut stanna kvar. Det som började som en utmaning avslutades på bästa sätt, när Flavor-Boss senare fick möjlighet att servera mat till Burlövs kommun. Ett fint avslut som visade att dialog och samarbete alltid är starkare än konflikt.\n\nSamma år utsågs Patricia till Årets Unga Företagare i Burlöv, ett erkännande för modet att tänka nytt och för att sätta både Flavor-Boss och Burlöv på kartan.\n\nFlavor-Boss försvarade sin plats i toppen genom att vinna Sverigemästerskapet i Streetfood, den här gången i ett nytt mästerskap och på en ny scen.\n\nFör första gången tävlade Flavor-Boss också i Nordiska Mästerskapen, där två nya titlar följde med hem: Mest Kreativa Rätt och Barnjuryns Favorit.\n\nKöerna blev längre.\nFler började resa för upplevelsen.\nVisionen blev större.\n\nFlavor-Boss hade blivit en destination.',
+    expandableTextEn: 'Flavor-Boss expanded beyond Malmö and opened its first own catering kitchen, Flavor-Boss Kitchen, in Arlöv.\n\nAn anonymous industrial unit was transformed into a vibrant, colourful meeting place. Built with big dreams, small resources and thousands of hours of hard work.\n\nThe opening drew hundreds of visitors.\n\nFor the first time, people could step right into the Flavor-Boss world.\n\nShortly after, the journey took an unexpected turn.\n\nThe colourful facade mural was questioned and asked to be removed.\n\nWhat at first looked like a setback instead became one of the finest moments in Flavor-Boss history.\n\nThousands of people.\nNeighbours.\nBusiness owners.\nFollowers from all over Sweden.\n\nThey stood behind the vision.\n\nIt never became just a mural. It became a symbol of the courage to stand out, add colour to everyday life and dare to think differently.\n\nWith support from Företagarna (the Swedish Federation of Business Owners) in Burlöv, the decision was appealed, and the facade was ultimately allowed to stay. What began as a challenge ended in the best possible way, when Flavor-Boss later got the chance to serve food to the Burlöv municipality. A fitting conclusion that showed dialogue and collaboration are always stronger than conflict.\n\nThat same year, Patricia was named Young Entrepreneur of the Year in Burlöv, a recognition of the courage to think differently and for putting both Flavor-Boss and Burlöv on the map.\n\nFlavor-Boss defended its place at the top by winning the Swedish Street Food Championship, this time in a new championship and on a new stage.\n\nFor the first time, Flavor-Boss also competed in the Nordic Championships, bringing home two new titles: Most Creative Dish and Kids’ Jury Favourite.\n\nThe queues grew longer.\nMore people started travelling for the experience.\nThe vision grew bigger.\n\nFlavor-Boss had become a destination.',
     sources: [
       {
         url: 'https://www.sydsvenskan.se/2023-07-19/foodtrucksresan-i-arlov-borjade-med-en-tragedi',
@@ -348,6 +357,11 @@ const TimelineJourney = ({ initialYear }: TimelineJourneyProps = {}) => {
 
   return (
     <div className="fixed inset-0 overflow-hidden">
+      {/* Top scrim: sits above scrolling slide content but below the fixed nav
+          buttons, so any content that scrolls up (text, image, anything) fades
+          out before it reaches the buttons instead of visually colliding with them. */}
+      <div className="fixed top-0 left-0 right-0 h-28 md:h-32 z-40 pointer-events-none bg-gradient-to-b from-black/85 via-black/55 to-transparent" />
+
       {/* Floating navigation: back to Home — gives the user a way out of the immersive view */}
       <Link
         to="/"
@@ -368,6 +382,7 @@ const TimelineJourney = ({ initialYear }: TimelineJourneyProps = {}) => {
           pattern={years[currentIndex].pattern}
           layout={years[currentIndex].layout}
           uniformText={years[currentIndex].uniformText}
+          bodyBackline={years[currentIndex].bodyBackline}
           yearIndex={currentIndex}
           totalYears={years.length}
           fromIndex={fromIndex}

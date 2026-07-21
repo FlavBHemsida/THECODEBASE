@@ -13,4 +13,4 @@ Allow: /
 User-agent: *
 Allow: /
 
-Sitemap: https://flavorboss-ab.lovable.app/sitemap.xml
+Sitemap: https://flavorboss.se/sitemap.xml

@@ -36,6 +36,7 @@ interface YearPageProps {
   pattern?: PatternKind;
   layout?: LayoutKind;
   uniformText?: boolean;
+  bodyBackline?: boolean;
   yearIndex: number;
   totalYears: number;
   fromIndex?: number;
@@ -77,6 +78,7 @@ const YearPage = ({
   pattern = 'palms',
   layout = 'centered',
   uniformText = false,
+  bodyBackline = false,
   yearIndex,
   totalYears,
   fromIndex,
@@ -190,7 +192,7 @@ const YearPage = ({
 
   const expandableSlot = expandableText ? (
     <motion.div
-      className="mt-4 md:mt-5 max-w-2xl w-full"
+      className="relative z-20 mt-4 md:mt-5 max-w-2xl w-full"
       initial={{ opacity: 0, y: 10 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ delay: 1.0, duration: 0.5 }}
@@ -338,6 +340,7 @@ const YearPage = ({
                 lead={lead}
                 restLines={restLines}
                 uniformText={uniformText}
+                bodyBackline={bodyBackline}
                 images={images}
                 accentColor={accentColor}
                 expandableSlot={expandableSlot}
@@ -484,6 +487,7 @@ interface ContentLayoutProps {
   lead?: string;
   restLines: string[];
   uniformText?: boolean;
+  bodyBackline?: boolean;
   images?: string[];
   accentColor: string;
   expandableSlot?: ReactNode;
@@ -495,7 +499,7 @@ const UniformBody = ({ lines }: { lines: string[] }) => {
   if (lines.length === 0) return null;
   return (
     <motion.div
-      className="space-y-2 md:space-y-3 text-white/95 text-base md:text-lg lg:text-xl font-body leading-snug max-w-2xl"
+      className="relative z-20 space-y-2 md:space-y-3 text-white/95 text-base md:text-lg lg:text-xl font-body leading-snug max-w-2xl"
       initial={{ opacity: 0, y: 15 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ delay: 0.6, duration: 0.6 }}
@@ -511,7 +515,7 @@ const TitleBlock = ({ title, accentColor }: { title?: string; accentColor: strin
   if (!title) return null;
   return (
     <motion.h2
-      className="font-display font-extrabold uppercase text-white leading-[0.9] tracking-tight text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl mb-4 md:mb-6"
+      className="relative z-20 font-display font-extrabold uppercase text-white leading-[0.9] tracking-tight text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl mb-4 md:mb-6"
       style={{
         textShadow: '0 4px 30px rgba(0,0,0,0.5), 0 2px 8px rgba(0,0,0,0.4)',
       }}
@@ -528,12 +532,12 @@ const TitleBlock = ({ title, accentColor }: { title?: string; accentColor: strin
   );
 };
 
-const LeadBlock = ({ lead, accentColor }: { lead?: string; accentColor: string }) => {
+const LeadBlock = ({ lead, accentColor, noBackline = false }: { lead?: string; accentColor: string; noBackline?: boolean }) => {
   if (!lead) return null;
   return (
     <motion.p
-      className="font-display font-bold uppercase text-white text-xl md:text-2xl lg:text-3xl leading-tight mb-4 md:mb-6"
-      style={{ borderLeft: `4px solid ${accentColor}`, paddingLeft: '1rem' }}
+      className="relative z-20 font-display font-bold uppercase text-white text-xl md:text-2xl lg:text-3xl leading-tight mb-4 md:mb-6"
+      style={noBackline ? undefined : { borderLeft: `4px solid ${accentColor}`, paddingLeft: '1rem' }}
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ delay: 0.7, duration: 0.6 }}
@@ -543,11 +547,12 @@ const LeadBlock = ({ lead, accentColor }: { lead?: string; accentColor: string }
   );
 };
 
-const BodyBlock = ({ restLines }: { restLines: string[] }) => {
+const BodyBlock = ({ restLines, backline = false, accentColor }: { restLines: string[]; backline?: boolean; accentColor?: string }) => {
   if (restLines.length === 0) return null;
   return (
     <motion.div
-      className="space-y-2 md:space-y-3 text-white/95 text-base md:text-lg lg:text-xl font-body leading-snug max-w-2xl"
+      className="relative z-20 space-y-2 md:space-y-3 text-white/95 text-base md:text-lg lg:text-xl font-body leading-snug max-w-2xl"
+      style={backline && accentColor ? { borderLeft: `4px solid ${accentColor}`, paddingLeft: '1rem' } : undefined}
       initial={{ opacity: 0, y: 15 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ delay: 0.9, duration: 0.6 }}
@@ -563,7 +568,7 @@ const BodyBlock = ({ restLines }: { restLines: string[] }) => {
 
 const ImageOne = ({ src, rotate = -3, delay = 0.6 }: { src: string; rotate?: number; delay?: number }) => (
   <motion.div
-    className="relative"
+    className="relative z-0 w-full h-full"
     initial={{ opacity: 0, scale: 0.6, rotate: rotate * 4 }}
     animate={{ opacity: 1, scale: 1, rotate }}
     transition={{ type: 'spring', stiffness: 180, damping: 16, delay }}
@@ -576,19 +581,20 @@ const ImageOne = ({ src, rotate = -3, delay = 0.6 }: { src: string; rotate?: num
   </motion.div>
 );
 
-const ContentLayout = ({ layout, title, lead, restLines, uniformText, images, accentColor, expandableSlot }: ContentLayoutProps) => {
+const ContentLayout = ({ layout, title, lead, restLines, uniformText, bodyBackline, images, accentColor, expandableSlot }: ContentLayoutProps) => {
   const firstImage = images?.[0];
   const secondImage = images?.[1];
 
   // When uniformText is set, the main text is rendered as one continuous block
-  // instead of the lead + body split.
+  // instead of the lead + body split. When bodyBackline is set, the accent
+  // "backline" bar moves off the lead line and onto the body block.
   const allLines = lead ? [lead, ...restLines] : restLines;
   const textBlock = uniformText ? (
     <UniformBody lines={allLines} />
   ) : (
     <>
-      <LeadBlock lead={lead} accentColor={accentColor} />
-      <BodyBlock restLines={restLines} />
+      <LeadBlock lead={lead} accentColor={accentColor} noBackline={bodyBackline} />
+      <BodyBlock restLines={restLines} backline={bodyBackline} accentColor={accentColor} />
     </>
   );
 
@@ -636,10 +642,9 @@ const ContentLayout = ({ layout, title, lead, restLines, uniformText, images, ac
       </div>
     );
     const textEl = (
-      <div className="mt-10 lg:mt-0 lg:max-w-xl">
+      <div className="mt-4 lg:mt-0 lg:max-w-xl">
         <TitleBlock title={title} accentColor={accentColor} />
-        <LeadBlock lead={lead} accentColor={accentColor} />
-        <BodyBlock restLines={restLines} />
+        {textBlock}
         {expandableSlot}
       </div>
     );
@@ -662,7 +667,7 @@ const ContentLayout = ({ layout, title, lead, restLines, uniformText, images, ac
 
   // centered (no images, or fallback)
   return (
-    <div className="w-full max-w-4xl mx-auto self-center text-center">
+    <div className="relative z-20 w-full max-w-4xl mx-auto self-center text-center">
       {title && (
         <motion.h2
           className="font-display font-extrabold uppercase text-white leading-[0.9] tracking-tight text-5xl md:text-7xl lg:text-8xl xl:text-9xl mb-6 md:mb-8"
