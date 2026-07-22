@@ -242,16 +242,17 @@ const YearPage = ({
     </p>
   );
 
-  // Render expandable text; supports [[IMAGE]] and [[VIDEO]] markers that
-  // render expandableImage(s)/expandableVideo inline between paragraph
-  // blocks. The final line of the final segment is emphasized to match the
-  // body text's bold closing line.
+  // Render expandable text; supports [[IMAGE]], [[IMAGES]] (a side-by-side
+  // pair consuming two images at once) and [[VIDEO]] markers that render
+  // expandableImage(s)/expandableVideo inline between paragraph blocks. The
+  // final line of the final segment is emphasized to match the body text's
+  // bold closing line.
   const renderExpandableContent = () => {
     if (!expandableText) return null;
     const imagesList = expandableImages && expandableImages.length > 0
       ? expandableImages
       : (expandableImage ? [expandableImage] : []);
-    const parts = expandableText.split(/\n?\[\[(IMAGE|VIDEO)\]\]\n?/);
+    const parts = expandableText.split(/\n?\[\[(IMAGE|IMAGES|VIDEO)\]\]\n?/);
     let imageIdx = 0;
     const elements: ReactNode[] = [];
     for (let idx = 0; idx < parts.length; idx += 2) {
@@ -262,6 +263,7 @@ const YearPage = ({
       const currentImageIdx = marker === 'IMAGE' ? imageIdx++ : -1;
       const currentImage = marker === 'IMAGE' ? imagesList[currentImageIdx] : undefined;
       const currentImageSize = expandableImageSizes?.[currentImageIdx] === 'sm' ? 'max-w-xs' : 'max-w-md';
+      const pairImages = marker === 'IMAGES' ? [imagesList[imageIdx++], imagesList[imageIdx++]] : undefined;
       elements.push(
         <div key={`seg-${idx}`}>
           <div className="space-y-3 text-white/95 text-base md:text-lg font-body leading-snug">
@@ -275,6 +277,19 @@ const YearPage = ({
                 loading="lazy"
                 className={`w-full ${currentImageSize} mx-auto rounded-2xl shadow-[0_20px_50px_rgba(0,0,0,0.45)] border-4 border-white/40`}
               />
+            </div>
+          )}
+          {marker === 'IMAGES' && pairImages && (
+            <div className="my-5 md:my-7 grid grid-cols-2 gap-3 md:gap-4 max-w-2xl mx-auto">
+              {pairImages.map((src, i) => src && (
+                <img
+                  key={i}
+                  src={src}
+                  alt={expandableImageAlt || ''}
+                  loading="lazy"
+                  className="w-full h-full object-cover rounded-2xl shadow-[0_20px_50px_rgba(0,0,0,0.45)] border-4 border-white/40"
+                />
+              ))}
             </div>
           )}
           {marker === 'VIDEO' && expandableVideo && (
@@ -698,7 +713,7 @@ const LeadBlock = ({ lead, accentColor, noBackline = false }: { lead?: string; a
       animate={{ opacity: 1, y: 0 }}
       transition={{ delay: 0.7, duration: 0.6 }}
     >
-      {lead}
+      {parseInlineMarkdown(lead, 'lead-block')}
     </motion.p>
   );
 };
@@ -849,7 +864,7 @@ const ContentLayout = ({ layout, title, lead, restLines, uniformText, bodyBackli
             transition={{ delay: 0.7, duration: 0.6 }}
           >
             <p className="font-display font-bold uppercase text-white text-2xl md:text-3xl lg:text-4xl leading-tight">
-              {lead}
+              {parseInlineMarkdown(lead, 'lead-la')}
             </p>
           </motion.div>
         ) : (
@@ -859,7 +874,7 @@ const ContentLayout = ({ layout, title, lead, restLines, uniformText, bodyBackli
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.7, duration: 0.6 }}
           >
-            {lead}
+            {parseInlineMarkdown(lead, 'lead-c')}
           </motion.p>
         )
       )}
