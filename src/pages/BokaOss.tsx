@@ -2,6 +2,7 @@ import { useState, useCallback, useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
 import { Button } from '@/components/ui/button';
 import { useLanguage } from '@/contexts/LanguageContext';
+import { useAdventurePath } from '@/lib/adventureLaunch';
 import SEOHead from '@/components/SEOHead';
 import SectionDivider from '@/components/SectionDivider';
 import { Mail, Phone, MapPin, Info, Route } from 'lucide-react';
@@ -20,6 +21,7 @@ const fadeUp = {
 
 const BokaOss = () => {
   const { t } = useLanguage();
+  const adventurePath = useAdventurePath();
   const [form, setForm] = useState({
     name: '', email: '', phone: '', address: '', date: '', maxGuests: '', minGuests: '', eventType: '', specialDiet: '', deliveryMethod: '', menu: '', message: '',
   });
@@ -603,7 +605,7 @@ const BokaOss = () => {
 
             <motion.a
               {...fadeUp}
-              href="/aventyr-snart"
+              href={adventurePath}
               className="mt-5 flex items-center justify-center gap-2 rounded-2xl bg-card/90 p-4 text-center font-display text-lg font-extrabold uppercase text-foreground shadow-md transition-all hover:-translate-y-1 hover:text-primary sm:hidden"
             >
               <Route className="h-5 w-5 text-primary" />

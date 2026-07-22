@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { useLanguage } from '@/contexts/LanguageContext';
+import { useAdventurePath } from '@/lib/adventureLaunch';
 import { Trophy } from 'lucide-react';
 
 const fadeUp = {
@@ -31,6 +32,7 @@ const trophyColors  = timeline.map((_, i) => trophyPalette[i % trophyPalette.len
 
 const WhyUsSection = () => {
   const { t } = useLanguage();
+  const adventurePath = useAdventurePath();
 
   return (
     <section className="section-padding bg-background relative overflow-hidden">
@@ -70,7 +72,7 @@ const WhyUsSection = () => {
                 className="flex flex-col items-center group basis-[calc(50%-0.5rem)] sm:basis-[calc(25%-1.125rem)] lg:basis-[calc(20%-1.2rem)]"
               >
                 <Link
-                  to="/aventyr-snart"
+                  to={adventurePath}
                   onClick={() => window.scrollTo({ top: 0, behavior: 'auto' })}
                   className="flex flex-col items-center cursor-pointer"
                   aria-label={t(`Gå till ${item.year} i Vårt Äventyr`, `Go to ${item.year} in Our Adventure`)}
@@ -88,7 +90,7 @@ const WhyUsSection = () => {
 
         <div className="flex justify-center mt-12">
           <Link
-            to="/aventyr-snart"
+            to={adventurePath}
             className="inline-flex items-center gap-2 text-primary font-bold hover:gap-3 transition-all text-lg group"
           >
             {t('Upplev hela äventyret', 'Experience the whole adventure')}

@@ -2,9 +2,11 @@ import { Link } from 'react-router-dom';
 import { Instagram, Facebook, Music, Mail, Phone, MapPin, Star } from 'lucide-react';
 import logoImg from '@/assets/logo-cutout.png';
 import { useLanguage } from '@/contexts/LanguageContext';
+import { useAdventurePath } from '@/lib/adventureLaunch';
 
 const Footer = () => {
   const { t } = useLanguage();
+  const adventurePath = useAdventurePath();
 
   return (
     <footer className="bg-surface-dark py-16 relative overflow-hidden" aria-label="Footer">
@@ -55,7 +57,7 @@ const Footer = () => {
                   { to: '/upplevelser', sv: 'Helhetsupplevelse', en: 'Complete Experience' },
                   { to: '/information', sv: 'Information', en: 'Info' },
                   { to: '/boka-oss', sv: 'Boka Oss', en: 'Book Us' },
-                  { to: '/aventyr-snart', sv: 'Vårt Äventyr', en: 'Our Adventure' },
+                  { to: adventurePath, sv: 'Vårt Äventyr', en: 'Our Adventure' },
                   { to: '/faq', sv: 'FAQ', en: 'FAQ' },
                 ].map(link => (
                   <li key={link.to}>

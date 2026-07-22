@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import { useState } from 'react';
 import { ChevronRight } from 'lucide-react';
 import { useLanguage } from '@/contexts/LanguageContext';
+import { useAdventurePath } from '@/lib/adventureLaunch';
 import aboutBg from '@/assets/about-bg.png';
 import aboutPortrait from '@/assets/about-portrait.png';
 
@@ -65,6 +66,7 @@ const fadeUp = {
 
 const AboutSection = () => {
   const { t, lang } = useLanguage();
+  const adventurePath = useAdventurePath();
   const [expanded, setExpanded] = useState(false);
 
   const firstHalfSv = [
@@ -203,7 +205,7 @@ const AboutSection = () => {
             )}
 
             <div>
-              <Link to="/aventyr-snart" className="inline-flex items-center gap-2 text-primary font-bold hover:gap-3 transition-all text-lg group">
+              <Link to={adventurePath} className="inline-flex items-center gap-2 text-primary font-bold hover:gap-3 transition-all text-lg group">
                 {t('Vårt Äventyr', 'Our Adventure')} <span className="group-hover:translate-x-1 transition-transform">&rarr;</span>
               </Link>
             </div>

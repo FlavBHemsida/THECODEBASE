@@ -4,6 +4,7 @@ import { Menu, X } from 'lucide-react';
 import logoImg from '@/assets/logo-cutout.png';
 import { Button } from '@/components/ui/button';
 import { useLanguage } from '@/contexts/LanguageContext';
+import { useAdventurePath } from '@/lib/adventureLaunch';
 import { motion, AnimatePresence } from 'framer-motion';
 
 const navItems = [
@@ -22,6 +23,10 @@ const Navbar = () => {
   const [hidden, setHidden] = useState(false);
   const { lang, toggleLang, t } = useLanguage();
   const location = useLocation();
+  const adventurePath = useAdventurePath();
+  const items = navItems.map(item =>
+    item.path === '/aventyr-snart' ? { ...item, path: adventurePath } : item
+  );
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 50);
@@ -60,7 +65,7 @@ const Navbar = () => {
           </Link>
 
           <div className="hidden lg:flex items-center gap-6">
-            {navItems.map(item => (
+            {items.map(item => (
               <Link
                 key={item.path}
                 to={item.path}
@@ -100,7 +105,7 @@ const Navbar = () => {
             exit={{ opacity: 0 }}
             className="fixed inset-0 z-40 bg-surface-dark flex flex-col items-center justify-center gap-6"
           >
-            {navItems.map((item, i) => (
+            {items.map((item, i) => (
               <motion.div key={item.path} initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: i * 0.05 }}>
                 <Link
                   to={item.path}

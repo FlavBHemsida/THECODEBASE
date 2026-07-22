@@ -4,9 +4,7 @@ import { motion } from 'framer-motion';
 import { Sparkles, Compass, ArrowLeft } from 'lucide-react';
 import SEOHead from '@/components/SEOHead';
 import { useLanguage } from '@/contexts/LanguageContext';
-
-// Launch date — bump this when you want to shift the countdown.
-export const ADVENTURE_LAUNCH_DATE = new Date('2026-07-22T12:00:00+02:00');
+import { ADVENTURE_LAUNCH_DATE } from '@/lib/adventureLaunch';
 
 const pad = (n: number) => String(Math.max(0, n)).padStart(2, '0');
 
