@@ -28,6 +28,7 @@ import img2023aretsforetagare from '@/assets/ÅretsFöretagare.jpg';
 import img2023sm from '@/assets/sm2023.jpg';
 import img2023aretsunga from '@/assets/åretsunga.jpg';
 import img2024gravid from '@/assets/gravid.jpg';
+import img2024hugboss from '@/assets/hugboss1.png';
 
 type SourceLink = {
   url: string;
@@ -55,6 +56,7 @@ type YearEntry = {
   bodyImages?: string[];
   headerImage?: string;
   headerImageAlt?: string;
+  headerImageDesktopSide?: boolean;
   titleSv?: string;
   titleEn?: string;
   // Cinematic theme per year
@@ -304,10 +306,13 @@ const years: YearEntry[] = [
     accentColor: '#f87171',
     pattern: 'zigzag',
     layout: 'centered',
+    headerImage: img2024hugboss,
+    headerImageAlt: 'Hugo Boss',
+    headerImageDesktopSide: true,
     extraTextSv: 'Hugo Boss skickar ett brev.\n\n2024 blev året då allt hände på en gång.\n\nFlavor-Boss växte snabbare än någonsin.\n\nSamtidigt väntade Patricia sitt andra barn.\n\nOch mitt i allt fortsatte resan framåt.',
     extraTextEn: 'Hugo Boss sends a letter.\n\n2024 became the year everything happened at once.\n\nFlavor-Boss grew faster than ever.\n\nAt the same time, Patricia was expecting her second child.\n\nAnd in the middle of it all, the journey kept moving forward.',
     expandableImages: [img2024gravid],
-    expandableTextSv: 'Precis innan Street Food Festivalen lanserades Flavor-Boss andra foodtruck.\n\nBossen.\n\nHon rullade in direkt på sitt första mästerskap.\n\nFlavor-Boss försvarade titeln och blev ännu en gång Sverigemästare i Streetfood i Malmö.\n[[IMAGE]]\n\nTre dagar senare väntade en helt annan utmaning.\n\nSamma natt som guldet firades väntade en helt annan utmaning, när det landade ett juridiskt brev från den globala modejätten Hugo Boss. Bara några dagar senare föddes Patricia och familjens andra barn.\n\nIstället för att bara få njuta av framgångarna fick teamet plötsligt lära sig nästan lika mycket om juridik som om matlagning.\n\nMen resan stannade aldrig.\n\nPå Malmöfestivalen växte köerna till flera hundra meter och Flavor-Boss blev det första konceptet att belönas med 5 av 5 stjärnor i Sydsvenskans mattest ”Bong”. Trycket blev större än någon kunnat föreställa sig.\n\nSamtidigt utsågs Patricia till en av Sveriges tio främsta unga entreprenörer av Företagarna, blev finalist i Årets Unga Idé (Företagarna) och stod på scen inför 3 000 UF-elever på Sparbanken Arena i Lund för att inspirera nästa generation entreprenörer på ett lekfullt och kreativt sätt.\n\nSäsongen avslutades på samma sätt som den började.\n\nFlavor-Boss stod högst upp på pallen ännu en gång och försvarade sin plats i toppen genom att vinna ännu ett Sverigemästerskapet i Streetfood, denna gången när vi landade i Göteborg för första gången.\n\n2024 blev året som bevisade att de största prövningarna ofta kommer precis innan nästa nivå.',
+    expandableTextSv: 'Precis innan Street Food Festivalen lanserades Flavor-Boss andra foodtruck.\n\nBossen.\n\nHon rullade in direkt på sitt första mästerskap.\n\nFlavor-Boss försvarade titeln och blev ännu en gång Sverigemästare i Streetfood i Malmö.\n[[IMAGE]]\n\nTre dagar senare väntade en helt annan utmaning.\n\nSamma natt som guldet firades väntade en helt annan utmaning, när det landade ett juridiskt [brev från den globala modejätten Hugo Boss](https://tv.aftonbladet.se/video/374830/fick-brev-fraan-hugo-boss-byt-namn). Bara några dagar senare föddes Patricia och familjens andra barn.\n\nIstället för att bara få njuta av framgångarna fick teamet plötsligt lära sig nästan lika mycket om juridik som om matlagning.\n\nMen resan stannade aldrig.\n\nPå Malmöfestivalen växte köerna till flera hundra meter och Flavor-Boss blev det första konceptet att belönas med 5 av 5 stjärnor i Sydsvenskans mattest ”Bong”. Trycket blev större än någon kunnat föreställa sig.\n\nSamtidigt utsågs Patricia till en av Sveriges tio främsta unga entreprenörer av Företagarna, blev finalist i Årets Unga Idé (Företagarna) och stod på scen inför 3 000 UF-elever på Sparbanken Arena i Lund för att inspirera nästa generation entreprenörer på ett lekfullt och kreativt sätt.\n\nSäsongen avslutades på samma sätt som den började.\n\nFlavor-Boss stod högst upp på pallen ännu en gång och försvarade sin plats i toppen genom att vinna ännu ett Sverigemästerskapet i Streetfood, denna gången när vi landade i Göteborg för första gången.\n\n2024 blev året som bevisade att de största prövningarna ofta kommer precis innan nästa nivå.',
     expandableTextEn: 'Just before the Street Food Festival, Flavor-Boss launched its second food truck.\n\nBossen.\n\nShe rolled straight into her first championship.\n\nFlavor-Boss defended the title and once again became Swedish Street Food Champion, this time in Malmö.\n[[IMAGE]]\n\nThree days later, a completely different challenge was waiting.\n\nThe same night the gold was celebrated, a legal letter landed from the global fashion giant Hugo Boss. Just a few days later, Patricia and the family’s second child was born.\n\nInstead of simply enjoying the success, the team suddenly had to learn almost as much about law as about cooking.\n\nBut the journey never stopped.\n\nAt Malmöfestivalen, the queues grew to several hundred meters, and Flavor-Boss became the first concept to be awarded 5 out of 5 stars in Sydsvenskan’s food review “Bong.” The pressure became bigger than anyone could have imagined.\n\nAt the same time, Patricia was named one of Sweden’s top ten young entrepreneurs by Företagarna, became a finalist for Young Idea of the Year (Företagarna), and took the stage in front of 3,000 student entrepreneurs at Sparbanken Arena in Lund to inspire the next generation of entrepreneurs in a playful and creative way.\n\nThe season ended the same way it began.\n\nFlavor-Boss stood at the very top of the podium once again, defending its place at the top by winning yet another Swedish Street Food Championship, this time landing in Gothenburg for the first time.\n\n2024 became the year that proved the biggest trials often come right before the next level.',
     sources: [
       {
@@ -454,6 +459,7 @@ const TimelineJourney = ({ initialYear }: TimelineJourneyProps = {}) => {
           bodyImages={years[currentIndex].bodyImages}
           headerImage={years[currentIndex].headerImage}
           headerImageAlt={years[currentIndex].headerImageAlt}
+          headerImageDesktopSide={years[currentIndex].headerImageDesktopSide}
         />
       </AnimatePresence>
     </div>

@@ -132,6 +132,7 @@ interface YearPageProps {
   centerVertically?: boolean;
   headerImage?: string;
   headerImageAlt?: string;
+  headerImageDesktopSide?: boolean;
   yearIndex: number;
   totalYears: number;
   fromIndex?: number;
@@ -182,6 +183,7 @@ const YearPage = ({
   centerVertically = false,
   headerImage,
   headerImageAlt,
+  headerImageDesktopSide = false,
   yearIndex,
   totalYears,
   fromIndex,
@@ -454,6 +456,7 @@ const YearPage = ({
                 expandableSlot={expandableSlot}
                 headerImage={headerImage}
                 headerImageAlt={headerImageAlt}
+                headerImageDesktopSide={headerImageDesktopSide}
               />
 
               {/* Sources rendered inline, between body text and the "Nästa" CTA */}
@@ -606,6 +609,7 @@ interface ContentLayoutProps {
   expandableSlot?: ReactNode;
   headerImage?: string;
   headerImageAlt?: string;
+  headerImageDesktopSide?: boolean;
 }
 
 // Renders the whole main text as one continuous block — same size/weight for
@@ -644,7 +648,7 @@ const UniformBody = ({ lines, bodyVideo }: { lines: string[]; bodyVideo?: string
 
 // A header image with its natural aspect ratio, a soft orange fade wash
 // over it, and a slight tilt for a cinematic feel.
-const HeaderBadge = ({ src, alt = '' }: { src: string; alt?: string }) => (
+const HeaderBadge = ({ src, alt = '', tint = 'orange' }: { src: string; alt?: string; tint?: 'orange' | 'dark' }) => (
   <motion.div
     className="relative z-20 mx-auto mb-6 md:mb-8 w-full max-w-md md:max-w-xl lg:max-w-2xl rounded-2xl overflow-hidden shadow-[0_20px_50px_rgba(0,0,0,0.5)]"
     initial={{ opacity: 0, scale: 0.85, rotate: -4 }}
@@ -654,7 +658,11 @@ const HeaderBadge = ({ src, alt = '' }: { src: string; alt?: string }) => (
     <img src={src} alt={alt} className="relative w-full h-auto object-contain" />
     <div
       className="absolute inset-0 pointer-events-none"
-      style={{ background: 'linear-gradient(180deg, rgba(249,115,22,0.55) 0%, rgba(249,115,22,0.3) 40%, transparent 75%)' }}
+      style={{
+        background: tint === 'dark'
+          ? 'linear-gradient(180deg, rgba(0,0,0,0.65) 0%, rgba(0,0,0,0.35) 40%, transparent 75%)'
+          : 'linear-gradient(180deg, rgba(249,115,22,0.55) 0%, rgba(249,115,22,0.3) 40%, transparent 75%)',
+      }}
     />
   </motion.div>
 );
@@ -729,7 +737,7 @@ const ImageOne = ({ src, rotate = -3, delay = 0.6 }: { src: string; rotate?: num
   </motion.div>
 );
 
-const ContentLayout = ({ layout, title, lead, restLines, uniformText, bodyBackline, leftAlignedContent, bodyVideo, bodyImages, images, accentColor, expandableSlot, headerImage, headerImageAlt }: ContentLayoutProps) => {
+const ContentLayout = ({ layout, title, lead, restLines, uniformText, bodyBackline, leftAlignedContent, bodyVideo, bodyImages, images, accentColor, expandableSlot, headerImage, headerImageAlt, headerImageDesktopSide }: ContentLayoutProps) => {
   const firstImage = images?.[0];
   const secondImage = images?.[1];
 
@@ -814,9 +822,8 @@ const ContentLayout = ({ layout, title, lead, restLines, uniformText, bodyBackli
   }
 
   // centered (no images, or fallback)
-  return (
-    <div className="relative z-20 w-full max-w-4xl mx-auto self-center text-center">
-      {headerImage && <HeaderBadge src={headerImage} alt={headerImageAlt} />}
+  const centeredInner = (
+    <>
       {title && (
         <motion.h2
           className="font-display font-extrabold uppercase text-white leading-[0.9] tracking-tight text-5xl md:text-7xl lg:text-8xl xl:text-9xl mb-6 md:mb-8"
@@ -914,6 +921,29 @@ const ContentLayout = ({ layout, title, lead, restLines, uniformText, bodyBackli
           <div className="mt-6 flex justify-center">{expandableSlot}</div>
         )
       )}
+    </>
+  );
+
+  if (headerImageDesktopSide && headerImage) {
+    return (
+      <div className="w-full max-w-6xl mx-auto self-center">
+        <div className="lg:hidden">
+          <HeaderBadge src={headerImage} alt={headerImageAlt} tint="dark" />
+        </div>
+        <div className="relative z-20 text-center lg:grid lg:grid-cols-[minmax(0,360px)_1fr] lg:gap-12 lg:items-center">
+          <div className="hidden lg:block h-[480px] lg:sticky lg:top-12">
+            <ImageOne src={headerImage} rotate={-2} delay={0.6} />
+          </div>
+          <div>{centeredInner}</div>
+        </div>
+      </div>
+    );
+  }
+
+  return (
+    <div className="relative z-20 w-full max-w-4xl mx-auto self-center text-center">
+      {headerImage && <HeaderBadge src={headerImage} alt={headerImageAlt} />}
+      {centeredInner}
     </div>
   );
 };
