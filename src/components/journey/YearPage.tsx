@@ -271,9 +271,12 @@ const YearPage = ({
             <div className="my-5 md:my-7">
               <video
                 src={expandableVideo}
-                controls
+                autoPlay
+                muted
+                loop
                 playsInline
-                preload="metadata"
+                disablePictureInPicture
+                preload="auto"
                 className="w-full max-w-md mx-auto rounded-2xl shadow-[0_20px_50px_rgba(0,0,0,0.45)] border-4 border-white/40"
               />
             </div>
@@ -611,9 +614,12 @@ const UniformBody = ({ lines, bodyVideo }: { lines: string[]; bodyVideo?: string
           <video
             key={i}
             src={bodyVideo}
-            controls
+            autoPlay
+            muted
+            loop
             playsInline
-            preload="metadata"
+            disablePictureInPicture
+            preload="auto"
             className="w-full max-w-md rounded-2xl shadow-[0_20px_50px_rgba(0,0,0,0.45)] border-4 border-white/40 my-3"
           />
         ) : (
