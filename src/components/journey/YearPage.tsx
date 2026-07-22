@@ -130,6 +130,8 @@ interface YearPageProps {
   bodyVideo?: string;
   bodyImages?: string[];
   centerVertically?: boolean;
+  headerImage?: string;
+  headerImageAlt?: string;
   yearIndex: number;
   totalYears: number;
   fromIndex?: number;
@@ -147,6 +149,7 @@ interface YearPageProps {
   expandableImage?: string;
   expandableImageAlt?: string;
   expandableImages?: string[];
+  expandableImageSizes?: ('sm' | 'md')[];
   expandableVideo?: string;
 }
 
@@ -177,6 +180,8 @@ const YearPage = ({
   bodyVideo,
   bodyImages,
   centerVertically = false,
+  headerImage,
+  headerImageAlt,
   yearIndex,
   totalYears,
   fromIndex,
@@ -194,6 +199,7 @@ const YearPage = ({
   expandableImage,
   expandableImageAlt,
   expandableImages,
+  expandableImageSizes,
   expandableVideo,
 }: YearPageProps) => {
   const { t } = useLanguage();
@@ -251,7 +257,9 @@ const YearPage = ({
       const marker = parts[idx + 1];
       const lines = segment.split('\n').filter(Boolean);
       const isLastSegment = idx + 2 >= parts.length;
-      const currentImage = marker === 'IMAGE' ? imagesList[imageIdx++] : undefined;
+      const currentImageIdx = marker === 'IMAGE' ? imageIdx++ : -1;
+      const currentImage = marker === 'IMAGE' ? imagesList[currentImageIdx] : undefined;
+      const currentImageSize = expandableImageSizes?.[currentImageIdx] === 'sm' ? 'max-w-xs' : 'max-w-md';
       elements.push(
         <div key={`seg-${idx}`}>
           <div className="space-y-3 text-white/95 text-base md:text-lg font-body leading-snug">
@@ -263,7 +271,7 @@ const YearPage = ({
                 src={currentImage}
                 alt={expandableImageAlt || ''}
                 loading="lazy"
-                className="w-full max-w-md mx-auto rounded-2xl shadow-[0_20px_50px_rgba(0,0,0,0.45)] border-4 border-white/40"
+                className={`w-full ${currentImageSize} mx-auto rounded-2xl shadow-[0_20px_50px_rgba(0,0,0,0.45)] border-4 border-white/40`}
               />
             </div>
           )}
@@ -444,6 +452,8 @@ const YearPage = ({
                 images={images}
                 accentColor={accentColor}
                 expandableSlot={expandableSlot}
+                headerImage={headerImage}
+                headerImageAlt={headerImageAlt}
               />
 
               {/* Sources rendered inline, between body text and the "Nästa" CTA */}
@@ -594,6 +604,8 @@ interface ContentLayoutProps {
   images?: string[];
   accentColor: string;
   expandableSlot?: ReactNode;
+  headerImage?: string;
+  headerImageAlt?: string;
 }
 
 // Renders the whole main text as one continuous block — same size/weight for
@@ -629,6 +641,23 @@ const UniformBody = ({ lines, bodyVideo }: { lines: string[]; bodyVideo?: string
     </motion.div>
   );
 };
+
+// A header image with its natural aspect ratio, a soft orange fade wash
+// over it, and a slight tilt for a cinematic feel.
+const HeaderBadge = ({ src, alt = '' }: { src: string; alt?: string }) => (
+  <motion.div
+    className="relative z-20 mx-auto mb-6 md:mb-8 w-full max-w-md md:max-w-xl lg:max-w-2xl rounded-2xl overflow-hidden shadow-[0_20px_50px_rgba(0,0,0,0.5)]"
+    initial={{ opacity: 0, scale: 0.85, rotate: -4 }}
+    animate={{ opacity: 1, scale: 1, rotate: -2 }}
+    transition={{ type: 'spring', stiffness: 160, damping: 16, delay: 0.3 }}
+  >
+    <img src={src} alt={alt} className="relative w-full h-auto object-contain" />
+    <div
+      className="absolute inset-0 pointer-events-none"
+      style={{ background: 'linear-gradient(180deg, rgba(249,115,22,0.55) 0%, rgba(249,115,22,0.3) 40%, transparent 75%)' }}
+    />
+  </motion.div>
+);
 
 const TitleBlock = ({ title, accentColor }: { title?: string; accentColor: string }) => {
   if (!title) return null;
@@ -700,7 +729,7 @@ const ImageOne = ({ src, rotate = -3, delay = 0.6 }: { src: string; rotate?: num
   </motion.div>
 );
 
-const ContentLayout = ({ layout, title, lead, restLines, uniformText, bodyBackline, leftAlignedContent, bodyVideo, bodyImages, images, accentColor, expandableSlot }: ContentLayoutProps) => {
+const ContentLayout = ({ layout, title, lead, restLines, uniformText, bodyBackline, leftAlignedContent, bodyVideo, bodyImages, images, accentColor, expandableSlot, headerImage, headerImageAlt }: ContentLayoutProps) => {
   const firstImage = images?.[0];
   const secondImage = images?.[1];
 
@@ -787,6 +816,7 @@ const ContentLayout = ({ layout, title, lead, restLines, uniformText, bodyBackli
   // centered (no images, or fallback)
   return (
     <div className="relative z-20 w-full max-w-4xl mx-auto self-center text-center">
+      {headerImage && <HeaderBadge src={headerImage} alt={headerImageAlt} />}
       {title && (
         <motion.h2
           className="font-display font-extrabold uppercase text-white leading-[0.9] tracking-tight text-5xl md:text-7xl lg:text-8xl xl:text-9xl mb-6 md:mb-8"
