@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useLanguage } from '@/contexts/LanguageContext';
@@ -59,13 +59,9 @@ const floatingIcons = [
 
 const VarResa = () => {
   const { t } = useLanguage();
-  const [step, setStep] = useState<'landing' | 'intro' | 'journey'>('landing');
   const [searchParams] = useSearchParams();
   const initialYear = searchParams.get('year') ?? undefined;
-
-  useEffect(() => {
-    if (initialYear) setStep('journey');
-  }, [initialYear]);
+  const [step, setStep] = useState<'landing' | 'intro' | 'journey'>(initialYear ? 'journey' : 'landing');
 
   return (
     <>
