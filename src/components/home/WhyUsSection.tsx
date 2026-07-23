@@ -72,7 +72,7 @@ const WhyUsSection = () => {
                 className="flex flex-col items-center group basis-[calc(50%-0.5rem)] sm:basis-[calc(25%-1.125rem)] lg:basis-[calc(20%-1.2rem)]"
               >
                 <Link
-                  to={adventurePath}
+                  to={adventurePath === '/var-resa' ? `${adventurePath}?year=${item.year}` : adventurePath}
                   onClick={() => window.scrollTo({ top: 0, behavior: 'auto' })}
                   className="flex flex-col items-center cursor-pointer"
                   aria-label={t(`Gå till ${item.year} i Vårt Äventyr`, `Go to ${item.year} in Our Adventure`)}
