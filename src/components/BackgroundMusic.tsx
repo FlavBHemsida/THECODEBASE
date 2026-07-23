@@ -4,12 +4,14 @@ import { Volume2, VolumeX } from 'lucide-react';
 const MUSIC_SRC = '/audio/bg-music.opus';
 const TARGET_VOLUME = 0.35;
 const MUTE_STORAGE_KEY = 'fb-music-muted';
+const INACTIVITY_MUTE_MS = 15000;
 
 const BackgroundMusic = () => {
   const audioRef = useRef<HTMLAudioElement>(null);
   const [muted, setMuted] = useState(() => sessionStorage.getItem(MUTE_STORAGE_KEY) === 'true');
   const [needsGesture, setNeedsGesture] = useState(false);
   const userMutedRef = useRef(muted);
+  const scheduleAutoMuteRef = useRef<() => void>(() => {});
 
   useLayoutEffect(() => {
     const preload = document.createElement('link');
@@ -64,9 +66,55 @@ const BackgroundMusic = () => {
     interactionEvents.forEach((evt) => window.addEventListener(evt, start, { once: true, passive: true }));
     window.addEventListener('flavorboss:hero-video-started', start, { once: true });
 
+    // Mobile browsers (esp. iOS/Android Chrome) keep <audio> playing when the tab
+    // is backgrounded or the screen is locked. Pause on hide, resume on return.
+    const handleVisibilityChange = () => {
+      if (document.hidden) {
+        if (!audio.paused) {
+          audio.dataset.wasPlaying = 'true';
+          audio.pause();
+        }
+      } else if (audio.dataset.wasPlaying === 'true' && !userMutedRef.current) {
+        delete audio.dataset.wasPlaying;
+        audio.play().catch(() => {});
+      }
+    };
+    document.addEventListener('visibilitychange', handleVisibilityChange);
+
+    // Auto-mute after 15s of no scroll/touch/click/key activity so the music
+    // doesn't play on unattended forever. This only mutes (not pauses) and only
+    // sets React state — it never touches sessionStorage, so it's not treated
+    // as a real user preference and won't survive a refresh. The mute button
+    // reflects it immediately so the visitor can see why it's silent and undo it.
+    let inactivityTimer: ReturnType<typeof setTimeout> | null = null;
+    const scheduleAutoMute = () => {
+      if (inactivityTimer) clearTimeout(inactivityTimer);
+      inactivityTimer = setTimeout(() => {
+        if (!audio.muted) {
+          audio.muted = true;
+          setMuted(true);
+        }
+      }, INACTIVITY_MUTE_MS);
+    };
+    scheduleAutoMuteRef.current = scheduleAutoMute;
+
+    const handleActivity = () => {
+      // Once silenced (by the user or by this same timer), leave it alone —
+      // only the button un-silences it. Otherwise every scroll would restart
+      // the clock and it would never actually go quiet.
+      if (audio.muted) return;
+      scheduleAutoMute();
+    };
+    const activityEvents: (keyof WindowEventMap)[] = ['pointerdown', 'touchstart', 'wheel', 'scroll', 'keydown', 'mousemove'];
+    activityEvents.forEach((evt) => window.addEventListener(evt, handleActivity, { passive: true }));
+    scheduleAutoMute();
+
     return () => {
       interactionEvents.forEach((evt) => window.removeEventListener(evt, start));
       window.removeEventListener('flavorboss:hero-video-started', start);
+      document.removeEventListener('visibilitychange', handleVisibilityChange);
+      activityEvents.forEach((evt) => window.removeEventListener(evt, handleActivity));
+      if (inactivityTimer) clearTimeout(inactivityTimer);
     };
   }, []);
 
@@ -83,6 +131,7 @@ const BackgroundMusic = () => {
       userMutedRef.current = false;
       setMuted(false);
       sessionStorage.setItem(MUTE_STORAGE_KEY, 'false');
+      scheduleAutoMuteRef.current();
       return;
     }
 
@@ -97,6 +146,7 @@ const BackgroundMusic = () => {
       }
       setMuted(false);
       sessionStorage.setItem(MUTE_STORAGE_KEY, 'false');
+      scheduleAutoMuteRef.current();
     } else {
       userMutedRef.current = true;
       audio.muted = true;
