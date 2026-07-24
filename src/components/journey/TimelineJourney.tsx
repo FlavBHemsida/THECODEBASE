@@ -380,7 +380,7 @@ const years: YearEntry[] = [
     titleSv: 'NÄSTA KAPITEL HAR REDAN BÖRJAT.',
     titleEn: 'THE NEXT CHAPTER HAS ALREADY BEGUN.',
     gradient: 'linear-gradient(135deg,#1e1b4b 0%,#7c3aed 40%,#f472b6 80%,#fbbf24 100%)',
-    accentColor: '#fde047',
+    accentColor: '#d362c5',
     pattern: 'waves',
     layout: 'centered',
     leftAlignedContent: true,
