@@ -140,6 +140,9 @@ interface YearPageProps {
   headerImage?: string;
   headerImageAlt?: string;
   headerImageDesktopSide?: boolean;
+  // Render the desktop side image at its natural aspect ratio with a color
+  // tint wash (no crop, no blur) instead of the default cropped/rotated box.
+  headerImageOriginalRatio?: boolean;
   yearIndex: number;
   totalYears: number;
   fromIndex?: number;
@@ -192,6 +195,7 @@ const YearPage = ({
   headerImage,
   headerImageAlt,
   headerImageDesktopSide = false,
+  headerImageOriginalRatio = false,
   yearIndex,
   totalYears,
   fromIndex,
@@ -481,6 +485,7 @@ const YearPage = ({
                 headerImage={headerImage}
                 headerImageAlt={headerImageAlt}
                 headerImageDesktopSide={headerImageDesktopSide}
+                headerImageOriginalRatio={headerImageOriginalRatio}
               />
 
               {/* Sources rendered inline, between body text and the "Nästa" CTA */}
@@ -634,6 +639,7 @@ interface ContentLayoutProps {
   headerImage?: string;
   headerImageAlt?: string;
   headerImageDesktopSide?: boolean;
+  headerImageOriginalRatio?: boolean;
 }
 
 // Renders the whole main text as one continuous block — same size/weight for
@@ -761,7 +767,7 @@ const ImageOne = ({ src, rotate = -3, delay = 0.6 }: { src: string; rotate?: num
   </motion.div>
 );
 
-const ContentLayout = ({ layout, title, lead, restLines, uniformText, bodyBackline, leftAlignedContent, bodyVideo, bodyImages, images, accentColor, expandableSlot, headerImage, headerImageAlt, headerImageDesktopSide }: ContentLayoutProps) => {
+const ContentLayout = ({ layout, title, lead, restLines, uniformText, bodyBackline, leftAlignedContent, bodyVideo, bodyImages, images, accentColor, expandableSlot, headerImage, headerImageAlt, headerImageDesktopSide, headerImageOriginalRatio }: ContentLayoutProps) => {
   const firstImage = images?.[0];
   const secondImage = images?.[1];
 
@@ -980,9 +986,15 @@ const ContentLayout = ({ layout, title, lead, restLines, uniformText, bodyBackli
         <div className="lg:hidden">
           <HeaderBadge src={headerImage} alt={headerImageAlt} tint="dark" />
         </div>
-        <div className="relative z-20 text-center lg:grid lg:grid-cols-[minmax(0,360px)_1fr] lg:gap-12 lg:items-center">
-          <div className="hidden lg:block h-[480px] lg:sticky lg:top-12">
-            <ImageOne src={headerImage} rotate={-2} delay={0.6} />
+        <div className={`relative z-20 text-center lg:grid ${headerImageOriginalRatio ? 'lg:grid-cols-[minmax(0,420px)_1fr]' : 'lg:grid-cols-[minmax(0,360px)_1fr]'} lg:gap-12 lg:items-center`}>
+          <div className="hidden lg:block lg:sticky lg:top-12">
+            {headerImageOriginalRatio ? (
+              <HeaderBadge src={headerImage} alt={headerImageAlt} tint="dark" />
+            ) : (
+              <div className="h-[480px]">
+                <ImageOne src={headerImage} rotate={-2} delay={0.6} />
+              </div>
+            )}
           </div>
           <div>{centeredInner}</div>
         </div>

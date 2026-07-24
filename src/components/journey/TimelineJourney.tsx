@@ -68,6 +68,7 @@ type YearEntry = {
   headerImage?: string;
   headerImageAlt?: string;
   headerImageDesktopSide?: boolean;
+  headerImageOriginalRatio?: boolean;
   titleSv?: string;
   titleEn?: string;
   // Cinematic theme per year
@@ -381,9 +382,12 @@ const years: YearEntry[] = [
     gradient: 'linear-gradient(135deg,#1e1b4b 0%,#7c3aed 40%,#f472b6 80%,#fbbf24 100%)',
     accentColor: '#fde047',
     pattern: 'waves',
-    layout: 'imageBackdrop',
+    layout: 'centered',
     leftAlignedContent: true,
-    images: [img2026backdrop],
+    headerImage: img2026backdrop,
+    headerImageAlt: 'Flavor-Boss 2026',
+    headerImageDesktopSide: true,
+    headerImageOriginalRatio: true,
     expandableImages: [img2026hb],
     expandableVideo: video2026castella,
     extraTextSv: 'Äventyret fortsätter\n\n2026 blev året då Flavor-Boss började blicka långt bortom nästa festival.\nVisionen hade vuxit.\nDrömmen hade blivit större än Sverige.\nOch resan hade bara börjat.',
@@ -482,6 +486,7 @@ const TimelineJourney = ({ initialYear }: TimelineJourneyProps = {}) => {
           headerImage={years[currentIndex].headerImage}
           headerImageAlt={years[currentIndex].headerImageAlt}
           headerImageDesktopSide={years[currentIndex].headerImageDesktopSide}
+          headerImageOriginalRatio={years[currentIndex].headerImageOriginalRatio}
         />
       </AnimatePresence>
     </div>
