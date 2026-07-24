@@ -275,7 +275,7 @@ const years: YearEntry[] = [
     titleSv: 'ALL IN. INGEN VÄG TILLBAKA.',
     titleEn: 'ALL IN. NO WAY BACK.',
     gradient: 'linear-gradient(135deg,#831843 0%,#be123c 40%,#f59e0b 100%)',
-    accentColor: '#fde047',
+    accentColor: '#ff5f1f',
     pattern: 'dancer',
     layout: 'centered',
     bodyBackline: true,
