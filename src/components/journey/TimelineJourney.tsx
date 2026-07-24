@@ -24,6 +24,7 @@ import img2020rapidus from '@/assets/Rapidus.jpg';
 import img2021friskt from '@/assets/journey/2021-friskt-vagat.png';
 import img2021ohboy from '@/assets/ohboy.jpg';
 import img2022sf from '@/assets/2022sf.jpg';
+import img2022truck from '@/assets/truck.jpg';
 import img2023aretsforetagare from '@/assets/ÅretsFöretagare.jpg';
 import img2023sm from '@/assets/sm2023.jpg';
 import img2023aretsunga from '@/assets/åretsunga.jpg';
@@ -256,6 +257,8 @@ const years: YearEntry[] = [
     pattern: 'burst',
     layout: 'centered',
     bodyBackline: true,
+    headerImage: img2022truck,
+    headerImageAlt: 'Flavor-Boss foodtruck',
     extraTextSv: 'När världen öppnade upp igen var Flavor-Boss redo.\n\nDet blev året då drömmen bevisade att den hörde hemma bland de bästa.',
     extraTextEn: 'When the world opened up again, Flavor-Boss was ready.\n\nThis became the year the dream proved it belonged among the best.',
     expandableImages: [img2022sf],
