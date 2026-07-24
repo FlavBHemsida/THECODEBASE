@@ -152,6 +152,7 @@ interface YearPageProps {
   expandableImages?: string[];
   expandableImageSizes?: ('sm' | 'md')[];
   expandableVideo?: string;
+  expandableVideoSize?: 'sm' | 'md';
 }
 
 const patternMap: Record<PatternKind, string> = {
@@ -203,6 +204,7 @@ const YearPage = ({
   expandableImages,
   expandableImageSizes,
   expandableVideo,
+  expandableVideoSize = 'md',
 }: YearPageProps) => {
   const { t } = useLanguage();
   const [isExpanded, setIsExpanded] = useState(false);
@@ -302,7 +304,7 @@ const YearPage = ({
                 playsInline
                 disablePictureInPicture
                 preload="auto"
-                className="w-full max-w-md mx-auto rounded-2xl shadow-[0_20px_50px_rgba(0,0,0,0.45)] border-4 border-white/40"
+                className={`w-full ${expandableVideoSize === 'sm' ? 'max-w-[220px]' : 'max-w-md'} mx-auto rounded-2xl shadow-[0_20px_50px_rgba(0,0,0,0.45)] border-4 border-white/40`}
               />
             </div>
           )}
@@ -354,7 +356,7 @@ const YearPage = ({
       className="absolute inset-0 flex flex-col"
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
-      exit={{ opacity: 0, x: -60 }}
+      exit={{ opacity: 0 }}
       transition={{ duration: 0.6 }}
     >
       {/* Animated cinematic gradient background — unique per year */}
@@ -399,7 +401,7 @@ const YearPage = ({
       <AnimatePresence>
         {phase === 'content' && (
           <motion.span
-            className="absolute top-16 right-4 md:top-6 md:right-20 font-display text-3xl md:text-6xl font-extrabold text-white/25 z-20 select-none pointer-events-none"
+            className="absolute top-16 right-4 md:top-6 md:right-20 font-display text-3xl md:text-6xl font-extrabold text-white/25 z-50 select-none pointer-events-none"
             initial={{ opacity: 0, scale: 3, x: '-40vw', y: '30vh' }}
             animate={{ opacity: 1, scale: 1, x: 0, y: 0 }}
             transition={{ duration: 0.8, ease: [0.25, 1, 0.5, 1] }}
@@ -880,14 +882,40 @@ const ContentLayout = ({ layout, title, lead, restLines, uniformText, bodyBackli
       )}
       {restLines.length > 0 && (
         leftAlignedContent ? (
-          <motion.div
-            className="space-y-3 text-white/95 text-lg md:text-xl lg:text-2xl font-body leading-snug max-w-3xl mx-auto text-left"
-            initial={{ opacity: 0, y: 15 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.9, duration: 0.6 }}
-          >
-            {renderTextLines(restLines, 'la', { bodyImages, bodyVideo })}
-          </motion.div>
+          bodyBackline ? (
+            <>
+              <motion.div
+                className="text-left max-w-3xl mx-auto mb-3 md:mb-4"
+                style={{ borderLeft: `4px solid ${accentColor}`, paddingLeft: '1rem' }}
+                initial={{ opacity: 0, y: 15 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.9, duration: 0.6 }}
+              >
+                <p className="font-display font-bold uppercase text-white text-xl md:text-2xl tracking-wide">
+                  {parseInlineMarkdown(restLines[0], 'la-backline')}
+                </p>
+              </motion.div>
+              {restLines.length > 1 && (
+                <motion.div
+                  className="space-y-3 text-white/95 text-lg md:text-xl lg:text-2xl font-body leading-snug max-w-3xl mx-auto text-left"
+                  initial={{ opacity: 0, y: 15 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 1.0, duration: 0.6 }}
+                >
+                  {renderTextLines(restLines.slice(1), 'la', { bodyImages, bodyVideo })}
+                </motion.div>
+              )}
+            </>
+          ) : (
+            <motion.div
+              className="space-y-3 text-white/95 text-lg md:text-xl lg:text-2xl font-body leading-snug max-w-3xl mx-auto text-left"
+              initial={{ opacity: 0, y: 15 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.9, duration: 0.6 }}
+            >
+              {renderTextLines(restLines, 'la', { bodyImages, bodyVideo })}
+            </motion.div>
+          )
         ) : bodyBackline ? (
           <>
             <motion.div

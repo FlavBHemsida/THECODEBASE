@@ -36,6 +36,7 @@ import img2025ovan from '@/assets/ovan.jpg';
 import img2025kamali from '@/assets/kamali.jpeg';
 import img2025gbg from '@/assets/gbg.jpg';
 import img2026hb from '@/assets/hb.png';
+import img2026backdrop from '@/assets/26dp.jpg';
 import video2026castella from '@/assets/castella.mp4';
 import imgRick from '@/assets/rick.jpeg';
 
@@ -61,6 +62,7 @@ type YearEntry = {
   expandableImages?: string[];
   expandableImageSizes?: ('sm' | 'md')[];
   expandableVideo?: string;
+  expandableVideoSize?: 'sm' | 'md';
   bodyVideo?: string;
   bodyImages?: string[];
   headerImage?: string;
@@ -315,6 +317,8 @@ const years: YearEntry[] = [
     accentColor: '#f87171',
     pattern: 'zigzag',
     layout: 'centered',
+    leftAlignedContent: true,
+    bodyBackline: true,
     headerImage: img2024hugboss,
     headerImageAlt: 'Hugo Boss',
     headerImageDesktopSide: true,
@@ -322,6 +326,7 @@ const years: YearEntry[] = [
     extraTextEn: '[Hugo Boss sends a letter](https://www.expressen.se/nyheter/sverige/hugo-boss-hotar-stamma-skansk-smaforetagare/).\n\n2024 became the year everything happened at once.\n\nFlavor-Boss grew faster than ever.\n\nAt the same time, Patricia was expecting her second child.\n\nAnd in the middle of it all, the journey kept moving forward.',
     expandableImages: [img2024gravid, img2024ko, img2024tioUnga],
     expandableVideo: '/videos/3000.mp4',
+    expandableVideoSize: 'sm',
     expandableTextSv: 'Precis innan Street Food Festivalen lanserades Flavor-Boss andra foodtruck.\n\nBossen.\n\nHon rullade in direkt på sitt första mästerskap.\n\nFlavor-Boss försvarade titeln och blev ännu en gång Sverigemästare i Streetfood i Malmö.\n[[IMAGE]]\n\nTre dagar senare väntade en helt annan utmaning.\n\nSamma natt som guldet firades väntade en helt annan utmaning, när det landade ett juridiskt [brev från den globala modejätten Hugo Boss](https://tv.aftonbladet.se/video/374830/fick-brev-fraan-hugo-boss-byt-namn). Bara några dagar senare föddes Patricia och familjens andra barn.\n\nIstället för att bara få njuta av framgångarna fick teamet plötsligt [lära sig nästan lika mycket om juridik som om matlagning](https://www.wyz.se/).\n\nMen resan stannade aldrig.\n\nPå Malmöfestivalen växte köerna till flera hundra meter och Flavor-Boss blev det första konceptet att belönas med 5 av 5 stjärnor i Sydsvenskans mattest ”Bong”. Trycket blev större än någon kunnat föreställa sig.\n[[IMAGE]]\n\nSamtidigt utsågs Patricia till en av Sveriges tio främsta unga entreprenörer av Företagarna, blev finalist i Årets Unga Idé (Företagarna).\n[[IMAGE]]\n\nOch hon stod på scen inför 3 000 UF-elever på Sparbanken Arena i Lund för att inspirera nästa generation entreprenörer på ett lekfullt och kreativt sätt.\n[[VIDEO]]\n\nSäsongen avslutades på samma sätt som den började.\n\nFlavor-Boss stod högst upp på pallen ännu en gång och försvarade sin plats i toppen genom att vinna ännu ett Sverigemästerskapet i Streetfood, denna gången när vi landade i Göteborg för första gången.\n\n2024 blev året som bevisade att de största prövningarna ofta kommer precis innan nästa nivå.',
     expandableTextEn: 'Just before the Street Food Festival, Flavor-Boss launched its second food truck.\n\nBossen.\n\nShe rolled straight into her first championship.\n\nFlavor-Boss defended the title and once again became Swedish Street Food Champion, this time in Malmö.\n[[IMAGE]]\n\nThree days later, a completely different challenge was waiting.\n\nThe same night the gold was celebrated, a legal letter landed from the global fashion giant Hugo Boss. Just a few days later, Patricia and the family’s second child was born.\n\nInstead of simply enjoying the success, the team suddenly had to learn almost as much about law as about cooking.\n\nBut the journey never stopped.\n\nAt Malmöfestivalen, the queues grew to several hundred meters, and Flavor-Boss became the first concept to be awarded 5 out of 5 stars in Sydsvenskan’s food review “Bong.” The pressure became bigger than anyone could have imagined.\n[[IMAGE]]\n\nAt the same time, Patricia was named one of Sweden’s top ten young entrepreneurs by Företagarna, and became a finalist for Young Idea of the Year (Företagarna).\n[[IMAGE]]\n\nShe also took the stage in front of 3,000 student entrepreneurs at Sparbanken Arena in Lund to inspire the next generation of entrepreneurs in a playful and creative way.\n[[VIDEO]]\n\nThe season ended the same way it began.\n\nFlavor-Boss stood at the very top of the podium once again, defending its place at the top by winning yet another Swedish Street Food Championship, this time landing in Gothenburg for the first time.\n\n2024 became the year that proved the biggest trials often come right before the next level.',
     sources: [
@@ -349,11 +354,10 @@ const years: YearEntry[] = [
     titleSv: 'EN VÄRLD TAR FORM',
     titleEn: 'A WORLD TAKES SHAPE',
     gradient: 'linear-gradient(135deg,#451a03 0%,#b45309 40%,#fde047 100%)',
-    accentColor: '#fef08a',
+    accentColor: '#dc2626',
     pattern: 'sun',
-    layout: 'centered',
-    headerImage: imgRick,
-    headerImageAlt: 'Rick',
+    layout: 'imageRight',
+    images: [imgRick],
     extraTextSv: 'Fyra nationella mästerskap i rad.\n\n2025 blev året då Flavor-Boss växte långt bortom maten.\n\nDet som en gång började med en grill på en bakgård hade blivit en värld av smaker, musik, kultur och upplevelser.\n\nFlavor-Boss World hade tagit sina första steg.',
     extraTextEn: 'Four national championships in a row.\n\n2025 became the year Flavor-Boss grew far beyond the food.\n\nWhat had once begun with a grill in a backyard had become a world of flavors, music, culture and experiences.\n\nFlavor-Boss World had taken its first steps.',
     expandableImages: [img2025ovan, img2025dryckor, img2025kamali, img2025gbg],
@@ -377,8 +381,9 @@ const years: YearEntry[] = [
     gradient: 'linear-gradient(135deg,#1e1b4b 0%,#7c3aed 40%,#f472b6 80%,#fbbf24 100%)',
     accentColor: '#fde047',
     pattern: 'waves',
-    layout: 'centered',
+    layout: 'imageBackdrop',
     leftAlignedContent: true,
+    images: [img2026backdrop],
     expandableImages: [img2026hb],
     expandableVideo: video2026castella,
     extraTextSv: 'Äventyret fortsätter\n\n2026 blev året då Flavor-Boss började blicka långt bortom nästa festival.\nVisionen hade vuxit.\nDrömmen hade blivit större än Sverige.\nOch resan hade bara börjat.',
@@ -471,6 +476,7 @@ const TimelineJourney = ({ initialYear }: TimelineJourneyProps = {}) => {
           expandableImages={years[currentIndex].expandableImages}
           expandableImageSizes={years[currentIndex].expandableImageSizes}
           expandableVideo={years[currentIndex].expandableVideo}
+          expandableVideoSize={years[currentIndex].expandableVideoSize}
           bodyVideo={years[currentIndex].bodyVideo}
           bodyImages={years[currentIndex].bodyImages}
           headerImage={years[currentIndex].headerImage}
