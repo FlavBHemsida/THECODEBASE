@@ -26,7 +26,9 @@ interface SourceItem {
 
 // Parses inline markdown-style spans within a single line of text:
 // links: [label](url), bold: **text**, and emphasized red-bold: ==text==
-const parseInlineMarkdown = (line: string, keyPrefix: string): ReactNode[] => {
+// An optional linkAccentColor recolors [label](url) links to that hex color
+// (turning white on hover) instead of the default yellow link styling.
+const parseInlineMarkdown = (line: string, keyPrefix: string, linkAccentColor?: string): ReactNode[] => {
   const parts: ReactNode[] = [];
   const regex = /\[([^\]]+)\]\(([^)]+)\)|\*\*([^*]+)\*\*|==([^=]+)==/g;
   let lastIndex = 0;
@@ -41,7 +43,12 @@ const parseInlineMarkdown = (line: string, keyPrefix: string): ReactNode[] => {
           href={match[2]}
           target="_blank"
           rel="noopener noreferrer"
-          className="underline decoration-2 underline-offset-4 font-bold text-yellow-300 hover:text-yellow-200"
+          className={
+            linkAccentColor
+              ? 'underline decoration-2 underline-offset-4 font-bold hover:!text-white transition-colors'
+              : 'underline decoration-2 underline-offset-4 font-bold text-yellow-300 hover:text-yellow-200'
+          }
+          style={linkAccentColor ? { color: linkAccentColor } : undefined}
         >
           {match[1]}
         </a>
@@ -865,8 +872,8 @@ const ContentLayout = ({ layout, title, lead, restLines, uniformText, bodyBackli
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.7, duration: 0.6 }}
           >
-            <p className="font-display font-bold uppercase text-white text-2xl md:text-3xl lg:text-4xl leading-tight">
-              {parseInlineMarkdown(lead, 'lead-la')}
+            <p className="font-display font-bold uppercase text-white text-3xl md:text-4xl lg:text-5xl leading-tight">
+              {parseInlineMarkdown(lead, 'lead-la', accentColor)}
             </p>
           </motion.div>
         ) : (
