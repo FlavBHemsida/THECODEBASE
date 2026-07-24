@@ -408,17 +408,40 @@ const YearPage = ({
         <img src={patternGreen} alt="" className="absolute bottom-[10%] right-[15%] w-[22%] opacity-[0.04]" />
       </div>
 
-      {/* Tiny year text top-right after content phase */}
+      {/* Tiny year text top-right after content phase — rendered as a direct
+          sibling (not nested inside the z-10 scrollable content wrapper below)
+          so its z-index isn't trapped under that wrapper's own stacking
+          context, the same way the fixed "Hem" button in TimelineJourney sits
+          above the top scrim. */}
       <AnimatePresence>
         {phase === 'content' && (
           <motion.span
-            className="absolute top-16 right-4 md:top-6 md:right-20 font-display text-3xl md:text-6xl font-extrabold text-white/25 z-50 select-none pointer-events-none"
+            className="absolute top-16 right-4 md:top-6 md:right-20 font-display text-3xl md:text-6xl font-extrabold text-white/25 z-[60] select-none pointer-events-none"
             initial={{ opacity: 0, scale: 3, x: '-40vw', y: '30vh' }}
             animate={{ opacity: 1, scale: 1, x: 0, y: 0 }}
             transition={{ duration: 0.8, ease: [0.25, 1, 0.5, 1] }}
           >
             {year}
           </motion.span>
+        )}
+      </AnimatePresence>
+
+      {/* Top-left Back button — also lifted out of the z-10 scrollable content
+          wrapper for the same reason as the year text above, so the top scrim
+          never renders on top of it. */}
+      <AnimatePresence>
+        {phase === 'content' && onPrev && (
+          <motion.button
+            onClick={onPrev}
+            aria-label={t('Tillbaka', 'Back')}
+            className="fixed top-4 left-4 z-[60] flex items-center gap-2 px-4 py-2 rounded-full bg-white/15 backdrop-blur-md text-white font-display font-bold uppercase tracking-wider text-xs border border-white/30 hover:bg-white/25 hover:scale-105 transition-all shadow-lg"
+            initial={{ opacity: 0, x: -20 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ delay: 0.6 }}
+          >
+            <ChevronLeft className="w-4 h-4" />
+            {t('Tillbaka', 'Back')}
+          </motion.button>
         )}
       </AnimatePresence>
 
@@ -568,20 +591,6 @@ const YearPage = ({
               </motion.div>
             )}
 
-            {/* Top-left Back button (sibling to "Hem" rendered by TimelineJourney) */}
-            {onPrev && (
-              <motion.button
-                onClick={onPrev}
-                aria-label={t('Tillbaka', 'Back')}
-                className="fixed top-4 left-4 z-[60] flex items-center gap-2 px-4 py-2 rounded-full bg-white/15 backdrop-blur-md text-white font-display font-bold uppercase tracking-wider text-xs border border-white/30 hover:bg-white/25 hover:scale-105 transition-all shadow-lg"
-                initial={{ opacity: 0, x: -20 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ delay: 0.6 }}
-              >
-                <ChevronLeft className="w-4 h-4" />
-                {t('Tillbaka', 'Back')}
-              </motion.button>
-            )}
             {onNext && !inlineNext && (
               <>
                 {/* Bottom pulsing Next CTA — kept consistent across years */}
